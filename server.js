@@ -6,7 +6,10 @@ const OpenAI = require('openai');
 dotenv.config();
 console.log("API Key Loaded:", process.env.OPENAI_API_KEY);
 const app = express();
-app.use(cors());
+app.use(cors({
+ origin: '*', // For now, allows all — or replace with your Squarespace domain
+  methods: ['POST']
+}));
 app.use(express.json());
 
 const openai = new OpenAI({
