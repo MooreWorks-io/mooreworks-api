@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MooreWorks Email Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #f4f4f6; }
+    h1 { color: #7A3EF0; }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input, textarea, button {
+      width: 100%; padding: 0.5rem; margin-top: 0.5rem;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      background-color: #7A3EF0; color: white; border: none; font-size: 1rem;
+      cursor: pointer; margin-top: 1.5rem;
+    }
+    button:hover {
+      background-color: #5d2bd7;
+    }
+    #output {
+      margin-top: 2rem; padding: 1rem;
+      background: white; border: 1px solid #ddd; border-radius: 4px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>MooreWorks Email Generator</h1>
+
+  <form id="emailForm">
+    <label for="clientName">Client Name:</label>
+    <input type="text" id="clientName" name="clientName" required />
+
+    <label for="address">Project Address:</label>
+    <input type="text" id="address" name="address" required />
+
+    <label for="price">Estimated Price ($):</label>
+    <input type="text" id="price" name="price" required />
+
+    <label for="timeline">Project Timeline:</label>
+    <input type="text" id="timeline" name="timeline" required />
+
+    <button type="submit">Generate Email</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    const form = document.getElementById('emailForm');
+    const output = document.getElementById('output');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        clientName: form.clientName.value,
+        address: form.address.value,
+        price: form.price.value,
+        timeline: form.timeline.value
+      };
+
+      output.innerHTML = 'Generating...';
+
+      try {
+        const res = await fetch('http://localhost:5000/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        output.textContent = result.email || 'No response from server.';
+      } catch (err) {
+        output.textContent = 'Error generating email.';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
