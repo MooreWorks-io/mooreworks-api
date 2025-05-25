@@ -48,7 +48,48 @@ app.post('/generate', async (req, res) => {
         End the email with a line asking the client to reply if they would like to proceed.
       `
     });
-  } else {
+    
+} else if (type === 'schedule') {
+  const {
+    clientName,
+    address,
+    jobType,
+    access,
+    presence,
+    dates,
+    contact,
+    notes
+  } = req.body;
+
+  const accessLine = access === 'yes'
+    ? "The property is accessible."
+    : "Please confirm that we will have access to the property.";
+
+  const presenceLine = presence === 'yes'
+    ? "The client would like to be present for the survey."
+    : presence === 'no'
+    ? "The client does not need to be present."
+    : "The client is welcome to be present, but it's optional.";
+
+  const notesLine = notes?.trim()
+    ? `Additional notes: ${notes}`
+    : "";
+
+  messages.push({
+    role: 'user',
+    content: `
+      Write a professional email to schedule a land surveying job for a client named ${clientName}
+      at the address ${address}. The type of job is: ${jobType}.
+      ${accessLine}
+      ${presenceLine}
+      Preferred timeframe: ${dates}.
+      Preferred contact method: ${contact}.
+      ${notesLine}
+      Keep the tone professional and prompt the client to confirm availability or request a different time.
+    `
+  });
+
+} else {
     return res.status(400).json({ error: 'Unsupported email type' });
   }
 
