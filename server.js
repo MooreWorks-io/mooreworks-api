@@ -186,7 +186,39 @@ If you are unable to retrieve these documents, we can pull them for you at the r
     return res.status(500).json({ error: 'Failed inside delay logic' });
   }
 
+} else if (type === 'thankYou') {
+  const {
+    clientName,
+    address,
+    completedWork,
+    review,
+    referral,
+    finalNote
+  } = req.body;
 
+  const reviewLine = review === 'yes'
+    ? "If you were happy with our service, we’d love for you to leave us a quick review or share your feedback."
+    : "";
+
+  const referralLine = referral === 'yes'
+    ? "We’re a small local team, and referrals go a long way — if you know anyone in need of surveying services, we’d be honored if you passed our name along."
+    : "";
+
+  const noteLine = finalNote?.trim()
+    ? `Personal note: ${finalNote}`
+    : "";
+
+  messages.push({
+    role: 'user',
+    content: `
+      Write a thank you and job completion email for ${clientName} regarding the project at ${address}.
+      Work completed: ${completedWork}.
+      ${reviewLine}
+      ${referralLine}
+      ${noteLine}
+      End with a sincere thanks and let the client know you're available for future needs.
+    `
+  });
 
 } else {
     return res.status(400).json({ error: 'Unsupported email type' });
