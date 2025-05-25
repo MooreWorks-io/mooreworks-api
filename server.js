@@ -147,6 +147,7 @@ If you are unable to retrieve these documents, we can pull them for you at the r
     `
   });
 
+
 } else if (type === 'delay') {
   const {
     clientName,
@@ -157,8 +158,10 @@ If you are unable to retrieve these documents, we can pull them for you at the r
     notes
   } = req.body;
 
+  console.log("DELAY email triggered:", req.body);
+
   const apologyLine = apology === 'yes'
-    ? "Thank you for your patience — we truly appreciate your flexibility."
+    ? "Thank you for your patience -- we truly appreciate your flexibility."
     : "";
 
   const notesLine = notes?.trim()
@@ -176,7 +179,7 @@ If you are unable to retrieve these documents, we can pull them for you at the r
       End the email by offering to answer any questions or reschedule if needed.
     `
   });
-}
+
 
 } else {
     return res.status(400).json({ error: 'Unsupported email type' });
