@@ -17,21 +17,45 @@ const openai = new OpenAI({
 });
 
 app.post('/generate', async (req, res) => {
-  const { clientName, address, price, timeline } = req.body;
+  const { type } = req.body;
+
+  let messages = [
+    {
+      role: 'system',
+      content: 'You are a professional assistant that writes client emails for land surveyors.'
+    }
+  ];
+
+  if (type === 'estimate') {
+    const { clientName, address, price, timeline, discussed, surveyType, details } = req.body;
+
+    const phoneMention = discussed === 'yes'
+      ? "This follows our recent phone call."
+      : "We haven't yet spoken directly.";
+
+    const justification = details?.trim()
+      ? `Additional details: ${details}`
+      : "";
+
+    messages.push({
+      role: 'user',
+      content: `
+        Write a clear and professional follow-up estimate email for a land surveying client named ${clientName}
+        regarding their project at ${address}. The type of survey is: ${surveyType}.
+        Estimated price is $${price}. Estimated timeline is: ${timeline}.
+        ${phoneMention}
+        ${justification}
+        End the email with a line asking the client to reply if they would like to proceed.
+      `
+    });
+  } else {
+    return res.status(400).json({ error: 'Unsupported email type' });
+  }
 
   try {
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: 'You are a professional assistant that writes client follow-up emails for land surveyors.',
-        },
-        {
-          role: 'user',
-          content: `Write a follow-up estimate email for a client named ${clientName} about a project at ${address}. The estimated price is $${price} and the expected timeline is ${timeline}.`,
-        },
-      ],
+      messages
     });
 
     const message = response.choices[0].message.content;
