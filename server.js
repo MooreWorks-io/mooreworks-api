@@ -89,6 +89,38 @@ app.post('/generate', async (req, res) => {
     `
   });
 
+} else if (type === 'finalReport') {
+  const {
+    clientName,
+    address,
+    reportType,
+    deliveryMethod,
+    moreDocs,
+    notes
+  } = req.body;
+
+  const followUpLine = moreDocs === 'yes'
+    ? "Please note that additional documents are still pending and will be provided as soon as they are available."
+    : "No further documents are expected at this time.";
+
+  const notesLine = notes?.trim()
+    ? `Additional information: ${notes}`
+    : "";
+
+  messages.push({
+    role: 'user',
+    content: `
+      Write a professional delivery email for a completed land survey.
+      Client: ${clientName}
+      Project Address: ${address}
+      Report Type: ${reportType}
+      Delivery Method: ${deliveryMethod}
+      ${followUpLine}
+      ${notesLine}
+      End the email by thanking the client and offering to answer any questions.
+    `
+  });
+
 } else {
     return res.status(400).json({ error: 'Unsupported email type' });
   }
