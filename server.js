@@ -158,27 +158,34 @@ If you are unable to retrieve these documents, we can pull them for you at the r
     notes
   } = req.body;
 
-  console.log("DELAY email triggered:", req.body);
+  console.log("🎯 DELAY TYPE HIT");
+  console.log("🧾 Payload:", req.body);
 
-  const apologyLine = apology === 'yes'
-    ? "Thank you for your patience -- we truly appreciate your flexibility."
-    : "";
+  try {
+    const apologyLine = apology === 'yes'
+      ? "Thank you for your patience -- we truly appreciate your flexibility."
+      : "";
 
-  const notesLine = notes?.trim()
-    ? `Additional context: ${notes}`
-    : "";
+    const notesLine = notes?.trim()
+      ? `Additional context: ${notes}`
+      : "";
 
-  messages.push({
-    role: 'user',
-    content: `
-      Write a professional job delay notification email for client ${clientName} regarding a project at ${address}.
-      Reason for delay: ${reason}.
-      New estimated timeline: ${timeline}.
-      ${apologyLine}
-      ${notesLine}
-      End the email by offering to answer any questions or reschedule if needed.
-    `
-  });
+    messages.push({
+      role: 'user',
+      content: `
+        Write a professional job delay notification email for client ${clientName} regarding a project at ${address}.
+        Reason for delay: ${reason}.
+        New estimated timeline: ${timeline}.
+        ${apologyLine}
+        ${notesLine}
+        End the email by offering to answer any questions or reschedule if needed.
+      `
+    });
+  } catch (error) {
+    console.error("❌ Error inside DELAY block:", error);
+    return res.status(500).json({ error: 'Failed inside delay logic' });
+  }
+
 
 
 } else {
