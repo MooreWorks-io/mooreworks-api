@@ -133,7 +133,7 @@ app.post('/generate', async (req, res) => {
     : "";
 
   const feeNote = `
-If you are unable to retrieve these documents, we can pull them for you at a rate of $65/hour for courthouse time, once the job is secured.
+If you are unable to retrieve these documents, we can pull them for you at the rate described in the work order.
   `;
 
   messages.push({
@@ -146,6 +146,37 @@ If you are unable to retrieve these documents, we can pull them for you at a rat
       End the email by asking the client to send the items or reach out with questions.
     `
   });
+
+} else if (type === 'delay') {
+  const {
+    clientName,
+    address,
+    reason,
+    timeline,
+    apology,
+    notes
+  } = req.body;
+
+  const apologyLine = apology === 'yes'
+    ? "Thank you for your patience — we truly appreciate your flexibility."
+    : "";
+
+  const notesLine = notes?.trim()
+    ? `Additional context: ${notes}`
+    : "";
+
+  messages.push({
+    role: 'user',
+    content: `
+      Write a professional job delay notification email for client ${clientName} regarding a project at ${address}.
+      Reason for delay: ${reason}.
+      New estimated timeline: ${timeline}.
+      ${apologyLine}
+      ${notesLine}
+      End the email by offering to answer any questions or reschedule if needed.
+    `
+  });
+}
 
 } else {
     return res.status(400).json({ error: 'Unsupported email type' });
