@@ -121,6 +121,32 @@ app.post('/generate', async (req, res) => {
     `
   });
 
+} else if (type === 'infoRequest') {
+  const { clientName, address, checklist, notes } = req.body;
+
+  const checklistLine = checklist.length
+    ? `We are missing the following documents:\n- ${checklist.join('\n- ')}`
+    : "We are missing some required documentation.";
+
+  const notesLine = notes?.trim()
+    ? `Additional message: ${notes}`
+    : "";
+
+  const feeNote = `
+If you are unable to retrieve these documents, we can pull them for you at a rate of $65/hour for courthouse time, once the job is secured.
+  `;
+
+  messages.push({
+    role: 'user',
+    content: `
+      Write a professional email requesting missing information for a survey project at ${address}, for client ${clientName}.
+      ${checklistLine}
+      ${notesLine}
+      ${feeNote}
+      End the email by asking the client to send the items or reach out with questions.
+    `
+  });
+
 } else {
     return res.status(400).json({ error: 'Unsupported email type' });
   }
