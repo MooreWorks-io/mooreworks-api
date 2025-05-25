@@ -187,38 +187,46 @@ If you are unable to retrieve these documents, we can pull them for you at the r
   }
 
 } else if (type === 'thankYou') {
-  const {
-    clientName,
-    address,
-    completedWork,
-    review,
-    referral,
-    finalNote
-  } = req.body;
+  try {
+    const {
+      clientName,
+      address,
+      completedWork,
+      review,
+      referral,
+      finalNote
+    } = req.body;
 
-  const reviewLine = review === 'yes'
-    ? "If you were happy with our service, we’d love for you to leave us a quick review or share your feedback."
-    : "";
+    console.log("🎉 THANK YOU email triggered:", req.body);
 
-  const referralLine = referral === 'yes'
-    ? "We’re a small local team, and referrals go a long way — if you know anyone in need of surveying services, we’d be honored if you passed our name along."
-    : "";
+    const reviewLine = review === 'yes'
+      ? "If you were happy with our service, we’d love for you to leave us a quick review or share your feedback."
+      : "";
 
-  const noteLine = finalNote?.trim()
-    ? `Personal note: ${finalNote}`
-    : "";
+    const referralLine = referral === 'yes'
+      ? "We’re a small local team, and referrals go a long way — if you know anyone in need of surveying services, we’d be honored if you passed our name along."
+      : "";
 
-  messages.push({
-    role: 'user',
-    content: `
-      Write a thank you and job completion email for ${clientName} regarding the project at ${address}.
-      Work completed: ${completedWork}.
-      ${reviewLine}
-      ${referralLine}
-      ${noteLine}
-      End with a sincere thanks and let the client know you're available for future needs.
-    `
-  });
+    const noteLine = finalNote?.trim()
+      ? `Personal note: ${finalNote}`
+      : "";
+
+    messages.push({
+      role: 'user',
+      content: `
+        Write a thank you and job completion email for ${clientName} regarding the project at ${address}.
+        Work completed: ${completedWork}.
+        ${reviewLine}
+        ${referralLine}
+        ${noteLine}
+        End with a sincere thanks and let the client know you're available for future needs.
+      `
+    });
+  } catch (err) {
+    console.error("❌ Error in thankYou block:", err);
+    return res.status(500).json({ error: "Failed in thankYou logic" });
+  }
+
 
 } else {
     return res.status(400).json({ error: 'Unsupported email type' });
