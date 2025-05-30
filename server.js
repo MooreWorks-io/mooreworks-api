@@ -17,6 +17,7 @@ const openai = new OpenAI({
 });
 
 app.post('/generate', async (req, res) => {
+ let subject = '';
   const { type } = req.body;
 
   let messages = [
@@ -28,6 +29,8 @@ app.post('/generate', async (req, res) => {
 
   if (type === 'estimate') {
     const { clientName, address, price, timeline, discussed, surveyType, details } = req.body;
+
+subject = `Estimate for Survey at ${address}`;
 
     const phoneMention = discussed === 'yes'
       ? "This follows our recent phone call."
@@ -60,6 +63,8 @@ app.post('/generate', async (req, res) => {
     contact,
     notes
   } = req.body;
+
+subject = `Scheduling Your ${jobType} Survey at ${address}`;
 
   const accessLine = access === 'yes'
     ? "The property is accessible."
@@ -99,6 +104,8 @@ app.post('/generate', async (req, res) => {
     notes
   } = req.body;
 
+subject = `Final ${reportType} Delivered for ${address}`;
+
   const followUpLine = moreDocs === 'yes'
     ? "Please note that additional documents are still pending and will be provided as soon as they are available."
     : "No further documents are expected at this time.";
@@ -123,6 +130,8 @@ app.post('/generate', async (req, res) => {
 
 } else if (type === 'infoRequest') {
   const { clientName, address, checklist, notes } = req.body;
+
+subject = `Request for Missing Info – ${address}`;
 
   const checklistLine = checklist.length
     ? `We are missing the following documents:\n- ${checklist.join('\n- ')}`
@@ -157,6 +166,8 @@ If you are unable to retrieve these documents, we can pull them for you at the r
     apology,
     notes
   } = req.body;
+
+subject = `Update on Your Survey – Delay at ${address}`;
 
   console.log("🎯 DELAY TYPE HIT");
   console.log("🧾 Payload:", req.body);
@@ -196,6 +207,8 @@ If you are unable to retrieve these documents, we can pull them for you at the r
       referral,
       finalNote
     } = req.body;
+
+subject = `Thank You – Project at ${address} Complete`;
 
     console.log("🎉 THANK YOU email triggered:", req.body);
 
@@ -239,7 +252,7 @@ If you are unable to retrieve these documents, we can pull them for you at the r
     });
 
     const message = response.choices[0].message.content;
-    res.json({ email: message });
+    res.json({ email: message, subject });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to generate email' });
