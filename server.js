@@ -245,18 +245,25 @@ subject = `Thank You – Project at ${address} Complete`;
     return res.status(400).json({ error: 'Unsupported email type' });
   }
 
-  try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages
-    });
+ try {
+  const response = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    messages
+  });
 
-    const message = response.choices[0].message.content;
-    res.json({ email: message, subject });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to generate email' });
+  const raw = response.choices[0].message.content;
+
+  const [maybeSubjectLine, ...rest] = raw.split('\n');
+  let cleanEmail = raw;
+  if (maybeSubjectLine.toLowerCase().startsWith('subject:')) {
+    cleanEmail = rest.join('\n').trim(); // remove subject from body
   }
+
+  res.json({ email: cleanEmail, subject });
+} catch (err) {
+  console.error(err);
+  res.status(500).json({ error: 'Failed to generate email' });
+}
 });
 
 const PORT = process.env.PORT || 5000;
