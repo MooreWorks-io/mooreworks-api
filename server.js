@@ -18,7 +18,7 @@ const openai = new OpenAI({
 
 app.post('/generate', async (req, res) => {
  let subject = '';
-  const { type } = req.body;
+  const { type, tone } = req.body;
 
   let messages = [
     {
@@ -40,9 +40,14 @@ subject = `Estimate for Survey at ${address}`;
       ? `Additional details: ${details}`
       : "";
 
+     const toneInstruction = tone && tone !== 'default'
+    ? `Write in a ${tone} tone.`
+    : "";
+
     messages.push({
       role: 'user',
       content: `
+      ${toneInstruction}
         Write a clear and professional follow-up estimate email for a land surveying client named ${clientName}
         regarding their project at ${address}. The type of survey is: ${surveyType}.
         Estimated price is $${price}. Estimated timeline is: ${timeline}.
@@ -80,9 +85,14 @@ subject = `Scheduling Your ${jobType} Survey at ${address}`;
     ? `Additional notes: ${notes}`
     : "";
 
+  const toneInstruction = tone && tone !== 'default'
+    ? `Write in a ${tone} tone.`
+    : "";
+
   messages.push({
     role: 'user',
     content: `
+    ${toneInstruction}
       Write a professional email to schedule a land surveying job for a client named ${clientName}
       at the address ${address}. The type of job is: ${jobType}.
       ${accessLine}
@@ -114,9 +124,14 @@ subject = `Final ${reportType} Delivered for ${address}`;
     ? `Additional information: ${notes}`
     : "";
 
+  const toneInstruction = tone && tone !== 'default'
+    ? `Write in a ${tone} tone.`
+    : "";
+
   messages.push({
     role: 'user',
     content: `
+    ${toneInstruction}
       Write a professional delivery email for a completed land survey.
       Client: ${clientName}
       Project Address: ${address}
@@ -145,9 +160,14 @@ subject = `Request for Missing Info – ${address}`;
 If you are unable to retrieve these documents, we can pull them for you at the rate described in the work order.
   `;
 
+const toneInstruction = tone && tone !== 'default'
+    ? `Write in a ${tone} tone.`
+    : "";
+
   messages.push({
     role: 'user',
     content: `
+    ${toneInstruction}
       Write a professional email requesting missing information for a survey project at ${address}, for client ${clientName}.
       ${checklistLine}
       ${notesLine}
@@ -181,9 +201,14 @@ subject = `Update on Your Survey – Delay at ${address}`;
       ? `Additional context: ${notes}`
       : "";
 
+    const toneInstruction = tone && tone !== 'default'
+    ? `Write in a ${tone} tone.`
+    : "";
+
     messages.push({
       role: 'user',
       content: `
+      ${toneInstruction}
         Write a professional job delay notification email for client ${clientName} regarding a project at ${address}.
         Reason for delay: ${reason}.
         New estimated timeline: ${timeline}.
@@ -224,9 +249,15 @@ subject = `Thank You – Project at ${address} Complete`;
       ? `Personal note: ${finalNote}`
       : "";
 
+const toneInstruction = tone && tone !== 'default'
+    ? `Write in a ${tone} tone.`
+    : "";
+
+
     messages.push({
       role: 'user',
       content: `
+      ${toneInstruction}
         Write a thank you and job completion email for ${clientName} regarding the project at ${address}.
         Work completed: ${completedWork}.
         ${reviewLine}
