@@ -338,9 +338,11 @@ const path = require('path');
   try {
     fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
     return res.status(201).json({ message: 'Signup successful' });
+    console.log("✅ User saved:", newUser);
   } catch (err) {
     console.error('Error writing to users.json:', err);
     return res.status(500).json({ message: 'Failed to save user' });
+ console.error("❌ Error writing to file:", err);
   }
 });
 
