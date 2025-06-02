@@ -10,10 +10,12 @@ dotenv.config();
 console.log("API Key Loaded:", process.env.OPENAI_API_KEY);
 const app = express();
 app.use(cors({
- origin: '*', // For now, allows all — or replace with your Squarespace domain
+  origin: '*',
   methods: ['POST']
 }));
+
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -300,16 +302,11 @@ const toneInstruction = tone && tone !== 'default'
 }
 });
 
-const PORT = process.env.PORT || 5000;
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'email-generator.html'));});
 
 app.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-const path = require('path');
   
   if (!name || !email || !password) {
     return res.status(400).json({ message: 'Missing required fields' });
@@ -337,8 +334,8 @@ const path = require('path');
 
   try {
     fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
-    return res.status(201).json({ message: 'Signup successful' });
-    console.log("✅ User saved:", newUser);
+    console.log("✅ User saved:", newUser);;
+    return res.status(201).json({ message: 'Signup successful' })
   } catch (err) {
     console.error('Error writing to users.json:', err);
     return res.status(500).json({ message: 'Failed to save user' });
@@ -346,3 +343,5 @@ const path = require('path');
   }
 });
 
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
