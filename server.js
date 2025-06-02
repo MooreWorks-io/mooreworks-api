@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcrypt');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -304,3 +307,39 @@ const path = require('path');
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'email-generator.html'));});
   
+app.post('/signup', async (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  const usersPath = path.join(__dirname, 'users.json');
+  let users = [];
+
+  try {
+    const data = fs.readFileSync(usersPath, 'utf8');
+    users = JSON.parse(data);
+  } catch (err) {
+    console.error('Error reading users.json:', err);
+  }
+
+  const existingUser = users.find(user => user.email === email);
+  if (existingUser) {
+    return res.status(409).json({ message: 'User already exists' });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = { name, email, password: hashedPassword };
+
+  users.push(newUser);
+
+  try {
+    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
+    return res.status(201).json({ message: 'Signup successful' });
+  } catch (err) {
+    console.error('Error writing to users.json:', err);
+    return res.status(500).json({ message: 'Failed to save user' });
+  }
+});
+
