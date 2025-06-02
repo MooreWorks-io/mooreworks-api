@@ -301,15 +301,16 @@ const toneInstruction = tone && tone !== 'default'
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-const path = require('path');
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'email-generator.html'));});
-  
+
 app.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
 
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const path = require('path');
+  
   if (!name || !email || !password) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
