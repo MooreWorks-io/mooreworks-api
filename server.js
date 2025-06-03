@@ -26,6 +26,18 @@ app.use(cors({
 }));
 
 app.use(express.json());
+const session = require('express-session');
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'mooreworks_secret_key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false, // set to true if using HTTPS
+    maxAge: 1000 * 60 * 60 * 24 // 1 day
+  }
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const openai = new OpenAI({
@@ -340,6 +352,48 @@ app.post('/signup', async (req, res) => {
     console.error("❌ MongoDB save error:", err);
     res.status(500).json({ message: 'Mongo save failed' });
   }
+});
+
+
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return res.status(401).json({ message: 'Invalid credentials' });
+
+    // Save user info to session
+    req.session.userId = user._id;
+    req.session.userEmail = user.email;
+
+    console.log("✅ Session created for:", user.email);
+    res.json({ message: 'Login successful' });
+  } catch (err) {
+    console.error("❌ Login error:", err);
+    res.status(500).json({ message: 'Login failed' });
+  }
+});
+
+app.get('/check-auth', (req, res) => {
+  if (req.session.userId) {
+    res.json({ message: `Authenticated as ${req.session.userEmail}` });
+  } else {
+    res.status(401).json({ message: 'Not logged in' });
+  }
+});
+
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error("❌ Logout error:", err);
+      return res.status(500).json({ message: 'Logout failed' });
+    }
+    res.clearCookie('connect.sid');
+    res.json({ message: 'Logged out successfully' });
+  });
 });
 
 
