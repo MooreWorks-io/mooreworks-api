@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const User = require('./models/User'); 
 const OpenAI = require('openai');
 
 dotenv.config();
@@ -315,8 +316,6 @@ const toneInstruction = tone && tone !== 'default'
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'email-generator.html'));});
 
-const User = require('./models/User'); 
-
 app.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -332,13 +331,14 @@ app.post('/signup', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ name, email, password: hashedPassword });
-    await newUser.save();
 
-    console.log("✅ New user saved:", email);
+    const result = await newUser.save();
+    console.log("✅ MongoDB save result:", result);
     res.status(201).json({ message: 'Signup successful' });
+
   } catch (err) {
-    console.error("❌ Signup error:", err);
-    res.status(500).json({ message: 'Server error' });
+    console.error("❌ MongoDB save error:", err);
+    res.status(500).json({ message: 'Mongo save failed' });
   }
 });
 
