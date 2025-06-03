@@ -7,6 +7,16 @@ const dotenv = require('dotenv');
 const OpenAI = require('openai');
 
 dotenv.config();
+
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ Connected to MongoDB Atlas"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
+
 console.log("API Key Loaded:", process.env.OPENAI_API_KEY);
 const app = express();
 app.use(cors({
@@ -305,43 +315,33 @@ const toneInstruction = tone && tone !== 'default'
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'email-generator.html'));});
 
+const User = require('./models/User'); 
+
 app.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
-  
+
   if (!name || !email || !password) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
 
-  const usersPath = path.join(__dirname, 'users.json');
-  let users = [];
-
   try {
-    const data = fs.readFileSync(usersPath, 'utf8');
-    users = JSON.parse(data);
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ message: 'User already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ name, email, password: hashedPassword });
+    await newUser.save();
+
+    console.log("✅ New user saved:", email);
+    res.status(201).json({ message: 'Signup successful' });
   } catch (err) {
-    console.error('Error reading users.json:', err);
-  }
-
-  const existingUser = users.find(user => user.email === email);
-  if (existingUser) {
-    return res.status(409).json({ message: 'User already exists' });
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = { name, email, password: hashedPassword };
-
-  users.push(newUser);
-
-  try {
-    fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
-    console.log("✅ User saved:", newUser);;
-    return res.status(201).json({ message: 'Signup successful' })
-  } catch (err) {
-    console.error('Error writing to users.json:', err);
-    return res.status(500).json({ message: 'Failed to save user' });
- console.error("❌ Error writing to file:", err);
+    console.error("❌ Signup error:", err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
