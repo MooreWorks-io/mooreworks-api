@@ -4,8 +4,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  console.log("🔐 Attempting login...", { email });
-
   try {
     const res = await fetch('/api/auth/login', {
       method: 'POST',
@@ -14,20 +12,16 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
       body: JSON.stringify({ email, password })
     });
 
-    console.log("📬 Response:", res);
-
     const data = await res.json();
-    console.log("📦 Data:", data);
 
     if (res.ok) {
       alert('Login successful!');
-      window.location.href = '/tool'; // real tool
+      window.location.href = '/tool';
     } else {
       alert(`Login failed: ${data.message}`);
     }
-
   } catch (err) {
-    console.error("❌ Caught error:", err);
-    alert("Unexpected login error.");
+    console.error('❌ Login error:', err);
+    alert('Unexpected login error.');
   }
 });
