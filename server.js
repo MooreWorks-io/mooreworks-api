@@ -56,14 +56,9 @@ app.get('/tool', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'tool.html'));
 });
 app.get('/calendar', (req, res) => {
-  console.log('📅 /calendar route hit');
-  if (!req.session.userId) {
-    console.log('⛔ Not logged in, redirecting to /');
-    return res.redirect('/');
-  }
+  if (!req.session.userId) return res.redirect('/');
   res.sendFile(path.join(__dirname, 'views', 'calendar.html'));
 });
-
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
