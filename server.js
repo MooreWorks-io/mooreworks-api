@@ -49,12 +49,16 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'signup.html'));
 });
-app.get('/tool', (req, res) => {
+app.get('/tool', (req, res) => { 
   if (!req.session.userId) return res.redirect('/');
   res.sendFile(path.join(__dirname, 'views', 'tool.html'));
 });
 app.get('/calendar', (req, res) => {
-  if (!req.session.userId) return res.redirect('/');
+  console.log('📅 /calendar route hit');
+  if (!req.session.userId) {
+    console.log('⛔ Not logged in, redirecting to /');
+    return res.redirect('/');
+  }
   res.sendFile(path.join(__dirname, 'views', 'calendar.html'));
 });
 
