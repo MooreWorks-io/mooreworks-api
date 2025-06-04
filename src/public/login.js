@@ -4,19 +4,30 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  const res = await fetch('/api/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    body: JSON.stringify({ email, password })
-  });
+  console.log("🔐 Attempting login...", { email });
 
-  const data = await res.json();
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email, password })
+    });
 
-  if (res.ok) {
-    alert('Login successful!');
-    window.location.href = '/dashboard.html'; // placeholder
-  } else {
-    alert(`Login failed: ${data.message}`);
+    console.log("📬 Response:", res);
+
+    const data = await res.json();
+    console.log("📦 Data:", data);
+
+    if (res.ok) {
+      alert('Login successful!');
+      window.location.href = '/tool'; // real tool
+    } else {
+      alert(`Login failed: ${data.message}`);
+    }
+
+  } catch (err) {
+    console.error("❌ Caught error:", err);
+    alert("Unexpected login error.");
   }
 });
