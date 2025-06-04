@@ -12,6 +12,14 @@ const mongoose = require('mongoose');
 
 dotenv.config();
 
+app.get('/debug', (req, res) => {
+  res.json({
+    env: process.env.NODE_ENV || 'unknown',
+    session: req.session || null,
+    viewsPath: path.join(__dirname, 'views')
+  });
+});
+
 // Init + DB
 const app = express();
 mongoose.connect(process.env.MONGO_URI, {
