@@ -16,7 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
     if (res.ok) {
       alert('Login successful!');
-      window.location.href = '/tool';
+      window.location.href = '/';
     } else {
       alert(`Login failed: ${data.message}`);
     }
