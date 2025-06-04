@@ -8,6 +8,8 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const User = require('./models/User'); 
 const OpenAI = require('openai');
+const mongoose = require('mongoose');
+
 dotenv.config();
 
 // Init + DB
