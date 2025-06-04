@@ -45,9 +45,9 @@ router.post('/login', async (req, res) => {
 // Check auth
 router.get('/check-auth', (req, res) => {
   if (req.session.userId) {
-    res.json({ message: `Authenticated as ${req.session.userEmail}` });
+    return res.json({ email: req.session.userEmail });
   } else {
-    res.status(401).json({ message: 'Not logged in' });
+    return res.status(401).json({ message: 'Not logged in' });
   }
 });
 

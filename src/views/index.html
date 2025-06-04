@@ -13,11 +13,13 @@
     <h1 style="margin: 0; color: var(--brand-purple);">MooreWorks</h1>
     <p style="margin: 0.25rem 0 0; font-weight: 600;">Built by Surveyors. For Surveyors.</p>
   </div>
+  
   <nav>
-    <button id="logoutBtn" style="display: none;">Logout</button>
-    <a href="#features">Features</a>
-    <a href="#cta">Get Started</a>
-  </nav>
+  <div id="nav-buttons"></div>
+  <a href="#features">Features</a>
+  <a href="#cta">Get Started</a>
+</nav>
+
 </header>
 
   <section class="hero" style="text-align: center; margin-bottom: 3rem;">
@@ -66,29 +68,7 @@
     <p><a href="mailto:mooreworks.dev@gmail.com">Contact Us</a></p>
   </footer>
 </body>
-<script>
-  // Check if the user is logged in
-  async function checkAuth() {
-    const res = await fetch('/check-auth');
-    if (res.ok) {
-      document.getElementById('logoutBtn').style.display = 'inline-block';
-    }
-  }
 
-  // Logout logic
-  document.getElementById('logoutBtn').addEventListener('click', async () => {
-    const res = await fetch('/logout', {
-      method: 'POST',
-    });
+<script src="/index.js"></script>
 
-    if (res.ok) {
-      window.location.reload(); // Refresh to update UI
-    } else {
-      alert('Logout failed');
-    }
-  });
-
-  // Run check on page load
-  checkAuth();
-</script>
 </html>
