@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (res.ok) {
     // Logged in — show tools + logout
     navButtons.innerHTML = `
-      <a href="/tool" class="cta-button">Email Generator</a>
-      <a href="/calendar" class="cta-button">Calendar Tool</a>
-      <button id="logoutBtn" class="cta-button" style="background: var(--brand-purple);">Logout</button>
+      <a href="/tool" class="cta-button small">Email Generator</a>
+      <a href="/calendar" class="cta-button small">Calendar Tool</a>
+      <button id="logoutBtn" class="cta-button small" style="background: var(--brand-purple);">Logout</button>
     `;
 
     document.getElementById('logoutBtn').addEventListener('click', async () => {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   } else {
     // Not logged in — show login button
     navButtons.innerHTML = `
-      <a href="/login" class="cta-button">Login</a>
+      <a href="/login" class="cta-button small">Login</a>
     `;
   }
 });
