@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 
 const CalendarJobSchema = new mongoose.Schema({
-  jobTitle: String,
-  projectAddress: String,
-  clientName: String,
-  jobType: String,
-  scheduledDate: Date,
-  fieldCrewHours: Number,
+  title: String,
+  date: String, // ISO format e.g. "2025-06-04"
+  crew: String,
+  address: String,
+  fieldHours: Number,
   officeHours: Number,
-  assignedCrew: [String],
-  jobBrief: String,
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  jobBrief: String
 });
 
 module.exports = mongoose.model('CalendarJob', CalendarJobSchema);
