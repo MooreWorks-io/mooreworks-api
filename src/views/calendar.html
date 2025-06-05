@@ -27,6 +27,31 @@
   
   <div id="calendar"></div>
 
+  <!-- Add Job Button -->
+<div style="text-align: center; margin-top: 2rem;">
+  <button id="addJobBtn" class="cta-button">➕ Add Job</button>
+</div>
+
+<!-- Modal Form -->
+<div id="jobModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center;">
+  <div style="background:white; padding:2rem; border-radius:10px; width:90%; max-width:500px;">
+    <h2 style="margin-top:0;">Add New Job</h2>
+    <form id="jobForm">
+      <label>Date: <input type="date" name="date" required></label><br><br>
+      <label>Title: <input type="text" name="title" required></label><br><br>
+      <label>Address: <input type="text" name="address"></label><br><br>
+      <label>Crew: <input type="text" name="crew"></label><br><br>
+      <label>Field Hours: <input type="number" name="fieldHours" step="0.1"></label><br><br>
+      <label>Office Hours: <input type="number" name="officeHours" step="0.1"></label><br><br>
+      <label>Job Brief:<br><textarea name="jobBrief" rows="3" style="width:100%;"></textarea></label><br><br>
+      <div style="text-align: right;">
+        <button type="submit" class="cta-button small">Save</button>
+        <button type="button" id="cancelBtn" class="cta-button small" style="background:gray;">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
   <script src="/calendar.js"></script>
 </body>

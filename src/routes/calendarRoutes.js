@@ -17,4 +17,24 @@ router.get('/', async (req, res) => {
   }
 });
 
+// POST new calendar job
+router.post('/', async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  try {
+    const newJob = new CalendarJob({
+      ...req.body,
+      createdBy: req.session.userId
+    });
+
+    await newJob.save();
+    res.status(201).json({ message: 'Job created successfully' });
+  } catch (err) {
+    console.error('Error creating job:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
