@@ -579,6 +579,54 @@ nav a:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 1000px;
+  margin: 2rem auto;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo-block h1 {
+  margin: 0;
+  color: var(--brand-purple);
+  font-size: 1.75rem;
+}
+
+.logo-block p {
+  margin: 0.25rem 0 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  font-weight: 600;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.auth-buttons .cta-button {
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+}
+
 /* Sign Up Style */
 
 .form-container {
@@ -610,3 +658,4 @@ nav a:hover {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
+
