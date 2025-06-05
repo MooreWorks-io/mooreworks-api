@@ -7,7 +7,11 @@ const CalendarJobSchema = new mongoose.Schema({
   address: String,
   fieldHours: Number,
   officeHours: Number,
-  jobBrief: String
+  jobBrief: String,
+  createdBy: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'User'
+}
 });
 
 module.exports = mongoose.model('CalendarJob', CalendarJobSchema);

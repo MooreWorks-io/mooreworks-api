@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const calendarEl = document.getElementById('calendar');
 
   // Fetch calendar jobs from backend
-  const res = await fetch('/api/calendar/all');
+  const res = await fetch('/api/calendar');
   const jobs = await res.json();
 
   // Convert jobs to FullCalendar event format
