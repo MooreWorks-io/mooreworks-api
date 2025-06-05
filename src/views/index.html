@@ -5,31 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MooreWorks - Built for Surveyors</title>
   <link rel="stylesheet" href="styles.css">
+</head>
 
- <header class="landing-header">
-  <div class="logo-block">
-    <h1>MooreWorks</h1>
-    <p>Built by Surveyors. For Surveyors.</p>
-  </div>
+<body>
 
-  <nav class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#cta">Get Started</a>
-    <a href="/login" class="cta-button small">Login</a>
-  </nav>
-</header>
+  <header class="landing-header">
+    <div class="logo-block">
+      <h1>MooreWorks</h1>
+      <p>Built by Surveyors. For Surveyors.</p>
+    </div>
+
+    <nav class="nav-links">
+      <div id="nav-buttons">
+        <!-- Dynamic login/logout buttons will load here from index.js -->
+        <a href="/login" class="cta-button small">Login</a>
+      </div>
+      <a href="#features">Features</a>
+      <a href="#cta">Get Started</a>
+    </nav>
+  </header>
 
   <section class="hero" style="text-align: center; margin-bottom: 3rem;">
-  <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: #222;">
-    Smarter Tools for Modern Surveyors
-  </h2>
-  <p style="max-width: 600px; margin: 0 auto 1.5rem auto; font-size: 1.05rem; color: #555;">
-    Save time, reduce errors, and streamline client communication with our free email generator —
-    <strong>field-tested by real surveyors like you</strong>.
-  </p>
- <a href="/tool" class="cta-button"><span style="font-size: 1.1rem;">🚀</span> Try the Email Generator</a>
-
-</section>
+    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: #222;">
+      Smarter Tools for Modern Surveyors
+    </h2>
+    <p style="max-width: 600px; margin: 0 auto 1.5rem auto; font-size: 1.05rem; color: #555;">
+      Save time, reduce errors, and streamline client communication with our free email generator —
+      <strong>field-tested by real surveyors like you</strong>.
+    </p>
+    <a href="/tool" class="cta-button"><span style="font-size: 1.1rem;">🚀</span> Try the Email Generator</a>
+  </section>
 
   <section id="features" class="features">
     <h3>Why Choose MooreWorks?</h3>
@@ -49,10 +54,10 @@
     </div>
   </section>
 
- <section class="screenshot-section">
-  <h2>See It in Action</h2>
-  <img src="img/mooreworks-tool-preview.png" alt="MooreWorks email generator preview">
-</section>
+  <section class="screenshot-section">
+    <h2>See It in Action</h2>
+    <img src="img/mooreworks-tool-preview.png" alt="MooreWorks email generator preview">
+  </section>
 
   <section id="cta" class="call-to-action">
     <h3>Start Using MooreWorks Today</h3>
@@ -64,8 +69,7 @@
     <p>&copy; 2025 MooreWorks.io — Built by Surveyors, for Surveyors</p>
     <p><a href="mailto:mooreworks.dev@gmail.com">Contact Us</a></p>
   </footer>
+
+  <script src="/index.js"></script>
 </body>
-
-<script src="/index.js"></script>
-
 </html>
