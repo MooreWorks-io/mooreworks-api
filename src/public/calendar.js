@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Convert jobs to FullCalendar event format
   const events = jobs.map(job => ({
-    title: job.title || job.address || 'Scheduled Job',
+    title: job.jobType || job.address || 'Scheduled Job',
     start: job.date,
     extendedProps: {
       crew: job.crew,
@@ -27,6 +27,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       alert(`📍 ${props.address}\n👷 Crew: ${props.crew}\n🕒 Field: ${props.fieldHours}h, Office: ${props.officeHours}h\n📝 ${props.jobBrief}`);
     }
   });
+
+const jobList = document.getElementById('jobList');
+jobs.forEach(job => {
+  const jobDiv = document.createElement('div');
+  jobDiv.classList.add('job-entry');
+  jobDiv.dataset.id = job._id;
+  jobDiv.innerHTML = `
+    <strong>${job.jobType || 'Job'}</strong> on ${job.date}<br>
+    <button class="edit-btn">Edit</button>
+    <button class="remove-btn">Remove</button>
+    <hr>
+  `;
+  jobList.appendChild(jobDiv);
+});
 
   calendar.render();
 });

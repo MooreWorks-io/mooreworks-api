@@ -32,11 +32,8 @@
   <button id="addJobBtn" class="cta-button">➕ Add Job</button>
 </div>
 
-<div class="job-entry" data-id="{{job._id}}">
-  <strong>{{job.jobType}}</strong> on {{job.date}}<br>
-  <button class="edit-btn">Edit</button>
-  <button class="remove-btn">Remove</button>
-</div>
+<h3>📋 Job List</h3>
+<div id="jobList"></div>
 
 <!-- Modal Form -->
 <div id="jobModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center;">
