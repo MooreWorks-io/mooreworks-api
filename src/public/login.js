@@ -7,7 +7,9 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   try {
     const res = await fetch('/api/auth/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       credentials: 'include',
       body: JSON.stringify({ email, password })
     });
@@ -15,11 +17,11 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const data = await res.json();
 
     if (res.ok) {
-      alert('Login successful!');
-      window.location.href = '/';
+      window.location.href = '/tool'; 
     } else {
       alert(`Login failed: ${data.message}`);
     }
+
   } catch (err) {
     console.error('❌ Login error:', err);
     alert('Unexpected login error.');

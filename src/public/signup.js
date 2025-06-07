@@ -11,17 +11,18 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     const res = await fetch('/api/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify(formData)
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      alert('Signup successful! You can now log in.');
-      window.location.href = '/login';
+      window.location.href = '/tool'; // Or use '/calendar' if that's the preferred first tool
     } else {
       alert(`Signup failed: ${data.message}`);
     }
+
   } catch (err) {
     console.error("❌ Signup error:", err);
     alert("Unexpected signup error.");
