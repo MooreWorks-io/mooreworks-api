@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const res = await fetch('/api/calendar');
   const jobs = await res.json();
 
-  // Build calendar events
+  // Convert to FullCalendar event format
   const events = jobs.map(job => ({
     title: job.jobType || job.address || 'Scheduled Job',
     start: job.date,
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }));
 
+  // Initialize calendar
   const calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     height: 'auto',
@@ -32,61 +33,54 @@ document.addEventListener('DOMContentLoaded', async () => {
     eventClick: function(info) {
       const job = info.event.extendedProps;
 
-      const popup = document.createElement('div');
-      popup.classList.add('calendar-popup');
+      // Prefill modal
+      prefillJobForm(job);
+      jobForm.dataset.editing = job._id;
+      jobModal.style.display = 'flex';
 
-      popup.innerHTML = `
-        <div class="popup-content">
-          <h3>${info.event.title}</h3>
-          <p><strong>Address:</strong> ${job.address}</p>
-          <p><strong>Crew:</strong> ${job.crew}</p>
-          <p><strong>Field Hours:</strong> ${job.fieldHours}</p>
-          <p><strong>Office Hours:</strong> ${job.officeHours}</p>
-          <p><strong>Notes:</strong> ${job.jobBrief}</p>
-          <button id="editJobBtn">✏️ Edit</button>
-          <button id="deleteJobBtn">🗑️ Delete</button>
-          <button id="closePopupBtn">Close</button>
-        </div>
-      `;
+      // Add Delete button if not already added
+      if (!document.getElementById('deleteFromModal')) {
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.id = 'deleteFromModal';
+        deleteBtn.style.marginLeft = '10px';
+        deleteBtn.classList.add('danger');
 
-      document.body.appendChild(popup);
-
-      document.getElementById('closePopupBtn').addEventListener('click', () => popup.remove());
-
-      document.getElementById('deleteJobBtn').addEventListener('click', async () => {
-        if (confirm("Delete this job?")) {
-          const res = await fetch(`/api/calendar/${job._id}`, { method: 'DELETE' });
-          if (res.ok) {
-            popup.remove();
-            window.location.reload();
-          } else {
-            alert("Failed to delete job.");
+        deleteBtn.addEventListener('click', async () => {
+          if (confirm('Delete this job?')) {
+            const res = await fetch(`/api/calendar/${job._id}`, {
+              method: 'DELETE',
+            });
+            if (res.ok) {
+              jobModal.style.display = 'none';
+              window.location.reload();
+            } else {
+              alert('Failed to delete job.');
+            }
           }
-        }
-      });
+        });
 
-      document.getElementById('editJobBtn').addEventListener('click', () => {
-        popup.remove();
-        prefillJobForm(job);
-        jobForm.dataset.editing = job._id;
-        jobModal.style.display = 'flex';
-      });
+        document.getElementById('cancelBtn').insertAdjacentElement('beforebegin', deleteBtn);
+      }
     }
   });
 
   calendar.render();
 
-  // Modal logic
+  // Open modal from Add Job button
   addJobBtn.addEventListener('click', () => {
     jobForm.dataset.editing = '';
     jobForm.reset();
     jobModal.style.display = 'flex';
+    document.getElementById('modalHeader').textContent = 'Add New Job';
   });
 
+  // Close modal
   cancelBtn.addEventListener('click', () => {
     jobModal.style.display = 'none';
   });
 
+  // Form submit logic (create or update)
   jobForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -111,6 +105,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   function prefillJobForm(job) {
+    document.getElementById('modalHeader').textContent = 'Edit Job';
     document.getElementById('jobType').value = job.jobType || '';
     document.getElementById('date').value = job.date || '';
     document.getElementById('crew').value = job.crew || '';
