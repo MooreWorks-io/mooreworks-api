@@ -73,3 +73,26 @@ jobForm.addEventListener('submit', async (e) => {
     alert(`❌ Failed to add job: ${error.message}`);
   }
 });
+
+// Button Logic Remove and Edit
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('remove-btn')) {
+    const jobId = e.target.closest('.job-entry').dataset.id;
+    if (confirm("Are you sure you want to delete this job?")) {
+      const res = await fetch(`/api/calendar/${jobId}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        e.target.closest('.job-entry').remove();
+      } else {
+        alert("Failed to delete job.");
+      }
+    }
+  }
+
+  if (e.target.classList.contains('edit-btn')) {
+    const jobId = e.target.closest('.job-entry').dataset.id;
+    // Optional: Load data and prefill the job modal
+    openEditModal(jobId); // You’ll define this function
+  }
+});
