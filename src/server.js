@@ -9,6 +9,7 @@ const session = require('express-session');
 const User = require('./models/User'); 
 const OpenAI = require('openai');
 const mongoose = require('mongoose');
+app.set('view engine', 'ejs');
 
 dotenv.config();
 
@@ -44,7 +45,7 @@ app.use('/api/calendar', calendarRoutes);
 // Serve HTML Views
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.render('index', { loggedIn: !!req.session.userId });
 });
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'login.html'));

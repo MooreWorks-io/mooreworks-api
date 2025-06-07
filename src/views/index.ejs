@@ -18,7 +18,10 @@
     <nav class="nav-links">
       <div id="nav-buttons">
         <!-- Dynamic login/logout buttons will load here from index.js -->
-        <a href="/login" class="cta-button small">Login</a>
+        <a href="/login" class="cta-button small">Login</a> 
+        <% if (!loggedIn) { %>
+  <a href="/signup"><button class="cta-button">Sign Up</button></a>
+<% } %>
       </div>
       <a href="#features">Features</a>
       <a href="#cta">Get Started</a>
