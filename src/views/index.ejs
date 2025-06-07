@@ -15,17 +15,17 @@
       <p>Built by Surveyors. For Surveyors.</p>
     </div>
 
-    <nav class="nav-links">
-      <div id="nav-buttons">
-        <!-- Dynamic login/logout buttons will load here from index.js -->
-        <a href="/login" class="cta-button small">Login</a> 
-        <% if (!loggedIn) { %>
-  <a href="/signup"><button class="cta-button">Sign Up</button></a>
-<% } %>
-      </div>
-      <a href="#features">Features</a>
-      <a href="#cta">Get Started</a>
-    </nav>
+<nav class="nav-links">
+  <div id="nav-buttons">
+    <a href="/login" class="cta-button small">Login</a>
+    
+    <% if (!loggedIn) { %>
+      <a href="/signup" class="cta-button small" style="margin-left: 0.5rem;">Sign Up</a>
+    <% } %>
+  </div>
+  <a href="#features">Features</a>
+  <a href="#cta">Get Started</a>
+</nav>
   </header>
 
   <section class="hero" style="text-align: center; margin-bottom: 3rem;">
