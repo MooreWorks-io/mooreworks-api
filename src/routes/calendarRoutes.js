@@ -37,12 +37,12 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Delete Calendar Job
-router.put('/:id', async (req, res) => {
+// DELETE calendar job
+router.delete('/:id', async (req, res) => {
   try {
-    const updated = await CalendarJob.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updated) return res.status(404).send('Job not found');
-    res.status(200).json(updated);
+    const deleted = await CalendarJob.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).send('Job not found');
+    res.sendStatus(204);
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');
