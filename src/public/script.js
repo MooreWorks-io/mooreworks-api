@@ -119,14 +119,16 @@ if (infoPdfFile) {
     }
 
     try {
-  const res = await fetch('https://mooreworks-api.onrender.com/generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
+  const response = await fetch('/generate', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data)
+});
 
 
-  const result = await res.json();
+  const result = await response.json();
   let fullEmail = result.email || '';
 
   if (data.pdfReminder) {
