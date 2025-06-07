@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     title: job.jobType || job.address || 'Scheduled Job',
     start: job.date,
     extendedProps: {
+       _id: job._id,
       crew: job.crew,
       address: job.address,
       fieldHours: job.fieldHours,
@@ -22,25 +23,52 @@ document.addEventListener('DOMContentLoaded', async () => {
     initialView: 'dayGridMonth',
     height: 'auto',
     events: events,
-    eventClick: function(info) {
-      const props = info.event.extendedProps;
-      alert(`📍 ${props.address}\n👷 Crew: ${props.crew}\n🕒 Field: ${props.fieldHours}h, Office: ${props.officeHours}h\n📝 ${props.jobBrief}`);
-    }
-  });
+   eventClick: function(info) {
+  const job = info.event.extendedProps;
+  const jobId = info.event._def.extendedProps._id;
 
-const jobList = document.getElementById('jobList');
-jobs.forEach(job => {
-  const jobDiv = document.createElement('div');
-  jobDiv.classList.add('job-entry');
-  jobDiv.dataset.id = job._id;
-  jobDiv.innerHTML = `
-    <strong>${job.jobType || 'Job'}</strong> on ${job.date}<br>
-    <button class="edit-btn">Edit</button>
-    <button class="remove-btn">Remove</button>
-    <hr>
+  const popup = document.createElement('div');
+  popup.classList.add('calendar-popup');
+
+  popup.innerHTML = `
+    <div class="popup-content">
+      <h3>${info.event.title}</h3>
+      <p><strong>Address:</strong> ${job.address}</p>
+      <p><strong>Crew:</strong> ${job.crew}</p>
+      <p><strong>Field Hours:</strong> ${job.fieldHours}</p>
+      <p><strong>Office Hours:</strong> ${job.officeHours}</p>
+      <p><strong>Notes:</strong> ${job.jobBrief}</p>
+      <button id="editJobBtn">✏️ Edit</button>
+      <button id="deleteJobBtn">🗑️ Delete</button>
+      <button id="closePopupBtn">Close</button>
+    </div>
   `;
-  jobList.appendChild(jobDiv);
+
+  document.body.appendChild(popup);
+
+  document.getElementById('closePopupBtn').addEventListener('click', () => popup.remove());
+
+  document.getElementById('deleteJobBtn').addEventListener('click', async () => {
+  if (confirm("Delete this job?")) {
+    const res = await fetch(`/api/calendar/${job._id}`, { method: 'DELETE' });
+    if (res.ok) {
+      alert('Deleted!');
+      popup.remove();
+      window.location.reload();
+    } else {
+      alert('Failed to delete job.');
+    }
+  }
 });
+
+  document.getElementById('editJobBtn').addEventListener('click', () => {
+    popup.remove();
+    prefillJobForm(job); // Define this function next
+    jobModal.style.display = 'flex';
+    jobForm.dataset.editing = job._id;
+  });
+} 
+  });
 
   calendar.render();
 });
@@ -62,6 +90,16 @@ cancelBtn.addEventListener('click', () => {
 });
 
 // Submit form
+function prefillJobForm(job) {
+  document.getElementById('jobType').value = job.jobType || '';
+  document.getElementById('date').value = job.date || '';
+  document.getElementById('crew').value = job.crew || '';
+  document.getElementById('address').value = job.address || '';
+  document.getElementById('fieldHours').value = job.fieldHours || 0;
+  document.getElementById('officeHours').value = job.officeHours || 0;
+  document.getElementById('jobBrief').value = job.jobBrief || '';
+}
+
 jobForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -72,41 +110,18 @@ jobForm.addEventListener('submit', async (e) => {
   jobData.fieldHours = parseFloat(jobData.fieldHours) || 0;
   jobData.officeHours = parseFloat(jobData.officeHours) || 0;
 
-  const res = await fetch('/api/calendar', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    body: JSON.stringify(jobData)
-  });
+ const isEditing = jobForm.dataset.editing;
 
-  if (res.ok) {
-    alert('✅ Job added!');
-    window.location.reload();
-  } else {
-    const error = await res.json();
-    alert(`❌ Failed to add job: ${error.message}`);
-  }
+const res = await fetch(`/api/calendar${isEditing ? '/' + isEditing : ''}`, {
+  method: isEditing ? 'PUT' : 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  credentials: 'include',
+  body: JSON.stringify(jobData)
 });
 
-// Button Logic Remove and Edit
-document.addEventListener('click', async (e) => {
-  if (e.target.classList.contains('remove-btn')) {
-    const jobId = e.target.closest('.job-entry').dataset.id;
-    if (confirm("Are you sure you want to delete this job?")) {
-      const res = await fetch(`/api/calendar/${jobId}`, {
-        method: 'DELETE',
-      });
-      if (res.ok) {
-        e.target.closest('.job-entry').remove();
-      } else {
-        alert("Failed to delete job.");
-      }
-    }
-  }
+jobForm.dataset.editing = '';
+jobModal.style.display = 'none';
+window.location.reload();
 
-  if (e.target.classList.contains('edit-btn')) {
-    const jobId = e.target.closest('.job-entry').dataset.id;
-    // Optional: Load data and prefill the job modal
-    openEditModal(jobId); // You’ll define this function
-  }
 });
+ 

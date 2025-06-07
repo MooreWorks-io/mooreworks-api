@@ -671,3 +671,22 @@ nav a:hover {
   border-radius: 6px;
 }
 
+.calendar-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 2px solid #ccc;
+  padding: 1rem;
+  z-index: 1000;
+  width: 300px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-radius: 8px;
+}
+.calendar-popup .popup-content {
+  text-align: left;
+}
+.calendar-popup button {
+  margin: 5px 5px 0 0;
+}
