@@ -9,12 +9,14 @@ const session = require('express-session');
 const User = require('./models/User'); 
 const OpenAI = require('openai');
 const mongoose = require('mongoose');
-app.set('view engine', 'ejs');
+
 
 dotenv.config();
 
 // Init + DB
 const app = express();
+app.set('view engine', 'ejs');
+
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
