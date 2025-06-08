@@ -64,6 +64,16 @@ app.get('/calendar', (req, res) => {
   if (!req.session.userId) return res.redirect('/');
   res.sendFile(path.join(__dirname, 'views', 'calendar.html'));
 });
+app.get('/', (req, res) => {
+  if (req.session.userId) return res.redirect('/home');
+  res.render('index', { loggedIn: false });
+});
+
+app.get('/home', (req, res) => {
+  if (!req.session.userId) return res.redirect('/');
+  res.render('home', { userEmail: req.session.userEmail });
+});
+
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

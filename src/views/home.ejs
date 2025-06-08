@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MooreWorks Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <header class="landing-header">
+    <div class="logo-block">
+      <h1>MooreWorks</h1>
+      <p>Welcome back, <%= userEmail %> 👋</p>
+    </div>
+    <nav class="nav-links">
+      <a href="/tool" class="cta-button small">Email Generator</a>
+      <a href="/calendar" class="cta-button small">Calendar Tool</a>
+      <button id="logoutBtn" class="cta-button small" style="background: var(--brand-purple);">Logout</button>
+    </nav>
+  </header>
+
+  <section style="text-align: center; padding: 2rem;">
+    <h2>You're logged in — what do you want to do next?</h2>
+    <a href="/tool" class="cta-button">Open Email Generator</a>
+    <a href="/calendar" class="cta-button" style="margin-left: 1rem;">View Calendar</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MooreWorks.io — Built by Surveyors, for Surveyors</p>
+    <p><a href="mailto:mooreworks.dev@gmail.com">Contact Us</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+      const res = await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+      if (res.ok) window.location.href = '/';
+      else alert('Logout failed');
+    });
+  </script>
+</body>
+</html>
