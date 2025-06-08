@@ -130,4 +130,24 @@ document.getElementById('editJobBtn').addEventListener('click', () => {
     document.getElementById('jobBrief').value = job.jobBrief || '';
   }
 
+document.getElementById('deleteJobBtn').addEventListener('click', async () => {
+  const jobId = document.getElementById('editJobBtn').dataset.jobId;
+  if (!jobId) return;
+
+  const confirmDelete = confirm('Are you sure you want to delete this job?');
+  if (!confirmDelete) return;
+
+  const res = await fetch(`/api/calendar/${jobId}`, {
+    method: 'DELETE',
+    credentials: 'include'
+  });
+
+  if (res.ok) {
+    closeDetailsPopup();
+    window.location.reload();
+  } else {
+    alert('Failed to delete job.');
+  }
+});
+
 });
