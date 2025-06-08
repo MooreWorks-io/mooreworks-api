@@ -52,26 +52,25 @@
   </div>
 </div>
 
-<!-- Read-Only Job Details Modal -->
+<!-- Job Details Modal -->
 <div id="jobDetailsPopup" style="display: none;" class="modal-overlay">
-  <div class="modal-box">
-    <h2 id="detailsTitle">Job Title</h2>
+  <div class="modal-content">
+    <h2 id="detailsTitle" style="margin-bottom: 0.5rem;">Job Details</h2>
     <p><strong>Address:</strong> <span id="detailsAddress"></span></p>
     <p><strong>Job Type:</strong> <span id="detailsType"></span></p>
     <p><strong>Date:</strong> <span id="detailsDate"></span></p>
-    <p><strong>Crew Assigned:</strong> <span id="detailsCrew"></span></p>
-    <p><strong>Access Info:</strong> <span id="detailsAccess"></span></p>
+    <p><strong>Crew:</strong> <span id="detailsCrew"></span></p>
+    <p><strong>Access Notes:</strong> <span id="detailsAccess"></span></p>
     <p><strong>Client Present:</strong> <span id="detailsClientPresent"></span></p>
-    <p><strong>Notes:</strong> <span id="detailsNotes"></span></p>
+    <p><strong>Job Notes:</strong> <span id="detailsNotes"></span></p>
 
-    <div style="margin-top: 1rem;">
-      <button id="editJobBtn" class="btn">Edit</button>
+    <div class="modal-actions" style="margin-top: 1.5rem;">
+      <button id="editJobBtn" class="primary">Edit</button>
       <button id="deleteJobBtn" class="danger">Delete</button>
-      <button onclick="closeDetailsPopup()" class="btn danger">Close</button>
+      <button onclick="closeDetailsPopup()">Close</button>
     </div>
   </div>
 </div>
-
 
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
   <script src="/calendar.js"></script>
