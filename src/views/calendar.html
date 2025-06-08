@@ -52,20 +52,22 @@
   </div>
 </div>
 
-<!-- Read-Only Job Popup -->
-<div id="jobDetailsPopup" class="calendar-popup" style="display: none;">
-  <div class="popup-content">
-    <h3 id="detailsTitle">Job Details</h3>
-    <p><strong>Project Address:</strong> <span id="detailsAddress"></span></p>
+<!-- Read-Only Job Details Modal -->
+<div id="jobDetailsPopup" style="display: none;" class="modal-overlay">
+  <div class="modal-box">
+    <h2 id="detailsTitle">Job Title</h2>
+    <p><strong>Address:</strong> <span id="detailsAddress"></span></p>
     <p><strong>Job Type:</strong> <span id="detailsType"></span></p>
-    <p><strong>Scheduled Date:</strong> <span id="detailsDate"></span></p>
+    <p><strong>Date:</strong> <span id="detailsDate"></span></p>
     <p><strong>Crew Assigned:</strong> <span id="detailsCrew"></span></p>
     <p><strong>Access Info:</strong> <span id="detailsAccess"></span></p>
     <p><strong>Client Present:</strong> <span id="detailsClientPresent"></span></p>
-    <p><strong>Job Notes:</strong></p>
-    <p id="detailsNotes"></p>
-    <button id="editJobBtn">Edit</button>
-    <button onclick="closeDetailsPopup()">Close</button>
+    <p><strong>Notes:</strong> <span id="detailsNotes"></span></p>
+
+    <div style="margin-top: 1rem;">
+      <button id="editJobBtn" class="btn">Edit</button>
+      <button onclick="closeDetailsPopup()" class="btn danger">Close</button>
+    </div>
   </div>
 </div>
 
