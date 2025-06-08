@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('detailsType').innerText = job.jobType || 'N/A';
   document.getElementById('detailsDate').innerText = job.date || 'N/A';
   document.getElementById('detailsCrew').innerText = job.crew || 'N/A';
-  document.getElementById('detailsAccess').innerText = job.access || 'N/A';
-  document.getElementById('detailsClientPresent').innerText = job.clientPresent || 'N/A';
+document.getElementById('detailsFieldHours').innerText = job.fieldHours || 'N/A';
+document.getElementById('detailsOfficeHours').innerText = job.officeHours || 'N/A';
   document.getElementById('detailsNotes').innerText = job.jobBrief || 'N/A';
 
   document.getElementById('editJobBtn').dataset.jobId = job._id;
