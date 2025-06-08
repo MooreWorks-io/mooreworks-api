@@ -53,8 +53,8 @@
 </div>
 
 <!-- Job Details Modal -->
-<div id="jobDetailsPopup" style="display: none;" class="modal-overlay">
-  <div class="modal-content">
+<div id="jobDetailsPopup" style="display: none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center;">
+  <div style="background:white; padding:2rem; border-radius:10px; width:90%; max-width:500px;">
     <h2 id="detailsTitle" style="margin-bottom: 0.5rem;">Job Details</h2>
     <p><strong>Address:</strong> <span id="detailsAddress"></span></p>
     <p><strong>Job Type:</strong> <span id="detailsType"></span></p>
@@ -64,13 +64,12 @@
     <p><strong>Client Present:</strong> <span id="detailsClientPresent"></span></p>
     <p><strong>Job Notes:</strong> <span id="detailsNotes"></span></p>
 
-    <div class="modal-actions" style="margin-top: 1.5rem;">
+    <div style="margin-top: 1.5rem; text-align: right;">
       <button id="editJobBtn" class="primary">Edit</button>
       <button id="deleteJobBtn" class="danger">Delete</button>
       <button onclick="closeDetailsPopup()">Close</button>
     </div>
   </div>
-</div>
 
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
   <script src="/calendar.js"></script>
