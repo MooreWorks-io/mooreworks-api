@@ -732,3 +732,20 @@ nav a:hover {
   color: #666;
 }
 }
+
+.home-dashboard {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
