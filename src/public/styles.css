@@ -727,7 +727,8 @@ nav a:hover {
   }
 
   footer {
-    padding: 1rem;
-    font-size: 0.85rem;
-  }
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+}
 }

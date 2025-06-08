@@ -8,23 +8,16 @@
 </head>
 
 <body>
-  <header class="landing-header" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-    <div class="logo-block">
-      <h1>MooreWorks</h1>
-      <p>Welcome back, <%= userEmail %> 👋</p>
-    </div>
-    <nav class="nav-links">
-      <a href="/tool" class="cta-button small">Email Generator</a>
-      <a href="/calendar" class="cta-button small">Calendar Tool</a>
-      <button id="logoutBtn" class="cta-button small" style="background: var(--brand-purple);">Logout</button>
-    </nav>
-  </header>
+  <header class="landing-header" style="display: flex; justify-content: center; padding: 2rem;">
+  <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); max-width: 400px; width: 100%; text-align: center;">
+    <h1 style="margin-bottom: 0.5rem; color: var(--brand-purple); font-size: 1.75rem;">MooreWorks</h1>
+    <p style="margin-bottom: 1.5rem;">Welcome back, <%= userEmail %> 👋</p>
 
-  <section style="text-align: center; padding: 2rem;">
-    <h2>You're logged in — what do you want to do next?</h2>
-    <a href="/tool" class="cta-button">Open Email Generator</a>
-    <a href="/calendar" class="cta-button" style="margin-left: 1rem;">View Calendar</a>
-  </section>
+    <a href="/tool" class="cta-button" style="margin-bottom: 1rem;">Email Generator</a><br />
+    <a href="/calendar" class="cta-button" style="margin-bottom: 1rem;">Calendar Tool</a><br />
+    <button id="logoutBtn" class="cta-button small danger" style="background: #6c6c6c;">Logout</button>
+  </div>
+</header>
 
   <footer>
     <p>&copy; 2025 MooreWorks.io — Built by Surveyors, for Surveyors</p>
