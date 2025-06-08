@@ -33,45 +33,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     eventClick: function(info) {
       const job = info.event.extendedProps;
 
-      // Prefill modal
-      prefillJobForm(job);
-      jobForm.dataset.editing = job._id;
-      jobModal.style.display = 'flex';
+       document.getElementById('detailsTitle').innerText = job.jobType || job.address || 'Job';
+  document.getElementById('detailsAddress').innerText = job.address || 'N/A';
+  document.getElementById('detailsType').innerText = job.jobType || 'N/A';
+  document.getElementById('detailsDate').innerText = job.date || 'N/A';
+  document.getElementById('detailsCrew').innerText = job.crew || 'N/A';
+  document.getElementById('detailsAccess').innerText = job.access || 'N/A';
+  document.getElementById('detailsClientPresent').innerText = job.clientPresent || 'N/A';
+  document.getElementById('detailsNotes').innerText = job.jobBrief || '';
 
-      // Add Delete button if not already added
-      if (!document.getElementById('deleteFromModal')) {
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.id = 'deleteFromModal';
-        deleteBtn.style.marginLeft = '10px';
-        deleteBtn.classList.add('danger');
+  document.getElementById('editJobBtn').dataset.jobId = job._id;
+  document.getElementById('jobDetailsPopup').style.display = 'block';
+},
+ }); 
 
-        deleteBtn.addEventListener('click', async () => {
-          if (confirm('Delete this job?')) {
-            const res = await fetch(`/api/calendar/${job._id}`, {
-              method: 'DELETE',
-            });
-            if (res.ok) {
-              jobModal.style.display = 'none';
-              window.location.reload();
-            } else {
-              alert('Failed to delete job.');
-            }
-          }
-        });
+calendar.render();
 
-        document.getElementById('cancelBtn').insertAdjacentElement('beforebegin', deleteBtn);
-      }
-    }
-  });
+window.closeDetailsPopup = function () {
+  document.getElementById('jobDetailsPopup').style.display = 'none';
+};
 
-  calendar.render();
+
 
   // Open modal from Add Job button
   addJobBtn.addEventListener('click', () => {
     jobForm.dataset.editing = '';
-    jobForm.reset();
     jobModal.style.display = 'flex';
+    jobForm.reset();
     document.getElementById('modalHeader').textContent = 'Add New Job';
   });
 
@@ -104,6 +92,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.location.reload();
   });
 
+
+
   function prefillJobForm(job) {
     document.getElementById('modalHeader').textContent = 'Edit Job';
     document.getElementById('jobType').value = job.jobType || '';
@@ -114,4 +104,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('officeHours').value = job.officeHours || 0;
     document.getElementById('jobBrief').value = job.jobBrief || '';
   }
+
+// Edit button in read-only popup
+document.getElementById('editJobBtn').addEventListener('click', () => {
+  const jobId = document.getElementById('editJobBtn').dataset.jobId;
+  const job = jobs.find(j => j._id === jobId);
+  if (!job) return;
+
+  closeDetailsPopup(); // hide read-only popup
+  prefillJobForm(job); // prefill form
+  jobForm.dataset.editing = job._id;
+  jobModal.style.display = 'flex';
+});
+
 });
