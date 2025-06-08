@@ -44,6 +44,13 @@
       <label>Field Hours: <input type="number" name="fieldHours" id="fieldHours" step="0.1"></label><br><br>
       <label>Office Hours: <input type="number" name="officeHours" id="officeHours" step="0.1"></label><br><br>
       <label>Job Brief:<br><textarea name="jobBrief" id="jobBrief" rows="3" style="width:100%;"></textarea></label><br><br>
+      <label>Invoice Status:
+  <select name="invoiceStatus" id="invoiceStatus" style="width:100%;">
+    <option value="">Invoice Not Sent</option>
+    <option value="unpaid">Invoice Sent (Unpaid)</option>
+    <option value="paid">Invoice Sent (Paid)</option>
+  </select>
+</label><br><br>
       <div style="text-align: right;">
         <button type="submit" class="cta-button small">Save</button>
         <button type="button" id="cancelBtn" class="cta-button small" style="background:gray;">Cancel</button>
@@ -63,6 +70,7 @@
     <p><strong>Crew Hours:</strong> <span id="detailsFieldHours"></span></p>
     <p><strong>Office Hours:</strong> <span id="detailsOfficeHours"></span></p>
     <p><strong>Job Brief:</strong> <span id="detailsNotes"></span></p>
+    <p><strong>Invoice Status:</strong> <span id="detailsInvoiceStatus"></span></p>
 
     <div style="margin-top: 1.5rem; text-align: right;">
       <button id="editJobBtn" class="primary">Edit</button>

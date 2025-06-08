@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       fieldHours: job.fieldHours,
       officeHours: job.officeHours,
       jobBrief: job.jobBrief,
+      invoiceStatus: job.invoiceStatus,
       date: job.date
     }
   }));
@@ -38,9 +39,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('detailsType').innerText = job.jobType || 'N/A';
   document.getElementById('detailsDate').innerText = job.date || 'N/A';
   document.getElementById('detailsCrew').innerText = job.crew || 'N/A';
-document.getElementById('detailsFieldHours').innerText = job.fieldHours || 'N/A';
-document.getElementById('detailsOfficeHours').innerText = job.officeHours || 'N/A';
+  document.getElementById('detailsFieldHours').innerText = job.fieldHours || 'N/A';
+  document.getElementById('detailsOfficeHours').innerText = job.officeHours || 'N/A';
   document.getElementById('detailsNotes').innerText = job.jobBrief || 'N/A';
+  document.getElementById('detailsInvoiceStatus').innerText =
+  job.invoiceStatus || 'Unsent Invoice';
 
   document.getElementById('editJobBtn').dataset.jobId = job._id;
 
@@ -99,7 +102,7 @@ document.getElementById('editJobBtn').addEventListener('click', () => {
 
     const formData = new FormData(jobForm);
     const jobData = Object.fromEntries(formData.entries());
-
+    jobData.invoiceStatus = document.getElementById('invoiceStatus').value || '';
     jobData.fieldHours = parseFloat(jobData.fieldHours) || 0;
     jobData.officeHours = parseFloat(jobData.officeHours) || 0;
 
@@ -128,6 +131,7 @@ document.getElementById('editJobBtn').addEventListener('click', () => {
     document.getElementById('fieldHours').value = job.fieldHours || 0;
     document.getElementById('officeHours').value = job.officeHours || 0;
     document.getElementById('jobBrief').value = job.jobBrief || '';
+    document.getElementById('invoiceStatus').value = job.invoiceStatus || '';
   }
 
 document.getElementById('deleteJobBtn').addEventListener('click', async () => {
