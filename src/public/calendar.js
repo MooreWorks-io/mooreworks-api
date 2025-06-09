@@ -135,56 +135,62 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   window.openGroupedModal = function(name, address, jobGroup) {
-    document.getElementById('jobDetailsPopup').style.display = 'none';
-    document.getElementById('groupedClientName').textContent = name;
-    document.getElementById('groupedClientAddress').textContent = address;
-    const tbody = document.getElementById('groupedJobRows');
-    tbody.innerHTML = '';
-    let totalField = 0;
-    let totalOffice = 0;
+  // 🔒 Close all modals first to avoid overlap/bugs
+  document.getElementById('jobDetailsPopup').style.display = 'none';
+  document.getElementById('jobModal').style.display = 'none';
+  document.getElementById('groupedDetailsModal').style.display = 'none';
 
-    jobGroup.forEach(job => {
-      const row = document.createElement('tr');
+  // 🧠 Populate modal content
+  document.getElementById('groupedClientName').textContent = name;
+  document.getElementById('groupedClientAddress').textContent = address;
 
-      const dateCell = document.createElement('td');
-      dateCell.textContent = job.date || 'N/A';
+  const tbody = document.getElementById('groupedJobRows');
+  tbody.innerHTML = '';
+  let totalField = 0;
+  let totalOffice = 0;
 
-      const fieldCell = document.createElement('td');
-      fieldCell.textContent = job.fieldHours || 0;
-      totalField += parseFloat(job.fieldHours) || 0;
+  jobGroup.forEach(job => {
+    const row = document.createElement('tr');
 
-      const officeCell = document.createElement('td');
-      officeCell.textContent = job.officeHours || 0;
-      totalOffice += parseFloat(job.officeHours) || 0;
+    const dateCell = document.createElement('td');
+    dateCell.textContent = job.date || 'N/A';
 
-      const editCell = document.createElement('td');
-      const editBtn = document.createElement('button');
-      editBtn.textContent = 'Edit';
-      editBtn.className = 'cta-button small';
-      editBtn.onclick = () => {
-        closeGroupedModal();
-        const match = jobs.find(j => j._id === job._id);
-        if (match) {
-          prefillJobForm(match);
-          jobForm.dataset.editing = match._id;
-          document.getElementById('jobModal').style.display = 'flex';
-        }
-      };
-      editCell.appendChild(editBtn);
+    const fieldCell = document.createElement('td');
+    fieldCell.textContent = job.fieldHours || 0;
+    totalField += parseFloat(job.fieldHours) || 0;
 
-      row.appendChild(dateCell);
-      row.appendChild(fieldCell);
-      row.appendChild(officeCell);
-      row.appendChild(editCell);
-      tbody.appendChild(row);
-    });
+    const officeCell = document.createElement('td');
+    officeCell.textContent = job.officeHours || 0;
+    totalOffice += parseFloat(job.officeHours) || 0;
 
-    document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
-    document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
-    const groupedModal = document.getElementById('groupedDetailsModal');
-if (!groupedModal) return;
-groupedModal.style.display = 'flex';
-  };
+    const editCell = document.createElement('td');
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.className = 'cta-button small';
+    editBtn.onclick = () => {
+      closeGroupedModal();
+      const match = jobs.find(j => j._id === job._id);
+      if (match) {
+        prefillJobForm(match);
+        jobForm.dataset.editing = match._id;
+        document.getElementById('jobModal').style.display = 'flex';
+      }
+    };
+    editCell.appendChild(editBtn);
+
+    row.appendChild(dateCell);
+    row.appendChild(fieldCell);
+    row.appendChild(officeCell);
+    row.appendChild(editCell);
+    tbody.appendChild(row);
+  });
+
+  document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
+  document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
+
+  // ✅ Now safely show the grouped modal
+  document.getElementById('groupedDetailsModal').style.display = 'flex';
+};
 
   window.closeGroupedModal = function () {
     document.getElementById('groupedDetailsModal').style.display = 'none';
