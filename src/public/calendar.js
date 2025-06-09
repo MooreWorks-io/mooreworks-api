@@ -54,6 +54,53 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 calendar.render();
 
+// --- Job Search Logic ---
+const searchInput = document.getElementById('jobSearchInput');
+const resultsList = document.getElementById('searchResults');
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  resultsList.innerHTML = '';
+
+  if (!query) {
+    resultsList.style.display = 'none';
+    return;
+  }
+
+  const matches = jobs.filter(job =>
+    (job.jobType && job.jobType.toLowerCase().includes(query)) ||
+    (job.address && job.address.toLowerCase().includes(query))
+  );
+
+  matches.forEach(job => {
+    const li = document.createElement('li');
+    li.textContent = `${job.jobType || 'Job'} — ${job.address || 'No Address'}`;
+    li.style.padding = '0.5rem';
+    li.style.cursor = 'pointer';
+    li.style.borderBottom = '1px solid #eee';
+    li.addEventListener('click', () => {
+      searchInput.value = '';
+      resultsList.style.display = 'none';
+
+      // Show the popup with job details
+      document.getElementById('detailsTitle').innerText = job.jobType || job.address || 'Job';
+      document.getElementById('detailsAddress').innerText = job.address || 'N/A';
+      document.getElementById('detailsType').innerText = job.jobType || 'N/A';
+      document.getElementById('detailsDate').innerText = job.date || 'N/A';
+      document.getElementById('detailsCrew').innerText = job.crew || 'N/A';
+      document.getElementById('detailsAccess').innerText = job.fieldHours || 'N/A';
+      document.getElementById('detailsClientPresent').innerText = job.officeHours || 'N/A';
+      document.getElementById('detailsNotes').innerText = job.jobBrief || 'N/A';
+      document.getElementById('editJobBtn').dataset.jobId = job._id;
+      document.getElementById('jobDetailsPopup').style.display = 'flex';
+    });
+
+    resultsList.appendChild(li);
+  });
+
+  resultsList.style.display = matches.length ? 'block' : 'none';
+});
+
 window.closeDetailsPopup = function () {
   document.getElementById('jobDetailsPopup').style.display = 'none';
 };
