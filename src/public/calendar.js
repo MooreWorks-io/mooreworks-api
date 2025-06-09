@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   window.openGroupedModal = function(name, address, jobGroup) {
+    document.getElementById('jobDetailsPopup').style.display = 'none';
     document.getElementById('groupedClientName').textContent = name;
     document.getElementById('groupedClientAddress').textContent = address;
     const tbody = document.getElementById('groupedJobRows');
