@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       li.style.cursor = 'pointer';
       li.style.borderBottom = '1px solid #eee';
       li.addEventListener('click', () => {
+        console.log('Search result clicked');
         searchInput.value = '';
         resultsList.style.display = 'none';
         openGroupedModal(name, address, jobGroup);

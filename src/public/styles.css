@@ -716,3 +716,16 @@ nav a:hover {
 .modal-actions button {
   margin-right: 0.75rem;
 }
+
+#groupedDetailsModal {
+  z-index: 9999;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 2rem;
+  display: none;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
