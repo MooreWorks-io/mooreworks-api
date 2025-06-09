@@ -180,7 +180,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
     document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
-    document.getElementById('groupedDetailsModal').style.display = 'flex';
+    const groupedModal = document.getElementById('groupedDetailsModal');
+if (!groupedModal) return;
+groupedModal.style.display = 'flex';
   };
 
   window.closeGroupedModal = function () {
