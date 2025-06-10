@@ -58,7 +58,7 @@ nav {
       margin-top: 1.25rem;
       font-weight: bold;
     }
-    input, select, textarea, button {
+     form input, form select, form textarea, form button{
       width: 100%;
       padding: 0.5rem;
       margin-top: 0.25rem;
