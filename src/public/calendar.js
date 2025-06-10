@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     height: 'auto',
     events,
    eventClick: function(info) {
-  if (activeModal === 'grouped') return; // ✅ prevent double popup
+  if (activeModal === 'grouped') {
+  return; // still prevent opening if grouped modal is *currently* open
+}
 
   const job = info.event.extendedProps;
   document.getElementById('detailsTitle').innerText = job.jobType || job.address || 'Job';
