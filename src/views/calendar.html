@@ -93,32 +93,36 @@
     </div>
   </div>
 
-<div id="groupedDetailsModal" class="modal">
-  <div class="modal-content">
-    <h2 id="groupedClientName"></h2>
-    <p id="groupedClientAddress"></p>
-    <table>
+<!-- Grouped Job Summary Modal -->
+<div id="groupedDetailsModal" class="modal" style="display: none;">
+  <div class="modal-content" style="max-width: 600px; width: 100%;">
+    <h2 style="margin-bottom: 0.5rem;" id="groupedClientName">Client Name</h2>
+    <p style="margin-bottom: 1rem;" id="groupedClientAddress">Client Address</p>
+
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem;">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Field Hours</th>
-          <th>Office Hours</th>
-          <th>Edit</th>
+          <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Date</th>
+          <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Field Hours</th>
+          <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Office Hours</th>
+          <th style="padding: 0.5rem; border-bottom: 1px solid #ccc;"></th>
         </tr>
       </thead>
       <tbody id="groupedJobRows"></tbody>
       <tfoot>
         <tr>
-          <td>Total</td>
-          <td id="totalFieldHours"></td>
-          <td id="totalOfficeHours"></td>
+          <td style="padding: 0.5rem; font-weight: bold;">Total</td>
+          <td style="padding: 0.5rem; font-weight: bold;" id="totalFieldHours">0</td>
+          <td style="padding: 0.5rem; font-weight: bold;" id="totalOfficeHours">0</td>
           <td></td>
         </tr>
       </tfoot>
     </table>
-    <button onclick="closeGroupedModal()" class="cta-button">Close</button>
+
+    <div style="text-align: right;">
+      <button class="cta-button" onclick="closeGroupedModal()">Close</button>
+    </div>
   </div>
-</div>
 </div>
 
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
