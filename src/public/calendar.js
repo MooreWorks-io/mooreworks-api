@@ -87,70 +87,70 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   window.openGroupedModal = function(name, address, jobGroup) {
-  activeModal = 'grouped';
+  console.log('Grouped modal function called:', name, jobGroup);
+
+  // Hide any existing modals
   document.getElementById('jobDetailsPopup').style.display = 'none';
   document.getElementById('jobModal').style.display = 'none';
   document.getElementById('groupedDetailsModal').style.display = 'none';
 
-  // Short timeout ensures styles reset clean
-  setTimeout(() => {
-    // Header fields
-    document.getElementById('groupedClientName').textContent = name;
-    document.getElementById('groupedClientAddress').textContent = address;
+  const modal = document.getElementById('groupedDetailsModal');
+  const tbody = document.getElementById('groupedJobRows');
+  if (!modal || !tbody) {
+    console.error('Grouped modal elements not found');
+    return;
+  }
 
-    // Reset rows and totals
-    const tbody = document.getElementById('groupedJobRows');
-    tbody.innerHTML = '';
-    let totalField = 0;
-    let totalOffice = 0;
+  // Set header content
+  document.getElementById('groupedClientName').textContent = name;
+  document.getElementById('groupedClientAddress').textContent = address;
 
-    jobGroup.forEach(job => {
-      const row = document.createElement('tr');
+  // Reset table rows and totals
+  tbody.innerHTML = '';
+  let totalField = 0;
+  let totalOffice = 0;
 
-      const dateCell = document.createElement('td');
-      dateCell.textContent = job.date || 'N/A';
+  jobGroup.forEach(job => {
+    const row = document.createElement('tr');
 
-      const fieldCell = document.createElement('td');
-      fieldCell.textContent = job.fieldHours || 0;
-      totalField += parseFloat(job.fieldHours) || 0;
+    const dateCell = document.createElement('td');
+    dateCell.textContent = job.date || 'N/A';
 
-      const officeCell = document.createElement('td');
-      officeCell.textContent = job.officeHours || 0;
-      totalOffice += parseFloat(job.officeHours) || 0;
+    const fieldCell = document.createElement('td');
+    fieldCell.textContent = job.fieldHours || 0;
+    totalField += parseFloat(job.fieldHours) || 0;
 
-      const editCell = document.createElement('td');
-      const editBtn = document.createElement('button');
-      editBtn.textContent = 'Edit';
-      editBtn.className = 'cta-button small';
-      editBtn.addEventListener('click', () => {
-        closeGroupedModal();
-        const match = jobGroup.find(j => j._id === job._id);
-        if (match) {
-          prefillJobForm(match);
-          jobForm.dataset.editing = match._id;
-          document.getElementById('jobModal').style.display = 'flex';
-        }
-      });
+    const officeCell = document.createElement('td');
+    officeCell.textContent = job.officeHours || 0;
+    totalOffice += parseFloat(job.officeHours) || 0;
 
-      editCell.appendChild(editBtn);
-      row.appendChild(dateCell);
-      row.appendChild(fieldCell);
-      row.appendChild(officeCell);
-      row.appendChild(editCell);
-      tbody.appendChild(row);
+    const editCell = document.createElement('td');
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.className = 'cta-button small';
+    editBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      const match = jobGroup.find(j => j._id === job._id);
+      if (match) {
+        prefillJobForm(match);
+        jobForm.dataset.editing = match._id;
+        document.getElementById('jobModal').style.display = 'flex';
+      }
     });
 
-    document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
-    document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
-    
-    if (groupedModal) {
-  groupedModal.style.display = 'flex';
-  activeModal = 'grouped';
-} else {
-  console.error('Grouped modal not found');
-}
+    editCell.appendChild(editBtn);
+    row.appendChild(dateCell);
+    row.appendChild(fieldCell);
+    row.appendChild(officeCell);
+    row.appendChild(editCell);
+    tbody.appendChild(row);
+  });
 
-  }, 50); // slight delay helps override stuck modal display
+  document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
+  document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
+
+  // Show modal
+  modal.style.display = 'flex';
 };
 
   document.getElementById('editJobBtn').addEventListener('click', () => {
