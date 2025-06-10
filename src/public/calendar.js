@@ -65,10 +65,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       li.textContent = `${name || 'Job'} — ${address || 'No Address'}`;
       li.className = 'search-result-item';
       li.addEventListener('click', () => {
-        searchInput.value = '';
-        resultsList.style.display = 'none';
-        openGroupedModal(name, address, jobGroup);
-      });
+  console.log('Search result clicked:', name, address);
+  searchInput.value = '';
+  resultsList.style.display = 'none';
+  openGroupedModal(name, address, jobGroup);
+});
       resultsList.appendChild(li);
     });
 
