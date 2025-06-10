@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
+  let activeModal = null;
   const calendarEl = document.getElementById('calendar');
   const jobModal = document.getElementById('jobModal');
   const jobForm = document.getElementById('jobForm');
@@ -18,20 +19,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     initialView: 'dayGridMonth',
     height: 'auto',
     events,
-    eventClick(info) {
-      const job = info.event.extendedProps;
-      document.getElementById('detailsTitle').innerText = job.jobType || job.address || 'Job';
-      document.getElementById('detailsAddress').innerText = job.address || 'N/A';
-      document.getElementById('detailsType').innerText = job.jobType || 'N/A';
-      document.getElementById('detailsDate').innerText = job.date || 'N/A';
-      document.getElementById('detailsCrew').innerText = job.crew || 'N/A';
-      document.getElementById('detailsFieldHours').innerText = job.fieldHours || 'N/A';
-      document.getElementById('detailsOfficeHours').innerText = job.officeHours || 'N/A';
-      document.getElementById('detailsNotes').innerText = job.jobBrief || 'N/A';
-      document.getElementById('detailsInvoiceStatus').innerText = job.invoiceStatus || 'Unsent Invoice';
-      document.getElementById('editJobBtn').dataset.jobId = job._id;
-      document.getElementById('jobDetailsPopup').style.display = 'flex';
-    }
+   eventClick: function(info) {
+  if (activeModal === 'grouped') return; // ✅ prevent double popup
+
+  const job = info.event.extendedProps;
+  document.getElementById('detailsTitle').innerText = job.jobType || job.address || 'Job';
+  document.getElementById('detailsAddress').innerText = job.address || 'N/A';
+  document.getElementById('detailsType').innerText = job.jobType || 'N/A';
+  document.getElementById('detailsDate').innerText = job.date || 'N/A';
+  document.getElementById('detailsCrew').innerText = job.crew || 'N/A';
+  document.getElementById('detailsFieldHours').innerText = job.fieldHours || 'N/A';
+  document.getElementById('detailsOfficeHours').innerText = job.officeHours || 'N/A';
+  document.getElementById('detailsNotes').innerText = job.jobBrief || 'N/A';
+  document.getElementById('detailsInvoiceStatus').innerText = job.invoiceStatus || 'Unsent Invoice';
+  document.getElementById('editJobBtn').dataset.jobId = job._id;
+  document.getElementById('jobDetailsPopup').style.display = 'flex';
+  activeModal = 'details'; // ✅ track which modal is open
+} 
   });
   calendar.render();
 
@@ -77,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   window.openGroupedModal = function(name, address, jobGroup) {
-  // Close any open modals
+  activeModal = 'grouped';
   document.getElementById('jobDetailsPopup').style.display = 'none';
   document.getElementById('jobModal').style.display = 'none';
   document.getElementById('groupedDetailsModal').style.display = 'none';
