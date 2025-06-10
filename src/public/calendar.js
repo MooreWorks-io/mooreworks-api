@@ -135,17 +135,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   window.openGroupedModal = function(name, address, jobGroup) {
-  // 🔒 Close all modals first to avoid overlap/bugs
+  // Force-close ALL modals to prevent overlap
   document.getElementById('jobDetailsPopup').style.display = 'none';
   document.getElementById('jobModal').style.display = 'none';
   document.getElementById('groupedDetailsModal').style.display = 'none';
 
-  // 🧠 Populate modal content
+  // Force-clear any existing rows
+  const tbody = document.getElementById('groupedJobRows');
+  tbody.innerHTML = '';
+
+  // Set header fields
   document.getElementById('groupedClientName').textContent = name;
   document.getElementById('groupedClientAddress').textContent = address;
 
-  const tbody = document.getElementById('groupedJobRows');
-  tbody.innerHTML = '';
+  // Tally totals
   let totalField = 0;
   let totalOffice = 0;
 
@@ -176,8 +179,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('jobModal').style.display = 'flex';
       }
     };
-    editCell.appendChild(editBtn);
 
+    editCell.appendChild(editBtn);
     row.appendChild(dateCell);
     row.appendChild(fieldCell);
     row.appendChild(officeCell);
@@ -188,12 +191,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
   document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
 
-  // ✅ Now safely show the grouped modal
+  // ✅ Finally show the grouped modal
   document.getElementById('groupedDetailsModal').style.display = 'flex';
-};
-
-  window.closeGroupedModal = function () {
-    document.getElementById('groupedDetailsModal').style.display = 'none';
   };
 
   function prefillJobForm(job) {
