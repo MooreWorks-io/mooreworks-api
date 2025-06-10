@@ -76,12 +76,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('groupedDetailsModal').style.display = 'none';
   };
 
-  window.openGroupedModal = (name, address, jobGroup) => {
-    closeDetailsPopup();
-    closeGroupedModal();
+  window.openGroupedModal = function(name, address, jobGroup) {
+  // Close any open modals
+  document.getElementById('jobDetailsPopup').style.display = 'none';
+  document.getElementById('jobModal').style.display = 'none';
+  document.getElementById('groupedDetailsModal').style.display = 'none';
+
+  // Short timeout ensures styles reset clean
+  setTimeout(() => {
+    // Header fields
+    document.getElementById('groupedClientName').textContent = name;
+    document.getElementById('groupedClientAddress').textContent = address;
+
+    // Reset rows and totals
     const tbody = document.getElementById('groupedJobRows');
     tbody.innerHTML = '';
-
     let totalField = 0;
     let totalOffice = 0;
 
@@ -105,9 +114,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       editBtn.className = 'cta-button small';
       editBtn.addEventListener('click', () => {
         closeGroupedModal();
-        prefillJobForm(job);
-        jobForm.dataset.editing = job._id;
-        jobModal.style.display = 'flex';
+        const match = jobGroup.find(j => j._id === job._id);
+        if (match) {
+          prefillJobForm(match);
+          jobForm.dataset.editing = match._id;
+          document.getElementById('jobModal').style.display = 'flex';
+        }
       });
 
       editCell.appendChild(editBtn);
@@ -118,12 +130,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       tbody.appendChild(row);
     });
 
-    document.getElementById('groupedClientName').textContent = name;
-    document.getElementById('groupedClientAddress').textContent = address;
     document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
     document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
     document.getElementById('groupedDetailsModal').style.display = 'flex';
-  };
+  }, 50); // slight delay helps override stuck modal display
+};
 
   document.getElementById('editJobBtn').addEventListener('click', () => {
     const jobId = document.getElementById('editJobBtn').dataset.jobId;

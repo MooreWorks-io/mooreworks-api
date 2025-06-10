@@ -93,33 +93,32 @@
     </div>
   </div>
 
-<!-- Grouped Jobs Modal -->
-<div id="groupedDetailsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center;">
-  <div style="background:white; padding:2rem; border-radius:10px; width:90%; max-width:600px;">
-    <h2>Job History for <span id="groupedClientName"></span></h2>
-    <p><strong>Address:</strong> <span id="groupedClientAddress"></span></p>
-
-    <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+<div id="groupedDetailsModal" class="modal">
+  <div class="modal-content">
+    <h2 id="groupedClientName"></h2>
+    <p id="groupedClientAddress"></p>
+    <table>
       <thead>
-        <tr style="text-align:left;">
-          <th style="padding:0.5rem 0;">Date</th>
-          <th style="padding:0.5rem 0;">Field Hours</th>
-          <th style="padding:0.5rem 0;">Office Hours</th>
-          <th style="padding:0.5rem 0;"></th>
+        <tr>
+          <th>Date</th>
+          <th>Field Hours</th>
+          <th>Office Hours</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody id="groupedJobRows"></tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td id="totalFieldHours"></td>
+          <td id="totalOfficeHours"></td>
+          <td></td>
+        </tr>
+      </tfoot>
     </table>
-
-    <div style="margin-top:1rem;">
-      <p><strong>Total Field Hours:</strong> <span id="totalFieldHours"></span></p>
-      <p><strong>Total Office Hours:</strong> <span id="totalOfficeHours"></span></p>
-    </div>
-
-    <div style="text-align:right; margin-top: 1rem;">
-      <button onclick="closeGroupedModal()">Close</button>
-    </div>
+    <button onclick="closeGroupedModal()" class="cta-button">Close</button>
   </div>
+</div>
 </div>
 
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
