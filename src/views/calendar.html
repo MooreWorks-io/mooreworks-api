@@ -93,34 +93,35 @@
     </div>
   </div>
 
-<!-- Grouped Job Summary Modal -->
-<div id="groupedDetailsModal" class="modal" style="display: none;">
-  <div class="modal-content" style="max-width: 600px; width: 100%;">
-    <h2 style="margin-bottom: 0.5rem;" id="groupedClientName">Client Name</h2>
-    <p style="margin-bottom: 1rem;" id="groupedClientAddress">Client Address</p>
-
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem;">
+<div id="groupedDetailsModal" class="modal">
+  <div class="modal-content">
+    <h3 id="groupedClientName">Client Name</h3>
+    <p><strong>Address:</strong> <span id="groupedClientAddress">N/A</span></p>
+    
+    <table style="width:100%; margin-top: 1rem;">
       <thead>
         <tr>
-          <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Date</th>
-          <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Field Hours</th>
-          <th style="text-align: left; padding: 0.5rem; border-bottom: 1px solid #ccc;">Office Hours</th>
-          <th style="padding: 0.5rem; border-bottom: 1px solid #ccc;"></th>
+          <th>Date</th>
+          <th>Field Hours</th>
+          <th>Office Hours</th>
+          <th>Edit</th>
         </tr>
       </thead>
-      <tbody id="groupedJobRows"></tbody>
+      <tbody id="groupedJobRows">
+        <!-- Dynamic rows go here -->
+      </tbody>
       <tfoot>
         <tr>
-          <td style="padding: 0.5rem; font-weight: bold;">Total</td>
-          <td style="padding: 0.5rem; font-weight: bold;" id="totalFieldHours">0</td>
-          <td style="padding: 0.5rem; font-weight: bold;" id="totalOfficeHours">0</td>
+          <td><strong>Total</strong></td>
+          <td id="totalFieldHours">0</td>
+          <td id="totalOfficeHours">0</td>
           <td></td>
         </tr>
       </tfoot>
     </table>
 
-    <div style="text-align: right;">
-      <button class="cta-button" onclick="closeGroupedModal()">Close</button>
+    <div style="margin-top: 1rem; text-align: right;">
+      <button onclick="closeGroupedModal()">Close</button>
     </div>
   </div>
 </div>
