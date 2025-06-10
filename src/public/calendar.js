@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   window.openGroupedModal = function(name, address, jobGroup) {
   // Force-close ALL modals to prevent overlap
   document.getElementById('jobDetailsPopup').style.display = 'none';
+  document.getElementById('editJobBtn').dataset.jobId = '';
   document.getElementById('jobModal').style.display = 'none';
   document.getElementById('groupedDetailsModal').style.display = 'none';
 
@@ -167,18 +168,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     totalOffice += parseFloat(job.officeHours) || 0;
 
     const editCell = document.createElement('td');
+    
     const editBtn = document.createElement('button');
-    editBtn.textContent = 'Edit';
-    editBtn.className = 'cta-button small';
-    editBtn.onclick = () => {
-      closeGroupedModal();
-      const match = jobs.find(j => j._id === job._id);
-      if (match) {
-        prefillJobForm(match);
-        jobForm.dataset.editing = match._id;
-        document.getElementById('jobModal').style.display = 'flex';
-      }
-    };
+editBtn.textContent = 'Edit';
+editBtn.className = 'cta-button small';
+editBtn.addEventListener('click', () => {
+  closeGroupedModal();
+  const match = jobs.find(j => j._id === job._id);
+  if (match) {
+    prefillJobForm(match);
+    jobForm.dataset.editing = match._id;
+    document.getElementById('jobModal').style.display = 'flex';
+  }
+});
 
     editCell.appendChild(editBtn);
     row.appendChild(dateCell);
@@ -192,6 +194,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
 
   // ✅ Finally show the grouped modal
+  document.getElementById('groupedDetailsModal').style.display = 'none';
   document.getElementById('groupedDetailsModal').style.display = 'flex';
   };
 
