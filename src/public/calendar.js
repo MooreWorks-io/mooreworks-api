@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const jobForm = document.getElementById('jobForm');
   const addJobBtn = document.getElementById('addJobBtn');
   const cancelBtn = document.getElementById('cancelBtn');
+  const groupedModal = document.getElementById('groupedDetailsModal');
 
   const res = await fetch('/api/calendar');
   const jobs = await res.json();
@@ -74,10 +75,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   window.closeDetailsPopup = () => {
     document.getElementById('jobDetailsPopup').style.display = 'none';
+     activeModal = null;
   };
 
   window.closeGroupedModal = () => {
     document.getElementById('groupedDetailsModal').style.display = 'none';
+     activeModal = null;
   };
 
   window.openGroupedModal = function(name, address, jobGroup) {
@@ -136,7 +139,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
     document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
-    document.getElementById('groupedDetailsModal').style.display = 'flex';
+    
+    if (groupedModal) {
+  groupedModal.style.display = 'flex';
+  activeModal = 'grouped';
+} else {
+  console.error('Grouped modal not found');
+}
+
   }, 50); // slight delay helps override stuck modal display
 };
 
