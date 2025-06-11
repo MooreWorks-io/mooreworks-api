@@ -21,13 +21,14 @@ body {
 /* ========= Calendar Layout ========= */
 
 .calendar-header {
+   background: rgba(0, 255, 0, 0.05);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 2rem auto 1.5rem;
   max-width: 1000px;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   gap: 1rem;
 }
 
@@ -35,10 +36,13 @@ body {
   font-size: 1.75rem;
   color: var(--brand-purple);
   margin: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 #jobSearchInput {
   flex: 1;
+  min-width: 200px;
   max-width: 400px;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
