@@ -362,3 +362,28 @@ section {
   background: #f4f4ff;
   transform: translateY(-2px);
 }
+
+.site-footer {
+  background: transparent;
+  padding: 2rem 1.5rem 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.site-footer .footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.site-footer a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--brand-purple);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
