@@ -293,3 +293,30 @@ section {
   color: #444;
   line-height: 1.6;
 }
+
+.screenshot-section {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 2rem;
+  background-color: #f5f5fa;
+  border-radius: 12px;
+}
+
+.screenshot-section h2 {
+  font-size: 1.75rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.screenshot-sub {
+  font-size: 1.05rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.screenshot-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
