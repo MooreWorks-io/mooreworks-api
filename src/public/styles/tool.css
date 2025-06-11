@@ -1,0 +1,189 @@
+/* ========= Tool Email Generator Styles ========= */
+
+/* === Layout === */
+.tool-intro {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  margin-top: -1rem;
+}
+
+.tool-intro h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.75rem;
+}
+
+.tool-intro p {
+  font-size: 1.05rem;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 0.5rem;
+  line-height: 1.6;
+}
+
+.tool-intro .small-note {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+/* === Form Wrapper === */
+.form-wrapper {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5e5ef;
+  margin-bottom: 2.5rem;
+}
+
+/* === Section Titles === */
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #2d2d2d;
+  border-left: 5px solid var(--brand-purple);
+  padding-left: 0.75rem;
+  background: linear-gradient(to right, #f4f2fd, transparent);
+  border-radius: 4px;
+}
+
+.section-title + label {
+  margin-top: 0.75rem;
+}
+
+.section-title + * {
+  margin-top: 1rem;
+}
+
+/* === Preview Output === */
+.preview-wrapper {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0ec;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#previewBox {
+  margin-top: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #d3d3e8;
+  padding: 1.75rem 1.5rem;
+  border-radius: 14px;
+  font-family: 'Georgia', serif;
+  white-space: pre-wrap;
+  min-height: 200px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #2e2e2e;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: all 0.3s ease-in-out;
+  resize: vertical;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+}
+
+#previewHint {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+#previewHint span {
+  margin-right: 0.5rem;
+}
+
+.reminder-text {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+/* === Copy Button === */
+#copyBtn {
+  margin-top: 1rem;
+  background: var(--success-green);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#copyBtn:hover {
+  background: var(--success-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+#copySuccess {
+  color: green;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+/* === Form Fields === */
+.form-group {
+  display: none;
+}
+
+.form-group.active {
+  display: block;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  margin: 2.5rem 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.035);
+  border: 1px solid #e0e0e8;
+  transition: all 0.3s ease;
+}
+
+.form-group:not(:last-of-type) {
+  border-bottom: 1px dashed #ddd;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  margin-bottom: 1rem;
+}
+
+.form-group.active::before {
+  content: "";
+  position: absolute;
+  top: -1.25rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+}
+
+#emailSubject {
+  display: none;
+}
+
+/* === Generate Button === */
+.generate-btn {
+  background: var(--brand-purple);
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.generate-btn:hover {
+  background: var(--button-hover);
+  transform: scale(1.02);
+}

@@ -1,0 +1,78 @@
+/* ========= Auth Page Styles (Login & Signup) ========= */
+
+.form-container {
+  max-width: 400px;
+  margin: 5rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.form-container h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+  text-align: center;
+}
+
+.form-container label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.auth-button {
+  width: 100%;
+  margin-top: 1.5rem;
+  background: var(--brand-purple);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+.auth-button:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.auth-message {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #666;
+}
+
+.auth-message a {
+  color: var(--brand-purple);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-message a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    margin: 3rem 1rem;
+    padding: 1.5rem;
+  }
+}

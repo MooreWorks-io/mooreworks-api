@@ -1,0 +1,143 @@
+/* ========= Global Variables ========= */
+:root {
+  --brand-purple: #7A3EF0;
+  --button-hover: #5d2bd7;
+  --success-green: #4CAF50;
+  --success-hover: #3e8e41;
+  --text-color: #222;
+  --light-gray: #f7f7fb;
+}
+
+/* ========= Base Styles ========= */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, var(--light-gray), #ececf5);
+  color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--brand-purple);
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+p {
+  color: #444;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* ========= Inputs ========= */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--brand-purple);
+  box-shadow: 0 0 0 2px rgba(122, 62, 240, 0.1);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--brand-purple);
+  box-shadow: 0 0 0 2px rgba(122, 62, 240, 0.2);
+}
+
+/* ========= Buttons ========= */
+button {
+  background: var(--brand-purple);
+  color: white;
+  padding: 0.75rem 1.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  letter-spacing: 0.3px;
+}
+
+button:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(122, 62, 240, 0.3);
+}
+
+/* ========= Utility ========= */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ========= Media Queries ========= */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+  }
+}
+
+/* ========= Links ========= */
+a {
+  color: var(--brand-purple);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
