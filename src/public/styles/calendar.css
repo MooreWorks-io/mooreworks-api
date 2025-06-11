@@ -19,6 +19,59 @@ body {
 }
 
 /* ========= Calendar Layout ========= */
+
+.calendar-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem auto 1.5rem;
+  max-width: 1000px;
+  padding: 0 1rem;
+  gap: 1rem;
+}
+
+.calendar-header h1 {
+  font-size: 1.75rem;
+  color: var(--brand-purple);
+  margin: 0;
+}
+
+#jobSearchInput {
+  flex: 1;
+  max-width: 400px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+#searchResults {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem auto 0;
+  max-width: 90%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: none;
+  position: relative;
+  z-index: 1001;
+  overflow: hidden;
+}
+
+#searchResults li {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#searchResults li:hover {
+  background: #f7f7fb;
+}
+
 .main-content {
   display: flex;
   justify-content: center;
@@ -53,6 +106,16 @@ body {
 .fc-daygrid-day:hover {
   background-color: #f5f5fc;
   cursor: pointer;
+}
+
+.fc-event {
+  background-color: var(--brand-purple) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 2px 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 /* ========= Buttons ========= */
@@ -98,27 +161,34 @@ button:focus {
   font-weight: bold;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .floating-add-btn:hover {
   background-color: var(--button-hover);
+  transform: translateY(-2px);
 }
 
 .fc .fc-button {
   background-color: var(--brand-purple);
+  color: white;
   border: none;
-  color: #fff;
-  font-weight: 600;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
-  padding: 0.4rem 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  transition: background-color 0.3s ease;
 }
 
 .fc .fc-button:hover {
   background-color: var(--button-hover);
   transform: translateY(-2px);
+}
+
+.fc .fc-button-group {
+  gap: 0.5rem;
 }
 
 .fc .fc-button:disabled {
