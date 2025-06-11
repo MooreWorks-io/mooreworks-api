@@ -215,3 +215,24 @@ section {
   max-width: 1000px;
   padding: 0 1.5rem;
 }
+
+.hero {
+  text-align: center;
+  margin: 3rem auto 4rem;
+  max-width: 800px;
+  padding: 0 1.5rem;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 1.25rem;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
