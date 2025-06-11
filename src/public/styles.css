@@ -778,3 +778,31 @@ body {
   max-width: 1000px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+}
+
+.floating-add-btn {
+  position: absolute;
+  right: -70px; /* adjust this based on visual alignment */
+  top: 20px;
+  background-color: var(--brand-purple);
+  color: white;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.floating-add-btn:hover {
+  background-color: var(--button-hover);
+}
