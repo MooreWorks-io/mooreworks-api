@@ -45,6 +45,16 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
+.fc-daygrid-day-number {
+  color: #333 !important;
+  font-weight: 500;
+}
+
+.fc-daygrid-day:hover {
+  background-color: #f5f5fc;
+  cursor: pointer;
+}
+
 /* ========= Buttons ========= */
 button {
   background: var(--brand-purple);
@@ -93,6 +103,27 @@ button:focus {
 
 .floating-add-btn:hover {
   background-color: var(--button-hover);
+}
+
+.fc .fc-button {
+  background-color: var(--brand-purple);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.fc .fc-button:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-2px);
+}
+
+.fc .fc-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* ========= Modal Styles ========= */
