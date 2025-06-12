@@ -27,20 +27,33 @@
   </nav>
 </header>
 
-  <div class="calendar-header">
-  <h1>🗓️ MooreWorks Job Calendar</h1>
-  <div class="search-wrapper">
-    <input id="jobSearchInput" ... />
-    <ul id="searchResults"></ul>
-  </div>
-</div>
+ <div class="calendar-layout">
+  <!-- Sidebar -->
+  <aside class="calendar-sidebar">
+    <h1 class="logo-title">MooreWorks</h1>
+    <p>Built by Surveyors. For Surveyors.</p>
+    <a href="/" class="back-link">← Back to Home</a>
+    <a href="/tool" class="cta-button small">Open Tools</a>
+    <form action="/logout" method="POST">
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+  </aside>
 
-<div class="main-content">
-  <div class="calendar-container">
-    <div id="calendar"></div>
-</div>
+  <!-- Main Calendar Content -->
+  <section class="calendar-main">
+    <div class="calendar-header">
+      <h2>🗓️ MooreWorks Job Calendar</h2>
+      <div class="search-wrapper">
+        <input type="text" id="jobSearchInput" placeholder="Search jobs by name or address..." />
+        <ul id="searchResults"></ul>
+      </div>
+    </div>
 
-  <button id="addJobBtn" class="floating-add-btn">➕ Add Job</button>
+    <div class="calendar-container">
+      <div id="calendar"></div>
+      <button id="addJobBtn" class="floating-add-btn">➕ Add Job</button>
+    </div>
+  </section>
 </div>
 
 <!-- Modal Form -->
