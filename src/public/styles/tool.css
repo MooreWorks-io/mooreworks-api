@@ -1,33 +1,5 @@
 /* ========= Tool Email Generator Styles ========= */
 
-/* === Layout === */
-.tool-intro {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  margin-top: -1rem;
-}
-
-.tool-intro h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 0.75rem;
-}
-
-.tool-intro p {
-  font-size: 1.05rem;
-  color: #555;
-  max-width: 600px;
-  margin: 0 auto 0.5rem;
-  line-height: 1.6;
-}
-
-.tool-intro .small-note {
-  font-size: 0.9rem;
-  color: #777;
-  margin-top: 0.5rem;
-}
-
 /* === Form Wrapper === */
 .form-wrapper {
   background: #fff;
