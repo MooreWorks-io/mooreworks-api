@@ -1,6 +1,37 @@
-/* ========= Tool Email Generator Styles ========= */
+/* ========= MooreWorks Tool Styles ========= */
 
-/* === Layout === */
+/* === Root Variables === */
+:root {
+  --brand-purple: #7A3EF0;
+  --button-hover: #5d2bd7;
+  --success-green: #4CAF50;
+  --success-hover: #3e8e41;
+  --border-gray: #e5e5ef;
+  --text-dark: #222;
+  --text-medium: #555;
+  --text-light: #777;
+  --bg-light: #f7f7fb;
+  --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* === Base === */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #f7f7fb, #ececf5);
+  color: var(--text-medium);
+  margin: 0;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-wrapper {
+  width: 100%;
+  max-width: 780px;
+}
+
+/* === Header === */
 .tool-intro {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -10,13 +41,13 @@
 .tool-intro h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #222;
+  color: var(--text-dark);
   margin-bottom: 0.75rem;
 }
 
 .tool-intro p {
   font-size: 1.05rem;
-  color: #555;
+  color: var(--text-medium);
   max-width: 600px;
   margin: 0 auto 0.5rem;
   line-height: 1.6;
@@ -24,166 +55,188 @@
 
 .tool-intro .small-note {
   font-size: 0.9rem;
-  color: #777;
+  color: var(--text-light);
   margin-top: 0.5rem;
 }
 
-/* === Form Wrapper === */
+/* === Form Container === */
 .form-wrapper {
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-  border: 1px solid #e5e5ef;
-  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-light);
+  border: 1px solid var(--border-gray);
+  margin-bottom: 2rem;
 }
 
-/* === Section Titles === */
-.section-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #2d2d2d;
-  border-left: 5px solid var(--brand-purple);
-  padding-left: 0.75rem;
-  background: linear-gradient(to right, #f4f2fd, transparent);
-  border-radius: 4px;
-}
-
-.section-title + label {
-  margin-top: 0.75rem;
-}
-
-.section-title + * {
-  margin-top: 1rem;
-}
-
-/* === Preview Output === */
-.preview-wrapper {
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e0e0ec;
-  margin-top: 2rem;
-  text-align: center;
-}
-
-#previewBox {
+/* === Form Elements === */
+form label {
+  font-weight: bold;
+  display: block;
   margin-top: 1.5rem;
-  background-color: #fff;
-  border: 1px solid #d3d3e8;
-  padding: 1.75rem 1.5rem;
-  border-radius: 14px;
-  font-family: 'Georgia', serif;
-  white-space: pre-wrap;
-  min-height: 200px;
-  font-size: 1rem;
-  line-height: 1.75;
-  color: #2e2e2e;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  transition: all 0.3s ease-in-out;
-  resize: vertical;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+textarea,
+select {
   width: 100%;
-  max-width: 100%;
+  padding: 0.65rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
   box-sizing: border-box;
-  overflow-y: auto;
-  overflow-wrap: break-word;
 }
 
-#previewHint {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 1rem;
-}
-
-#previewHint span {
+/* === Checkboxes and Toggles === */
+input[type="checkbox"] {
   margin-right: 0.5rem;
 }
 
-.reminder-text {
-  font-size: 0.85rem;
-  color: #666;
+.toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   margin-top: 1rem;
 }
 
-/* === Copy Button === */
-#copyBtn {
-  margin-top: 1rem;
-  background: var(--success-green);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-#copyBtn:hover {
-  background: var(--success-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-#copySuccess {
-  color: green;
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
-  display: none;
-}
-
-/* === Form Fields === */
-.form-group {
-  display: none;
-}
-
-.form-group.active {
-  display: block;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 2rem 1.75rem;
-  margin: 2.5rem 0;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.035);
-  border: 1px solid #e0e0e8;
-  transition: all 0.3s ease;
-}
-
-.form-group:not(:last-of-type) {
-  border-bottom: 1px dashed #ddd;
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  margin-bottom: 1rem;
-}
-
-.form-group.active::before {
-  content: "";
-  position: absolute;
-  top: -1.25rem;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, #ccc, transparent);
-}
-
-#emailSubject {
-  display: none;
-}
-
-/* === Generate Button === */
-.generate-btn {
-  background: var(--brand-purple);
-  color: white;
-  padding: 0.75rem 2rem;
-  font-size: 1.05rem;
-  font-weight: 600;
-  border-radius: 10px;
+/* === Buttons === */
+button,
+.email-buttons a {
+  background-color: var(--brand-purple);
+  color: #fff;
   border: none;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1.5rem;
 }
 
-.generate-btn:hover {
-  background: var(--button-hover);
-  transform: scale(1.02);
+button:hover,
+.email-buttons a:hover {
+  background-color: var(--button-hover);
+}
+
+/* === Preview Box === */
+#previewBox {
+  width: 100%;
+  height: 220px;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fefefe;
+  white-space: pre-wrap;
+  resize: vertical;
+}
+
+/* === Email Buttons Group === */
+.email-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* === Responsive === */
+@media screen and (max-width: 600px) {
+  body {
+    padding: 1.25rem;
+  }
+
+  .email-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  button,
+  .email-buttons a {
+    width: 100%;
+  }
+}
+
+/* === Nav Bar === */
+header {
+  width: 100%;
+  max-width: 780px;
+  background-color: #ffffff;
+  padding: 1.25rem 2rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header a {
+  text-decoration: none;
+  color: var(--brand-purple);
+  font-weight: bold;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--brand-purple);
+}
+
+.tool-header {
+  background-color: #ffffff;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
+  margin-bottom: 2rem;
+}
+
+.top-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.top-header-block .back-link {
+  text-decoration: none;
+  color: var(--brand-purple);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.top-header-block h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: var(--brand-purple);
+}
+
+.tagline {
+  font-size: 1rem;
+  color: var(--text-medium);
+}
+
+.tool-headlines h2 {
+  margin-top: 1.25rem;
+  color: var(--text-dark);
+}
+
+.subheadline {
+  margin-top: 0.5rem;
+  color: var(--text-medium);
+}
+
+.small-note {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 0.5rem;
 }
