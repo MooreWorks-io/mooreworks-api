@@ -27,21 +27,16 @@
 
   <!-- Calendar Content Container -->
   <div class="calendar-page-content">
-    <!-- Search + Heading -->
-    <div class="calendar-header">
-      <h2>🗓️ MooreWorks Job Calendar</h2>
+  <div class="calendar-header">
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+    <h2>🗓️ MooreWorks Job Calendar</h2>
+    <div style="display: flex; align-items: center; gap: 1rem;">
       <input type="text" id="jobSearchInput" placeholder="Search jobs by name or address..." />
-      <ul id="searchResults"></ul>
-    </div>
-
-    <!-- Calendar + Add Button -->
-    <div class="main-content">
-      <div class="calendar-container">
-        <div id="calendar"></div>
-      </div>
       <button id="addJobBtn" class="floating-add-btn">➕ Add Job</button>
     </div>
   </div>
+  <ul id="searchResults"></ul>
+</div>
 
   <!-- Job Modal -->
   <div id="jobModal" class="modal">
