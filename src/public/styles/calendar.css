@@ -69,7 +69,6 @@ body {
   margin: auto;
 }
 
-/* Header Title + Search */
 .calendar-header {
   display: flex;
   flex-wrap: wrap;
@@ -209,7 +208,62 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  display: flex;
+}
+
+/* Shared modal content layout */
+#jobModal .modal-content,
+#jobDetailsPopup .modal-content,
+#groupedDetailsModal .modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 550px;
+  width: 95%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+#jobModal .modal-content h2,
+#jobDetailsPopup .modal-content h2,
+#groupedDetailsModal .modal-content h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--brand-purple);
+}
+
+#jobModal .modal-content label,
+#jobDetailsPopup .modal-content label,
+#groupedDetailsModal .modal-content label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+#jobModal .modal-content input,
+#jobModal .modal-content select,
+#jobModal .modal-content textarea,
+#jobDetailsPopup .modal-content input,
+#jobDetailsPopup .modal-content select,
+#jobDetailsPopup .modal-content textarea,
+#groupedDetailsModal .modal-content input,
+#groupedDetailsModal .modal-content select,
+#groupedDetailsModal .modal-content textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+#jobModal .modal-content textarea,
+#jobDetailsPopup .modal-content textarea,
+#groupedDetailsModal .modal-content textarea {
+  resize: vertical;
 }
 
 .modal-actions button {
@@ -234,47 +288,6 @@ body {
   border: none;
 }
 
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 550px;
-  width: 95%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  font-size: 1rem;
-  line-height: 1.5;
-  animation: fadeIn 0.3s ease;
-}
-
-.modal-content h2 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  color: var(--brand-purple);
-}
-
-.modal-content label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: 600;
-  color: #333;
-}
-
-.modal-content input,
-.modal-content select,
-.modal-content textarea {
-  width: 100%;
-  padding: 0.6rem 0.8rem;
-  margin-top: 0.25rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.modal-content textarea {
-  resize: vertical;
-}
-
 /* ========= Responsive ========= */
 @media (max-width: 768px) {
   .calendar-header {
@@ -293,27 +306,13 @@ body {
     gap: 0.5rem;
   }
 
- .floating-add-btn {
-  padding: 0.6rem 1.25rem;
-  border: none;
-  background-color: var(--brand-purple);
-  color: white;
-  font-weight: 600;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-left: 1rem;
-}
-
-.floating-add-btn:hover {
-  background-color: var(--button-hover);
-  transform: translateY(-1px);
+  .floating-add-btn {
+    padding: 0.6rem 1.25rem;
+    margin-left: 1rem;
+  }
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
 }
