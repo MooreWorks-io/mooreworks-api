@@ -288,6 +288,11 @@ body {
   border: none;
 }
 
+.modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
 /* ========= Responsive ========= */
 @media (max-width: 768px) {
   .calendar-header {
