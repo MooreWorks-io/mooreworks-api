@@ -45,31 +45,45 @@
 </div>
 
   <!-- Job Modal -->
-  <div id="jobModal" class="modal">
-    <div class="modal-content">
-      <h2 id="modalHeader">Add New Job</h2>
-      <form id="jobForm">
-        <label>Date: <input type="date" id="date" required /></label><br><br>
-        <label>Job Name: <input type="text" id="jobType" required /></label><br><br>
-        <label>Address: <input type="text" id="address" /></label><br><br>
-        <label>Crew: <input type="text" id="crew" /></label><br><br>
-        <label>Field Hours: <input type="number" id="fieldHours" step="0.1" /></label><br><br>
-        <label>Office Hours: <input type="number" id="officeHours" step="0.1" /></label><br><br>
-        <label>Job Brief:<br><textarea id="jobBrief" rows="3" style="width: 100%;"></textarea></label><br><br>
-        <label>Invoice Status:
-          <select id="invoiceStatus" style="width: 100%;">
-            <option value="">Invoice Not Sent</option>
-            <option value="unpaid">Invoice Sent (Unpaid)</option>
-            <option value="paid">Invoice Sent (Paid)</option>
-          </select>
-        </label><br><br>
-        <div style="text-align: right;">
-          <button type="submit" class="cta-button small">Save</button>
-          <button type="button" id="cancelBtn" class="cta-button small" style="background: gray;">Cancel</button>
-        </div>
-      </form>
-    </div>
+<div id="jobModal" class="modal">
+  <div class="modal-content">
+    <h2 id="modalHeader">Add New Job</h2>
+    <form id="jobForm">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="jobType">Job Name:</label>
+      <input type="text" id="jobType" name="jobType" required />
+
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" />
+
+      <label for="crew">Crew:</label>
+      <input type="text" id="crew" name="crew" />
+
+      <label for="fieldHours">Field Hours:</label>
+      <input type="number" id="fieldHours" name="fieldHours" step="0.1" />
+
+      <label for="officeHours">Office Hours:</label>
+      <input type="number" id="officeHours" name="officeHours" step="0.1" />
+
+      <label for="jobBrief">Job Brief:</label>
+      <textarea id="jobBrief" name="jobBrief" rows="3"></textarea>
+
+      <label for="invoiceStatus">Invoice Status:</label>
+      <select id="invoiceStatus" name="invoiceStatus">
+        <option value="">Invoice Not Sent</option>
+        <option value="unpaid">Invoice Sent (Unpaid)</option>
+        <option value="paid">Invoice Sent (Paid)</option>
+      </select>
+
+      <div class="modal-actions" style="text-align: right; margin-top: 1.5rem;">
+        <button type="submit" class="cta-button small">Save</button>
+        <button type="button" id="cancelBtn" class="cta-button small" style="background: gray;">Cancel</button>
+      </div>
+    </form>
   </div>
+</div>
 
   <!-- Job Details Modal -->
   <div id="jobDetailsPopup" class="modal">
