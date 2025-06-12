@@ -11,43 +11,56 @@
   <meta property="og:image" content="https://mooreworks.io/preview.jpg" />
   <link rel="icon" href="/favicon.ico" />
   <title>MooreWorks | Email Generator</title>
-  <link rel="stylesheet" href="/styles/global.css" />
-  <link rel="stylesheet" href="/styles/tool.css" />
+  <link rel="stylesheet" href="/styles/global.css">
+<link rel="stylesheet" href="/styles/tool.css">
+  <style>
+    @media (max-width: 600px) {
+      form, #previewBox, #copyBtn, #emailBtn, #gmailBtn {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+      }
+      #previewBox {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <div class="main-wrapper">
-    <header class="tool-header">
-      <div class="top-header-block">
-        <a href="/" class="back-link">&larr; Back to Home</a>
-        <h1>MooreWorks</h1>
-        <p class="tagline">Built for Land Surveyors</p>
-      </div>
-      <div class="tool-headlines">
-        <h2>Generate Client Emails with Confidence</h2>
-        <p class="subheadline">Save time and reduce errors with our fast, customizable email generator &mdash; built for real survey jobs.</p>
-        <p class="small-note">🔒 100% Local. No spam. Just clear communication.</p>
-      </div>
-    </header>
-
-  <main class="form-wrapper">
-    <label for="toneSelect">Choose Email Tone:</label>
-    <select id="toneSelect">
-      <option value="friendly">Friendly</option>
-      <option value="professional">Professional</option>
-      <option value="neutral">Neutral</option>
+ <header>
+  <div style="font-size: 1.7rem; font-weight: 700; color: var(--brand-purple);">
+    MooreWorks
+  </div>
+  <div style="font-size: 0.95rem; color: #444;">
+    Built for Land Surveyors
+  </div>
+  <a href="/home" style="margin-left: auto; color: var(--brand-purple); font-weight: 600; text-decoration: none; font-size: 0.95rem;">
+    ← Back to Home
+  </a>
+</header>
+  <section class="tool-intro">
+  <h2>Generate Client Emails with Confidence</h2>
+  <p>Save time and reduce errors with our fast, customizable email generator — built for real survey jobs.</p>
+  <p class="small-note">🔒 100% Local. No spam. Just clear communication.</p>
+</section>
+<div class="form-wrapper">
+  <label for="toneSelect">Choose Email Tone:</label>
+<select id="toneSelect">
+  <option value="friendly">Friendly</option>
+  <option value="professional">Professional</option>
+  <option value="neutral">Neutral</option>
+</select>
+  <form id="emailForm"> 
+    <select id="emailType" required>
+      <option value="">-- Choose an option --</option>
+      <option value="estimate">Estimate Follow-Up</option>
+      <option value="schedule">Job Scheduling</option>
+      <option value="finalReport">Final Report Delivery</option>
+      <option value="infoRequest">Request for Missing Info</option>
+      <option value="delay">Job Delay Notification</option>
+      <option value="thankYou">Thank You / Closeout</option>
     </select>
-
-    <form id="emailForm">
-      <select id="emailType" required>
-        <option value="">-- Choose an option --</option>
-        <option value="estimate">Estimate Follow-Up</option>
-        <option value="schedule">Job Scheduling</option>
-        <option value="finalReport">Final Report Delivery</option>
-        <option value="infoRequest">Request for Missing Info</option>
-        <option value="delay">Job Delay Notification</option>
-        <option value="thankYou">Thank You / Closeout</option>
-      </select>
 
 
 <!-- Estimate Follow-Up -->
@@ -295,15 +308,16 @@
   </div>
 
 
-<footer class="tool-footer">
-    <p>MooreWorks&trade; — Built by Surveyors, for Surveyors</p>
-    <p>&copy; 2025 MooreWorks.io</p>
-    <p>Need help or have feedback? <a href="mailto:mooreworks.dev@gmail.com">Email Us</a></p>
-  </footer>
-
-  <script src="/script.js"></script>
-</body>
-</html>
+  <footer style="margin-top: 3rem; padding-top: 1.5rem; font-size: 0.85rem; color: #777; text-align: center; border-top: 1px solid #ddd;">
+  <p style="margin-bottom: 0.75rem;">MooreWorks™ — Built by Surveyors, for Surveyors</p>
+  <p style="margin-bottom: 0.75rem;">&copy; 2025 MooreWorks.io</p>
+  <p style="margin-top: 1rem; font-size: 0.85rem; color: #999;">
+    Need help or have feedback?
+    <a href="mailto:mooreworks.dev@gmail.com" style="color: var(--brand-purple); text-decoration: none;">
+      Email Us
+    </a>
+  </p>
+</footer>
 
 
   <script src="script.js"></script>
