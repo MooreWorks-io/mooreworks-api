@@ -272,7 +272,7 @@ button:focus {
   }
 }
 
-/* === Clean Header Styling for Calendar Page === */
+/* Clean unified header like homepage */
 .landing-header {
   display: flex;
   justify-content: space-between;
@@ -280,9 +280,9 @@ button:focus {
   background: white;
   padding: 1.5rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   max-width: 1000px;
-  margin: 1rem auto 2rem;
+  margin: 0 auto 2rem;
   gap: 1rem;
   flex-wrap: wrap;
 }
@@ -306,7 +306,6 @@ button:focus {
   gap: 1rem;
   font-weight: 600;
   flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
 .nav-links a {
