@@ -85,6 +85,24 @@ body {
   margin: 0;
 }
 
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.calendar-controls input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 280px;
+  max-width: 100%;
+}
+
 #jobSearchInput {
   flex: 1;
   min-width: 220px;
