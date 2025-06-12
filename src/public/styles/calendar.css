@@ -6,81 +6,121 @@
   --success-hover: #3e8e41;
 }
 
-/* ========= Base Reset ========= */
+/* ========= Base Page ========= */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
+  padding: 2rem 1rem;
   background: linear-gradient(to bottom right, #f7f7fb, #ececf5);
 }
 
-/* ========= Calendar Layout ========= */
-#searchResults {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin-top: 0.25rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  display: none;
-  z-index: 1001;
-  overflow: hidden;
-}
-
-#searchResults li {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-#searchResults li:hover {
-  background: #f7f7fb;
-}
-
-.main-content {
+/* ========= Landing-Style Header ========= */
+.landing-header {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-grow: 1;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+}
+
+.logo-block h1 {
+  font-size: 1.75rem;
+  color: var(--brand-purple);
+  margin-bottom: 0.2rem;
+}
+
+.logo-block p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-links a,
+.logout-btn {
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  background: var(--brand-purple);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-links a:hover,
+.logout-btn:hover {
+  background: var(--button-hover);
+}
+
+/* ========= Calendar Page Layout ========= */
+.calendar-page-content {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Header Title + Search */
+.calendar-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.calendar-header h2 {
+  color: var(--brand-purple);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+#jobSearchInput {
+  flex: 1;
+  min-width: 220px;
+  max-width: 350px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+#searchResults {
+  display: none;
+}
+
+/* ========= Calendar Area ========= */
+.main-content {
   position: relative;
 }
 
 .calendar-container {
-  position: relative;
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 2rem;
-  margin: 0 auto;
-  max-width: 1000px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* FullCalendar Overrides */
 #calendar {
-  max-width: 1000px;
   background: white;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
 }
 
 .fc-daygrid-day-number {
   color: #333 !important;
   font-weight: 500;
-}
-
-.fc-daygrid-day:hover {
-  background-color: #f5f5fc;
-  cursor: pointer;
 }
 
 .fc-event {
@@ -90,59 +130,11 @@ body {
   padding: 2px 6px;
   font-size: 0.85rem;
   font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-/* ========= Buttons ========= */
-button {
-  background: var(--brand-purple);
-  color: white;
-  padding: 0.75rem 1.75rem;
-  font-size: 1.05rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
+.fc-daygrid-day:hover {
+  background-color: #f5f5fc;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  letter-spacing: 0.3px;
-}
-
-button:hover {
-  background: var(--button-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(122, 62, 240, 0.3);
-}
-
-.floating-add-btn {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
-  background-color: var(--brand-purple);
-  color: white;
-  padding: 0.75rem 1rem;
-  border: none;
-  border-radius: 12px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  z-index: 100;
-}
-
-.floating-add-btn:hover {
-  background-color: var(--button-hover);
-  transform: translateY(-2px);
 }
 
 .fc .fc-button {
@@ -160,19 +152,34 @@ button:focus {
 
 .fc .fc-button:hover {
   background-color: var(--button-hover);
-  transform: translateY(-2px);
 }
 
 .fc .fc-button-group {
   gap: 0.5rem;
 }
 
-.fc .fc-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+/* ========= Floating Add Button ========= */
+.floating-add-btn {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background-color: var(--brand-purple);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* ========= Modal Styles ========= */
+.floating-add-btn:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-1px);
+}
+
+/* ========= Modals ========= */
 .modal {
   display: none;
   position: fixed;
@@ -197,173 +204,46 @@ button:focus {
   margin-right: 0.75rem;
 }
 
-#groupedDetailsModal {
-  z-index: 9999;
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  padding: 2rem;
-  display: none;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.cta-button.small {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
 }
 
-/* ========= Media Queries ========= */
-@media (max-width: 600px) {
-  body {
+.primary {
+  background: var(--brand-purple);
+  color: white;
+  border: none;
+}
+
+.danger {
+  background: #f44336;
+  color: white;
+  border: none;
+}
+
+/* ========= Responsive ========= */
+@media (max-width: 768px) {
+  .calendar-header {
     flex-direction: column;
-    padding: 1rem;
+    align-items: flex-start;
+  }
+
+  .landing-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .floating-add-btn {
     position: static;
-    margin-top: 1rem;
     display: block;
     width: 100%;
+    margin-top: 1rem;
   }
-
-  .calendar-container {
-    padding: 1rem;
-  }
-
-  .modal-content {
-    padding: 1.5rem;
-  }
-}
-
-/* Clean unified header like homepage */
-.landing-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  padding: 1.5rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  max-width: 1000px;
-  margin: 0 auto 2rem;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.logo-block h1 {
-  margin: 0;
-  color: var(--brand-purple);
-  font-size: 1.9rem;
-}
-
-.logo-block p {
-  margin: 0.25rem 0 0;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #444;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-weight: 600;
-  flex-wrap: wrap;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #333;
-  font-size: 0.95rem;
-}
-
-.nav-links .cta-button.small {
-  font-size: 0.9rem;
-  padding: 0.45rem 1rem;
-  background-color: var(--brand-purple);
-  color: white;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: background 0.2s ease-in-out;
-}
-
-.nav-links .cta-button.small:hover {
-  background-color: var(--button-hover);
-}
-
-.calendar-layout {
-  display: flex;
-  gap: 2rem;
-  max-width: 1300px;
-  margin: auto;
-  align-items: flex-start;
-}
-
-.calendar-sidebar {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  width: 280px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.calendar-sidebar .logo-title {
-  font-size: 1.75rem;
-  color: var(--brand-purple);
-  margin: 0;
-}
-
-.back-link {
-  font-size: 0.95rem;
-  color: #333;
-  text-decoration: none;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-
-.logout-btn {
-  margin-top: 0.5rem;
-  background: #444;
-  color: white;
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.calendar-main {
-  flex: 1;
-}
-
-.calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.calendar-header h2 {
-  font-size: 1.5rem;
-  color: var(--brand-purple);
-  margin: 0;
-}
-
-.search-wrapper {
-  flex: 1;
-  max-width: 400px;
-}
-
-#jobSearchInput {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
