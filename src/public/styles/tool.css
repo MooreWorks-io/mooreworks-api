@@ -201,3 +201,20 @@
 .tool-header-right .tool-btn:hover {
   background-color: var(--button-hover);
 }
+
+.form-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-inner label {
+  margin-bottom: 0.25rem;
+}
+
+.form-inner select,
+.form-inner button {
+  width: 100%;
+}
