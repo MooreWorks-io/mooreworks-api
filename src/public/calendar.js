@@ -1,3 +1,4 @@
+let jobs = [];
 document.addEventListener('DOMContentLoaded', async () => {
   let activeModal = null;
   const calendarEl = document.getElementById('calendar');
@@ -34,7 +35,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('detailsFieldHours').innerText = job.fieldHours || 'N/A';
   document.getElementById('detailsOfficeHours').innerText = job.officeHours || 'N/A';
   document.getElementById('detailsNotes').innerText = job.jobBrief || 'N/A';
-  document.getElementById('detailsInvoiceStatus').innerText = job.invoiceStatus || 'Unsent Invoice';
+document.getElementById('detailsInvoiceStatus').innerText =
+  job.invoiceStatus === 'paid' ? 'Invoice Sent (Paid)' :
+  job.invoiceStatus === 'unpaid' ? 'Invoice Sent (Unpaid)' :
+  'Unsent Invoice'; 
   document.getElementById('editJobBtn').dataset.jobId = job._id;
   document.getElementById('jobDetailsPopup').style.display = 'flex';
   activeModal = 'details'; // ✅ track which modal is open
@@ -247,6 +251,11 @@ document.getElementById('saveInvoiceStatusBtn').addEventListener('click', async 
 
     const data = await res.json();
     if (data.success) {
+      for (let job of jobs) {
+    if (job.name === name && job.address === address) {
+      job.invoiceStatus = status;
+    }
+  }
       alert('Invoice status updated for all matching jobs.');
       document.getElementById('groupedDetailsModal').style.display = 'none';
       activeModal = null;
