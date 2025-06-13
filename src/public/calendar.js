@@ -231,6 +231,7 @@ document.getElementById('detailsInvoiceStatus').innerText =
     document.getElementById('fieldHours').value = job.fieldHours || 0;
     document.getElementById('officeHours').value = job.officeHours || 0;
     document.getElementById('jobBrief').value = job.jobBrief || '';
+    document.getElementById('invoiceStatus').value = job.invoiceStatus || '';
   }
 });
 
