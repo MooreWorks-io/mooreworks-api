@@ -49,4 +49,25 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// ✅ NEW: Bulk update invoice status for grouped jobs
+router.post('/update-invoice-status', async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  const { name, address, invoiceStatus } = req.body;
+
+  try {
+    await CalendarJob.updateMany(
+      { name, address, createdBy: req.session.userId },
+      { $set: { invoiceStatus } }
+    );
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error updating invoice status:', err);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 module.exports = router;
