@@ -1,3 +1,4 @@
+let calendar;
 let jobs = [];
 document.addEventListener('DOMContentLoaded', async () => {
   let activeModal = null;
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     extendedProps: { ...job }
   }));
 
-  const calendar = new FullCalendar.Calendar(calendarEl, {
+  calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     aspectRatio: 1.15,
     events,
@@ -257,6 +258,9 @@ document.getElementById('saveInvoiceStatusBtn').addEventListener('click', async 
       job.invoiceStatus = status;
     }
   }
+
+refreshCalendarEvents();
+
       alert('Invoice status updated for all matching jobs.');
       document.getElementById('groupedDetailsModal').style.display = 'none';
       activeModal = null;
@@ -268,3 +272,14 @@ document.getElementById('saveInvoiceStatusBtn').addEventListener('click', async 
     alert('There was an error updating invoice status.');
   }
 });
+
+function refreshCalendarEvents() {
+  const updatedEvents = jobs.map(job => ({
+    title: job.jobType || job.address || 'Scheduled Job',
+    start: job.date,
+    extendedProps: { ...job }
+  }));
+
+  calendar.removeAllEvents();
+  calendar.addEventSource(updatedEvents);
+}
