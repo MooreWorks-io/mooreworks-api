@@ -260,7 +260,16 @@ document.getElementById('saveInvoiceStatusBtn').addEventListener('click', async 
     }
   }
 
-refreshCalendarEvents();
+function refreshCalendarEvents() {
+  const updatedEvents = jobs.map(job => ({
+    title: job.jobType || job.address || 'Scheduled Job',
+    start: job.date,
+    extendedProps: { ...job }
+  }));
+
+  calendar.removeAllEvents();
+  calendar.addEventSource(updatedEvents);
+}
 
       alert('Invoice status updated for all matching jobs.');
       document.getElementById('groupedDetailsModal').style.display = 'none';
@@ -273,14 +282,3 @@ refreshCalendarEvents();
     alert('There was an error updating invoice status.');
   }
 });
-
-function refreshCalendarEvents() {
-  const updatedEvents = jobs.map(job => ({
-    title: job.jobType || job.address || 'Scheduled Job',
-    start: job.date,
-    extendedProps: { ...job }
-  }));
-
-  calendar.removeAllEvents();
-  calendar.addEventSource(updatedEvents);
-}
