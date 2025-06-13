@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   return; // still prevent opening if grouped modal is *currently* open
 }
 
-  const job = info.event.extendedProps;
+  const eventJob = info.event.extendedProps;
+const job = jobs.find(j => j._id === eventJob._id);
   console.log('Clicked job:', job);
   document.getElementById('detailsTitle').innerText = job.jobType || job.address || 'Job';
   document.getElementById('detailsAddress').innerText = job.address || 'N/A';
