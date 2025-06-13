@@ -249,3 +249,35 @@ document.addEventListener('DOMContentLoaded', async () => {
     alert('There was an error updating invoice status.');
   }
 });
+
+document.getElementById('saveInvoiceStatusBtn').addEventListener('click', async () => {
+  const status = document.getElementById('groupedInvoiceStatus').value;
+  if (!status) return alert('Please select an invoice status.');
+
+  const name = document.getElementById('groupedClientName').textContent;
+  const address = document.getElementById('groupedClientAddress').textContent;
+
+  try {
+    const res = await fetch('/api/update-invoice-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        address,
+        invoiceStatus: status
+      })
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      alert('Invoice status updated for all matching jobs.');
+      document.getElementById('groupedDetailsModal').style.display = 'none';
+      activeModal = null;
+    } else {
+      throw new Error(data.message || 'Failed to update jobs');
+    }
+  } catch (err) {
+    console.error('Invoice update failed:', err);
+    alert('There was an error updating invoice status.');
+  }
+});
