@@ -225,29 +225,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('officeHours').value = job.officeHours || 0;
     document.getElementById('jobBrief').value = job.jobBrief || '';
   }
-   try {
-    const res = await fetch('/api/update-invoice-status', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: clientName,
-        address: clientAddress,
-        invoiceStatus: status
-      })
-    });
-
-    const data = await res.json();
-    if (data.success) {
-      alert('Invoice status updated for all matching jobs.');
-      document.getElementById('groupedDetailsModal').style.display = 'none';
-      activeModal = null;
-    } else {
-      throw new Error(data.message || 'Failed to update jobs');
-    }
-  } catch (err) {
-    console.error('Invoice update failed:', err);
-    alert('There was an error updating invoice status.');
-  }
 });
 
 document.getElementById('saveInvoiceStatusBtn').addEventListener('click', async () => {
