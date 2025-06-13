@@ -235,7 +235,7 @@ document.getElementById('saveInvoiceStatusBtn').addEventListener('click', async 
   const address = document.getElementById('groupedClientAddress').textContent;
 
   try {
-    const res = await fetch('/api/update-invoice-status', {
+    const res = await fetch('/api/calendar/update-invoice-status', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
