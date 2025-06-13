@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 }
 
   const job = info.event.extendedProps;
+  console.log('Clicked job:', job);
   document.getElementById('detailsTitle').innerText = job.jobType || job.address || 'Job';
   document.getElementById('detailsAddress').innerText = job.address || 'N/A';
   document.getElementById('detailsType').innerText = job.jobType || 'N/A';
