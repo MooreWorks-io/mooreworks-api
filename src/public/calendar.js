@@ -149,6 +149,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('totalFieldHours').textContent = totalField.toFixed(1);
   document.getElementById('totalOfficeHours').textContent = totalOffice.toFixed(1);
 
+  const invoiceStatusSelect = document.getElementById('groupedInvoiceStatus');
+  invoiceStatusSelect.value = '';
+
   // Show modal
   modal.style.display = 'flex';
 };
@@ -178,7 +181,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
     const formData = new FormData(jobForm);
     const jobData = Object.fromEntries(formData.entries());
-    jobData.invoiceStatus = document.getElementById('invoiceStatus').value || '';
     jobData.fieldHours = parseFloat(jobData.fieldHours) || 0;
     jobData.officeHours = parseFloat(jobData.officeHours) || 0;
     const isEditing = jobForm.dataset.editing;
@@ -222,6 +224,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('fieldHours').value = job.fieldHours || 0;
     document.getElementById('officeHours').value = job.officeHours || 0;
     document.getElementById('jobBrief').value = job.jobBrief || '';
-    document.getElementById('invoiceStatus').value = job.invoiceStatus || '';
   }
 });

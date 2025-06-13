@@ -70,13 +70,6 @@
       <label for="jobBrief">Job Brief:</label>
       <textarea id="jobBrief" name="jobBrief" rows="3"></textarea>
 
-      <label for="invoiceStatus">Invoice Status:</label>
-      <select id="invoiceStatus" name="invoiceStatus">
-        <option value="">Invoice Not Sent</option>
-        <option value="unpaid">Invoice Sent (Unpaid)</option>
-        <option value="paid">Invoice Sent (Paid)</option>
-      </select>
-
       <div class="modal-actions" style="text-align: right; margin-top: 1.5rem;">
         <button type="submit" class="cta-button small">Save</button>
         <button type="button" id="cancelBtn" class="cta-button small" style="background: gray;">Cancel</button>
@@ -124,6 +117,13 @@
           </tr>
         </tfoot>
       </table>
+      <div class="form-group" style="margin-top: 1.5rem;">
+  <label for="groupedInvoiceStatus">Invoice Status</label>
+  <select id="groupedInvoiceStatus" class="invoice-dropdown">
+    <option value="unpaid">Invoice Sent (Unpaid)</option>
+    <option value="paid">Invoice Sent (Paid)</option>
+  </select>
+</div>
       <div style="margin-top: 1rem; text-align: right;">
         <button onclick="closeGroupedModal()">Close</button>
       </div>
