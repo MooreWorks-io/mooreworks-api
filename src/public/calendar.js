@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const groupedModal = document.getElementById('groupedDetailsModal');
 
   const res = await fetch('/api/calendar');
-  const jobs = await res.json();
+  jobs = await res.json();
 
   const events = jobs.map(job => ({
     title: job.jobType || job.address || 'Scheduled Job',
