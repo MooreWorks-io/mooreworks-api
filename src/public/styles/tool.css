@@ -5,7 +5,7 @@
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   border: 1px solid #e5e5ef;
   margin-bottom: 2.5rem;
 }
@@ -22,51 +22,12 @@
   border-radius: 4px;
 }
 
-/* === Form Structure === */
-.form-inner {
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: stretch;
-  text-align: left;
+.section-title + label {
+  margin-top: 0.75rem;
 }
 
-.form-inner label {
-  margin-bottom: 0.25rem;
-}
-
-.form-inner select,
-.form-inner button {
-  width: 100%;
-  font-size: 1rem;
-  padding: 0.65rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-  transition: all 0.25s ease;
-}
-
-.form-inner select:hover,
-.form-inner textarea:hover {
-  border-color: var(--brand-purple);
-  box-shadow: 0 0 0 3px rgba(122, 62, 240, 0.1);
-}
-
-/* === Generate Button === */
-.generate-btn {
-  background: var(--brand-purple);
-  color: white;
-  font-weight: 600;
-  border: none;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.generate-btn:hover {
-  background: var(--button-hover);
-  transform: scale(1.02);
+.section-title + * {
+  margin-top: 1rem;
 }
 
 /* === Preview Output === */
@@ -74,30 +35,19 @@
   background: #ffffff;
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   border: 1px solid #e0e0ec;
+  margin-top: 2rem;
   text-align: center;
 }
 
-#previewHint {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 1rem;
-}
-
-#previewHint span {
-  margin-right: 0.5rem;
-}
-
 #previewBox {
-  margin-top: 1rem;
-  background-color: #fafafa;
-  border: 1px solid #ccc;
+  margin-top: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #d3d3e8;
   padding: 1.75rem 1.5rem;
   border-radius: 14px;
-  font-family: 'Segoe UI', sans-serif;
-  caret-color: var(--brand-purple);
+  font-family: 'Georgia', serif;
   white-space: pre-wrap;
   min-height: 200px;
   font-size: 1rem;
@@ -111,6 +61,23 @@
   box-sizing: border-box;
   overflow-y: auto;
   overflow-wrap: break-word;
+}
+
+#previewHint {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+#previewHint span {
+  margin-right: 0.5rem;
+}
+
+.reminder-text {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 1rem;
 }
 
 /* === Copy Button === */
@@ -133,7 +100,7 @@
   display: none;
 }
 
-/* === Email Form Groups === */
+/* === Form Fields === */
 .form-group {
   display: none;
 }
@@ -144,7 +111,7 @@
   border-radius: 16px;
   padding: 2rem 1.75rem;
   margin: 2.5rem 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.035);
   border: 1px solid #e0e0e8;
   transition: all 0.3s ease;
 }
@@ -175,7 +142,25 @@
   display: none;
 }
 
-/* === Tool Header (Shared With Calendar Style) === */
+/* === Generate Button === */
+.generate-btn {
+  background: var(--brand-purple);
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.generate-btn:hover {
+  background: var(--button-hover);
+  transform: scale(1.02);
+}
+
+/* === Tool Page Header (Match Calendar Style) === */
 .tool-header {
   display: flex;
   justify-content: space-between;
@@ -217,17 +202,19 @@
   background-color: var(--button-hover);
 }
 
-/* Media */
+.form-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
 
-@media (max-width: 600px) {
-  .form-wrapper,
-  .form-group.active {
-    padding: 1.5rem 1rem;
-  }
+.form-inner label {
+  margin-bottom: 0.25rem;
+}
 
-  .tool-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
+.form-inner select,
+.form-inner button {
+  width: 100%;
 }

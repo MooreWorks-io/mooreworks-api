@@ -3,82 +3,321 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MooreWorks | Email Generator</title>
   <meta name="description" content="Quickly generate professional client emails for land surveying." />
+  <meta property="og:title" content="MooreWorks Email Generator" />
+  <meta property="og:description" content="Customizable, ready-to-send survey emails for land surveyors." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mooreworks.io" />
+  <meta property="og:image" content="https://mooreworks.io/preview.jpg" />
   <link rel="icon" href="/favicon.ico" />
+  <title>MooreWorks | Email Generator</title>
   <link rel="stylesheet" href="/styles/global.css">
-  <link rel="stylesheet" href="/styles/tool.css">
+<link rel="stylesheet" href="/styles/tool.css">
+  <style>
+    @media (max-width: 600px) {
+      form, #previewBox, #copyBtn, #emailBtn, #gmailBtn {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+      }
+      #previewBox {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="tool-header">
-    <div class="tool-header-left">
-      <h1>MooreWorks</h1>
-      <p class="tagline">Built for Land Surveyors.</p>
-    </div>
-    <div class="tool-header-right">
-      <a href="/" class="tool-btn">&larr; Back to Home</a>
-    </div>
-  </header>
+ <header>
+ <div class="tool-header">
+  <div class="tool-header-left">
+    <h1>MooreWorks</h1>
+    <p class="tagline">Built for Land Surveyors.</p>
+  </div>
+  <div class="tool-header-right">
+    <a href="/" class="tool-btn">← Back to Home</a>
+  </div>
+</div>
+</header>
+<div class="form-wrapper">
+  <div class="form-inner">
+  <label for="toneSelect">Choose Email Tone:</label>
+<select id="toneSelect">
+  <option value="friendly">Friendly</option>
+  <option value="professional">Professional</option>
+  <option value="neutral">Neutral</option>
+</select>
+  <form id="emailForm"> 
+    <select id="emailType" required>
+      <option value="">-- Choose an option --</option>
+      <option value="estimate">Estimate Follow-Up</option>
+      <option value="schedule">Job Scheduling</option>
+      <option value="finalReport">Final Report Delivery</option>
+      <option value="infoRequest">Request for Missing Info</option>
+      <option value="delay">Job Delay Notification</option>
+      <option value="thankYou">Thank You / Closeout</option>
+    </select>
 
-  <main class="form-wrapper">
-    <div class="form-inner">
-      <label for="toneSelect">Choose Email Tone:</label>
-      <select id="toneSelect">
-        <option value="friendly">Friendly</option>
-        <option value="professional">Professional</option>
-        <option value="neutral">Neutral</option>
-      </select>
 
-      <form id="emailForm">
-        <label for="emailType">Choose Email Type:</label>
-        <select id="emailType" required>
-          <option value="">-- Choose an option --</option>
-          <option value="estimate">Estimate Follow-Up</option>
-          <option value="schedule">Job Scheduling</option>
-          <option value="finalReport">Final Report Delivery</option>
-          <option value="infoRequest">Request for Missing Info</option>
-          <option value="delay">Job Delay Notification</option>
-          <option value="thankYou">Thank You / Closeout</option>
-        </select>
+<!-- Estimate Follow-Up -->
+<div class="form-group" id="estimate">
+  <div class="section-title">Estimate Details</div>
+  <label>Client Name:</label>
+  <input type="text" id="estClient" />
 
-        <div id="dynamicFields"></div>
+  <label>Project Address:</label>
+  <input type="text" id="estAddress" />
 
-        <button type="submit" class="generate-btn">Generate Email</button>
-      </form>
-    </div>
-  </main>
+  <label>Was this discussed by phone?</label>
+  <select id="estDiscussed">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
 
-  <section class="preview-wrapper">
-    <p id="previewHint">
-      <span>📧</span>
-      <strong>Generated Email Preview &mdash; edit if needed, then click Copy</strong>
-    </p>
-    <input type="hidden" id="emailSubject" />
-    <textarea id="previewBox"></textarea>
-    <button id="copyBtn" type="button">Copy Email to Clipboard</button>
-    <div id="copySuccess">Copied to clipboard!</div>
-    <p class="reminder-text">
-      <strong>Reminder:</strong> Please review your email before sending. All messages are generated based on the information you provide.
-    </p>
-  </section>
+  <label>Type of Survey:</label>
+  <select id="estSurveyType">
+    <option value="">-- Select one --</option>
+    <option value="Mark corners only (no plat)">Mark corners only (no plat)</option>
+    <option value="Boundary survey with plat">Boundary survey with plat</option>
+    <option value="ALTA/NSPS survey">ALTA/NSPS survey</option>
+    <option value="Elevation certificate">Elevation certificate</option>
+    <option value="Topographic/tree map">Topographic/tree map</option>
+    <option value="Cut line + stake (land management)">Cut line + stake (land management)</option>
+    <option value="Large acreage (>50 acres)">Large acreage (>50 acres)</option>
+    <option value="Re-establish lost corners">Re-establish lost corners</option>
+  </select>
 
-  <section style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; justify-content: center;">
-    <button id="emailBtn" type="button" class="email-launch-btn" style="background-color: #4a90e2;">Send via Email App</button>
-    <button id="gmailBtn" type="button" class="email-launch-btn" style="background-color: #D93025;">Open in Gmail</button>
-    <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem; width: 100%; text-align: center;">
-      Works best on mobile or with your email app set up. Otherwise, click <strong>“Open in Gmail”</strong>.
-    </p>
-  </section>
+  <label>Estimated Price ($):</label>
+  <input type="text" id="estPrice" />
 
-  <footer class="site-footer">
-    <p>MooreWorks™ &mdash; Built by Surveyors, for Surveyors</p>
-    <p>&copy; 2025 MooreWorks.io</p>
-    <p>
-      Need help or have feedback?
-      <a href="mailto:mooreworks.dev@gmail.com">Email Us</a>
-    </p>
-  </footer>
+  <label>Estimated Timeline:</label>
+  <input type="text" id="estTimeline" />
+
+  <label>Additional Notes or Justification:</label>
+  <textarea id="estDetails" rows="3"></textarea>
+
+<label for="estPdf">Attach PDF (optional reminder):</label>
+<input type="file" id="estPdf" accept=".pdf" />
+</div>
+
+
+
+<!-- Job Scheduling -->
+<div class="form-group" id="schedule">
+  <div class="section-title">Scheduling Information</div>
+  <label>Client Name:</label>
+  <input type="text" id="schedClient" />
+
+  <label>Project Address:</label>
+  <input type="text" id="schedAddress" />
+
+  <label>Type of Job:</label>
+  <input type="text" id="schedType" />
+
+  <label>Is the property accessible?</label>
+  <select id="schedAccess">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <label>Does the client need to be present?</label>
+  <select id="schedPresence">
+    <option value="optional">Optional</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <label>Available Dates:</label>
+  <input type="text" id="schedDates" />
+
+  <label>Preferred Contact Method:</label>
+  <input type="text" id="schedContact" />
+
+  <label>Additional Notes:</label>
+  <textarea id="schedNotes" rows="3"></textarea>
+</div>
+
+
+<!-- Final Report / Deliverable Sent -->
+<div class="form-group" id="finalReport">
+  <div class="section-title">Final Deliverables</div>
+  <label>Client Name:</label>
+  <input type="text" id="finalName" />
+
+  <label>Project Address:</label>
+  <input type="text" id="finalAddress" />
+
+  <label>Type of Report:</label>
+  <select id="finalType">
+    <option value="">-- Select One --</option>
+    <option value="Plat">Plat</option>
+    <option value="Elevation Certificate">Elevation Certificate</option>
+    <option value="PDF/DWG File">PDF/DWG File</option>
+    <option value="Map Amendment Letter">Map Amendment Letter</option>
+  </select>
+
+  <label>Delivery Method:</label>
+  <select id="finalDelivery">
+    <option value="Email">Email</option>
+    <option value="Physical Copy">Physical Copy</option>
+    <option value="Delivered to Office">Delivered to Office</option>
+  </select>
+
+  <label>Are additional documents expected later?</label>
+  <select id="finalMoreDocs">
+    <option value="no">No</option>
+    <option value="yes">Yes</option>
+  </select>
+
+  <label>Additional Instructions or Notes:</label>
+  <textarea id="finalNotes" rows="3"></textarea>
+
+<label for="finalPdf">Attach PDF (optional reminder):</label>
+<input type="file" id="finalPdf" accept=".pdf" />
+</div>
+
+
+<!-- Request for Missing Info -->
+<div class="form-group" id="infoRequest">
+ <div class="section-title">Missing Information Request</div>
+  <label>Client Name:</label>
+  <input type="text" id="infoName" />
+
+  <label>Project Address:</label>
+  <input type="text" id="infoAddress" />
+
+  <label>Which records are needed?</label>
+  <select id="infoChecklist" multiple size="6">
+    <optgroup label="Tax Assessor’s Office">
+      <option value="Ownership plat">Ownership plat</option>
+      <option value="Parcel listing/assessment report">Parcel listing / assessment report</option>
+    </optgroup>
+    <optgroup label="Clerk of Court">
+      <option value="Deed">Deed</option>
+      <option value="Subdivision plat or previous surveys">Subdivision plat or previous surveys</option>
+    </optgroup>
+  </select>
+
+  <label>Custom Message (Optional):</label>
+  <textarea id="infoNotes" rows="3"></textarea>
+
+<label for="infoPdf">Attach PDF (optional reminder):</label>
+<input type="file" id="infoPdf" accept=".pdf" />
+</div>
+
+
+<!-- Job Delay Notification -->
+<div class="form-group" id="delay">
+  <div class="section-title">Job Delay Notice</div>
+  <label>Client Name:</label>
+  <input type="text" id="delayName" />
+
+  <label>Project Address:</label>
+  <input type="text" id="delayAddress" />
+
+  <label>Reason for Delay:</label>
+  <select id="delayReason">
+    <option value="Weather conditions">Weather conditions</option>
+    <option value="Access not granted">Access not granted</option>
+    <option value="Field crew backup">Field crew backup</option>
+    <option value="Equipment issues">Equipment issues</option>
+    <option value="Scheduling conflict">Scheduling conflict</option>
+    <option value="Prior job overrun">Prior job overrun</option>
+    <option value="Office processing delay">Office processing delay</option>
+  </select>
+
+  <label>New Estimated Timeline:</label>
+  <input type="text" id="delayTimeline" />
+
+  <label>Include apology note?</label>
+  <select id="delayApology">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <label>Additional Notes (Optional):</label>
+  <textarea id="delayNotes" rows="3"></textarea>
+</div>
+
+
+
+<!-- Thank You / Closeout -->
+<div class="form-group" id="thankYou">
+  <div class="section-title">Project Closeout</div>
+  <label>Client Name:</label>
+  <input type="text" id="thankName" />
+
+  <label>Project Address:</label>
+  <input type="text" id="thankAddress" />
+
+  <label>What Was Completed:</label>
+  <textarea id="thankWork" rows="2"></textarea>
+
+  <label>Include Review Request?</label>
+  <select id="thankReview">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <label>Include Referral Mention?</label>
+  <select id="thankReferral">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <label>Final Note:</label>
+  <textarea id="thankNote" rows="2"></textarea>
+</div>
+
+
+<button type="submit" class="generate-btn">Generate Email</button>
+  </form>
+  </div>
+</main> 
+
+ <div class="preview-wrapper">
+  <p id="previewHint">
+    <span>📧</span>
+    <strong>Generated Email Preview — edit if needed, then click Copy</strong>
+  </p>
+
+  <input type="hidden" id="emailSubject" />
+  <textarea id="previewBox"></textarea>
+  <button id="copyBtn" type="button">Copy Email to Clipboard</button>
+  <div id="copySuccess">Copied to clipboard!</div>
+
+  <p class="reminder-text">
+    <strong>Reminder:</strong> Please review your email before sending. All messages are generated based on the information you provide.
+  </p>
+</div>
+
+  
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; justify-content: center;">
+    <button id="emailBtn" type="button" style="flex: 1; min-width: 140px; background-color: #4a90e2; color: white; border: none; font-size: 1rem; font-weight: bold; cursor: pointer; border-radius: 8px; padding: 0.5rem 1rem; transition: background-color 0.3s;">
+      Send via Email App
+    </button>
+
+    <button id="gmailBtn" type="button" style="flex: 1; min-width: 140px; background-color: #D93025; color: white; border: none; font-size: 1rem; font-weight: bold; cursor: pointer; border-radius: 8px; padding: 0.5rem 1rem; transition: background-color 0.3s;">
+      Open in Gmail
+    </button>
+    <p style="font-size: 0.85rem; color: #666;">
+    Works best on mobile or with your email app set up. Otherwise, click <strong>“Open in Gmail”</strong>.
+  </div>
+
+
+  <footer style="margin-top: 3rem; padding-top: 1.5rem; font-size: 0.85rem; color: #777; text-align: center; border-top: 1px solid #ddd;">
+  <p style="margin-bottom: 0.75rem;">MooreWorks™ — Built by Surveyors, for Surveyors</p>
+  <p style="margin-bottom: 0.75rem;">&copy; 2025 MooreWorks.io</p>
+  <p style="margin-top: 1rem; font-size: 0.85rem; color: #999;">
+    Need help or have feedback?
+    <a href="mailto:mooreworks.dev@gmail.com" style="color: var(--brand-purple); text-decoration: none;">
+      Email Us
+    </a>
+  </p>
+</footer>
+
 
   <script src="script.js"></script>
+
 </body>
 </html>

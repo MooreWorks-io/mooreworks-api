@@ -1,189 +1,202 @@
-// ==============================
-// Dynamic Email Form Injection
-// ==============================
+const emailType = document.getElementById('emailType');
+  const form = document.getElementById('emailForm');
 
-document.addEventListener('DOMContentLoaded', () => {
-  const emailType = document.getElementById('emailType');
-  const formContainer = document.getElementById('dynamicFields');
+  const groups = {
+    estimate: document.getElementById('estimate'),
+    schedule: document.getElementById('schedule'),
+    finalReport: document.getElementById('finalReport'),
+    infoRequest: document.getElementById('infoRequest'),
+    delay: document.getElementById('delay'),
+    thankYou: document.getElementById('thankYou')
+  };
 
   emailType.addEventListener('change', () => {
+    Object.values(groups).forEach(g => g.classList.remove('active'));
     const selected = emailType.value;
-    formContainer.innerHTML = '';
-    if (selected && formTemplates[selected]) {
-      formContainer.innerHTML = formTemplates[selected];
+    if (groups[selected]) {
+      groups[selected].classList.add('active');
     }
   });
+
+  if (!form.dataset.listenerAttached) {
+  form.dataset.listenerAttached = "true";
+
+  form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+    const selected = emailType.value;
+    let data = { type: selected };
+    document.getElementById('previewBox').value = 'Generating...';
+
+
+    if (selected === 'estimate') {
+      data = {
+        ...data,
+        clientName: document.getElementById('estClient').value,
+        address: document.getElementById('estAddress').value,
+        discussed: document.getElementById('estDiscussed').value,
+        surveyType: document.getElementById('estSurveyType').value,
+        price: document.getElementById('estPrice').value,
+        timeline: document.getElementById('estTimeline').value,
+        details: document.getElementById('estDetails').value
+      };
+
+ data.tone = document.getElementById('toneSelect').value;
+ const estPdfFile = document.getElementById('estPdf')?.files?.[0];
+  if (estPdfFile) {
+    data.pdfReminder = `\n\n(PDF attachment: ${estPdfFile.name} — please remember to attach before sending)`;
+  }
+
+    } else if (selected === 'schedule') {
+      data = {
+        ...data,
+        clientName: document.getElementById('schedClient').value,
+        address: document.getElementById('schedAddress').value,
+        jobType: document.getElementById('schedType').value,
+        access: document.getElementById('schedAccess').value,
+        presence: document.getElementById('schedPresence').value,
+        dates: document.getElementById('schedDates').value,
+        contact: document.getElementById('schedContact').value,
+        notes: document.getElementById('schedNotes').value
+      };
+
+      data.tone = document.getElementById('toneSelect').value;
+    } else if (selected === 'finalReport') {
+      data = {
+        ...data,
+        clientName: document.getElementById('finalName').value,
+        address: document.getElementById('finalAddress').value,
+        reportType: document.getElementById('finalType').value,
+        deliveryMethod: document.getElementById('finalDelivery').value,
+        moreDocs: document.getElementById('finalMoreDocs').value,
+        notes: document.getElementById('finalNotes').value
+      };
+
+const finalPdfFile = document.getElementById('finalPdf')?.files?.[0];
+if (finalPdfFile) {
+  data.pdfReminder = `\n\n(PDF attachment: ${finalPdfFile.name} — please remember to attach before sending)`;
+}
+
+    } else if (selected === 'infoRequest') {
+      const options = [...document.getElementById('infoChecklist').selectedOptions];
+      const selectedItems = options.map(o => o.value);
+      data = {
+        ...data,
+        clientName: document.getElementById('infoName').value,
+        address: document.getElementById('infoAddress').value,
+        checklist: selectedItems,
+        notes: document.getElementById('infoNotes').value
+      };
+
+data.tone = document.getElementById('toneSelect').value;
+const infoPdfFile = document.getElementById('infoPdf')?.files?.[0];
+if (infoPdfFile) {
+  data.pdfReminder = `\n\n(PDF attachment: ${infoPdfFile.name} — please remember to attach before sending)`;
+}
+
+    } else if (selected === 'delay') {
+      data = {
+        ...data,
+        clientName: document.getElementById('delayName').value,
+        address: document.getElementById('delayAddress').value,
+        reason: document.getElementById('delayReason').value,
+        timeline: document.getElementById('delayTimeline').value,
+        apology: document.getElementById('delayApology').value,
+        notes: document.getElementById('delayNotes').value
+      };
+      data.tone = document.getElementById('toneSelect').value;
+
+    } else if (selected === 'thankYou') {
+      data = {
+        ...data,
+        clientName: document.getElementById('thankName').value,
+        address: document.getElementById('thankAddress').value,
+        completedWork: document.getElementById('thankWork').value,
+        review: document.getElementById('thankReview').value,
+        referral: document.getElementById('thankReferral').value,
+        finalNote: document.getElementById('thankNote').value
+      };
+      data.tone = document.getElementById('toneSelect').value;
+    }
+
+    try {
+  const response = await fetch('/api/generate', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data)
 });
 
-// ========== Template Strings for Each Form ==========
-const formTemplates = {
-  estimate: `
-    <div class="form-group">
-      <div class="section-title">Estimate Details</div>
-      <label>Client Name:</label>
-      <input type="text" id="estClient" />
-      <label>Project Address:</label>
-      <input type="text" id="estAddress" />
-      <label>Was this discussed by phone?</label>
-      <select id="estDiscussed">
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <label>Type of Survey:</label>
-      <select id="estSurveyType">
-        <option value="">-- Select one --</option>
-        <option value="Mark corners only (no plat)">Mark corners only (no plat)</option>
-        <option value="Boundary survey with plat">Boundary survey with plat</option>
-        <option value="ALTA/NSPS survey">ALTA/NSPS survey</option>
-        <option value="Elevation certificate">Elevation certificate</option>
-        <option value="Topographic/tree map">Topographic/tree map</option>
-        <option value="Cut line + stake (land management)">Cut line + stake (land management)</option>
-        <option value="Large acreage (>50 acres)">Large acreage (>50 acres)</option>
-        <option value="Re-establish lost corners">Re-establish lost corners</option>
-      </select>
-      <label>Estimated Price ($):</label>
-      <input type="text" id="estPrice" />
-      <label>Estimated Timeline:</label>
-      <input type="text" id="estTimeline" />
-      <label>Additional Notes or Justification:</label>
-      <textarea id="estDetails" rows="3"></textarea>
-      <label for="estPdf">Attach PDF (optional reminder):</label>
-      <input type="file" id="estPdf" accept=".pdf" />
-    </div>
-  `,
-  schedule: `
-    <div class="form-group">
-      <div class="section-title">Scheduling Information</div>
-      <label>Client Name:</label>
-      <input type="text" id="schedClient" />
-      <label>Project Address:</label>
-      <input type="text" id="schedAddress" />
-      <label>Type of Job:</label>
-      <input type="text" id="schedType" />
-      <label>Is the property accessible?</label>
-      <select id="schedAccess">
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <label>Does the client need to be present?</label>
-      <select id="schedPresence">
-        <option value="optional">Optional</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <label>Available Dates:</label>
-      <input type="text" id="schedDates" />
-      <label>Preferred Contact Method:</label>
-      <input type="text" id="schedContact" />
-      <label>Additional Notes:</label>
-      <textarea id="schedNotes" rows="3"></textarea>
-    </div>
-  `,
-  finalReport: `
-    <div class="form-group">
-      <div class="section-title">Final Deliverables</div>
-      <label>Client Name:</label>
-      <input type="text" id="finalName" />
-      <label>Project Address:</label>
-      <input type="text" id="finalAddress" />
-      <label>Type of Report:</label>
-      <select id="finalType">
-        <option value="">-- Select One --</option>
-        <option value="Plat">Plat</option>
-        <option value="Elevation Certificate">Elevation Certificate</option>
-        <option value="PDF/DWG File">PDF/DWG File</option>
-        <option value="Map Amendment Letter">Map Amendment Letter</option>
-      </select>
-      <label>Delivery Method:</label>
-      <select id="finalDelivery">
-        <option value="Email">Email</option>
-        <option value="Physical Copy">Physical Copy</option>
-        <option value="Delivered to Office">Delivered to Office</option>
-      </select>
-      <label>Are additional documents expected later?</label>
-      <select id="finalMoreDocs">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
-      <label>Additional Instructions or Notes:</label>
-      <textarea id="finalNotes" rows="3"></textarea>
-      <label for="finalPdf">Attach PDF (optional reminder):</label>
-      <input type="file" id="finalPdf" accept=".pdf" />
-    </div>
-  `,
-  infoRequest: `
-    <div class="form-group">
-      <div class="section-title">Missing Information Request</div>
-      <label>Client Name:</label>
-      <input type="text" id="infoName" />
-      <label>Project Address:</label>
-      <input type="text" id="infoAddress" />
-      <label>Which records are needed?</label>
-      <select id="infoChecklist" multiple size="6">
-        <optgroup label="Tax Assessor’s Office">
-          <option value="Ownership plat">Ownership plat</option>
-          <option value="Parcel listing/assessment report">Parcel listing / assessment report</option>
-        </optgroup>
-        <optgroup label="Clerk of Court">
-          <option value="Deed">Deed</option>
-          <option value="Subdivision plat or previous surveys">Subdivision plat or previous surveys</option>
-        </optgroup>
-      </select>
-      <label>Custom Message (Optional):</label>
-      <textarea id="infoNotes" rows="3"></textarea>
-      <label for="infoPdf">Attach PDF (optional reminder):</label>
-      <input type="file" id="infoPdf" accept=".pdf" />
-    </div>
-  `,
-  delay: `
-    <div class="form-group">
-      <div class="section-title">Job Delay Notice</div>
-      <label>Client Name:</label>
-      <input type="text" id="delayName" />
-      <label>Project Address:</label>
-      <input type="text" id="delayAddress" />
-      <label>Reason for Delay:</label>
-      <select id="delayReason">
-        <option value="Weather conditions">Weather conditions</option>
-        <option value="Access not granted">Access not granted</option>
-        <option value="Field crew backup">Field crew backup</option>
-        <option value="Equipment issues">Equipment issues</option>
-        <option value="Scheduling conflict">Scheduling conflict</option>
-        <option value="Prior job overrun">Prior job overrun</option>
-        <option value="Office processing delay">Office processing delay</option>
-      </select>
-      <label>New Estimated Timeline:</label>
-      <input type="text" id="delayTimeline" />
-      <label>Include apology note?</label>
-      <select id="delayApology">
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <label>Additional Notes (Optional):</label>
-      <textarea id="delayNotes" rows="3"></textarea>
-    </div>
-  `,
-  thankYou: `
-    <div class="form-group">
-      <div class="section-title">Project Closeout</div>
-      <label>Client Name:</label>
-      <input type="text" id="thankName" />
-      <label>Project Address:</label>
-      <input type="text" id="thankAddress" />
-      <label>What Was Completed:</label>
-      <textarea id="thankWork" rows="2"></textarea>
-      <label>Include Review Request?</label>
-      <select id="thankReview">
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <label>Include Referral Mention?</label>
-      <select id="thankReferral">
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <label>Final Note:</label>
-      <textarea id="thankNote" rows="2"></textarea>
-    </div>
-  `
-};
+
+  const result = await response.json();
+  let fullEmail = result.email || '';
+
+  if (data.pdfReminder) {
+    fullEmail += data.pdfReminder;
+  }
+
+  document.getElementById('emailSubject').value = result.subject || 'Survey Email';
+  document.getElementById('previewBox').value = fullEmail;
+
+} catch (err) {
+  document.getElementById('previewBox').value = 'Error generating email.';
+  console.error(err);
+}
+  });
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const previewBox = document.getElementById('previewBox');
+previewBox.focus();
+previewBox.select();
+
+try {
+  document.execCommand('copy');
+  const success = document.getElementById('copySuccess');
+  success.style.display = 'inline';
+  setTimeout(() => { success.style.display = 'none'; }, 2000);
+} catch (err) {
+  alert('Failed to copy text. Please copy manually.');
+}
+});
+
+const selectedInit = emailType.value;
+if (groups[selectedInit]) {
+  groups[selectedInit].classList.add('active');
+}
+
+document.getElementById('emailBtn').addEventListener('click', () => {
+  const emailBody = document.getElementById('previewBox').value.trim();
+  if (!emailBody) {
+    alert("Please generate an email before sending.");
+    return;
+  }
+
+ const subject = document.getElementById('emailSubject').value.trim() || 'Survey Email'; 
+const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+
+  const tempLink = document.createElement('a');
+  tempLink.href = mailtoLink;
+  tempLink.style.display = 'none';
+  document.body.appendChild(tempLink);
+  tempLink.click();
+  document.body.removeChild(tempLink);
+});
+
+document.getElementById('gmailBtn').addEventListener('click', () => {
+  setTimeout(() => {
+    const emailBody = document.getElementById('previewBox').value.trim();
+    const subject = document.getElementById('emailSubject').value.trim() || 'Survey Email';
+
+    if (!emailBody) {
+      alert("Please generate an email before sending.");
+      return;
+    }
+
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    window.open(gmailLink, '_blank');
+  }, 100); // short delay to ensure updated value is read
+});
+  }
+
+   
+  
