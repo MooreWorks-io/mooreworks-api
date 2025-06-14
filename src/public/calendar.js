@@ -27,6 +27,7 @@ function refreshCalendarEvents() {
 
   calendar.removeAllEvents();
   calendar.addEventSource(updatedEvents);
+   calendar.refetchEvents();
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -45,20 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     aspectRatio: 1.15,
-    events: jobs.map(job => {
-  let bgColor = '#7A3EF0';
-  if (job.invoiceStatus === 'unpaid') bgColor = '#e74c3c';
-  else if (job.invoiceStatus === 'paid') bgColor = '#27ae60';
+    events: [],
 
-  return {
-    title: job.jobType || job.address || 'Scheduled Job',
-    start: job.date,
-    backgroundColor: bgColor,
-    borderColor: bgColor,
-    textColor: '#fff',
-    extendedProps: { ...job }
-  };
-}),
     eventClick: function(info) {
       if (activeModal === 'grouped') return;
 
