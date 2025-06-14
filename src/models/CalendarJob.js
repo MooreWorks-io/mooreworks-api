@@ -1,3 +1,7 @@
+// ============================
+// CALENDARJOB.JS - Updated Schema
+// ============================
+
 const mongoose = require('mongoose');
 
 const CalendarJobSchema = new mongoose.Schema({
@@ -8,11 +12,16 @@ const CalendarJobSchema = new mongoose.Schema({
   fieldHours: Number,
   officeHours: Number,
   jobBrief: String,
-  invoiceStatus: String,
+  invoiceStatus: {
+    type: String,
+    enum: ['unpaid', 'paid', ''],
+    default: ''
+  },
   createdBy: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: 'User'
-}
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
 });
 
 module.exports = mongoose.model('CalendarJob', CalendarJobSchema);

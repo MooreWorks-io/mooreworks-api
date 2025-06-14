@@ -14,7 +14,7 @@ body {
   background: linear-gradient(to bottom right, #f7f7fb, #ececf5);
 }
 
-/* ========= Landing-Style Header ========= */
+/* ========= Landing Header ========= */
 .landing-header {
   display: flex;
   justify-content: space-between;
@@ -63,7 +63,7 @@ body {
   background: var(--button-hover);
 }
 
-/* ========= Calendar Page Layout ========= */
+/* ========= Calendar Layout ========= */
 .calendar-page-content {
   max-width: 1200px;
   margin: auto;
@@ -110,14 +110,14 @@ body {
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 #searchResults {
   display: none;
 }
 
-/* ========= Calendar Area ========= */
+/* ========= Calendar Display ========= */
 .main-content {
   position: relative;
 }
@@ -129,7 +129,6 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* FullCalendar Overrides */
 #calendar {
   background: white;
   border-radius: 12px;
@@ -163,7 +162,7 @@ body {
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: capitalize;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
   transition: background-color 0.3s ease;
 }
 
@@ -210,7 +209,6 @@ body {
   z-index: 1000;
 }
 
-/* Shared modal content layout */
 #jobModal .modal-content,
 #jobDetailsPopup .modal-content,
 #groupedDetailsModal .modal-content {
@@ -225,32 +223,23 @@ body {
   animation: fadeIn 0.3s ease;
 }
 
-#jobModal .modal-content h2,
-#jobDetailsPopup .modal-content h2,
-#groupedDetailsModal .modal-content h2 {
+.modal-content h2,
+.modal-content h3 {
   margin-top: 0;
   font-size: 1.5rem;
   color: var(--brand-purple);
 }
 
-#jobModal .modal-content label,
-#jobDetailsPopup .modal-content label,
-#groupedDetailsModal .modal-content label {
+.modal-content label {
   display: block;
   margin-top: 1rem;
   font-weight: 600;
   color: #333;
 }
 
-#jobModal .modal-content input,
-#jobModal .modal-content select,
-#jobModal .modal-content textarea,
-#jobDetailsPopup .modal-content input,
-#jobDetailsPopup .modal-content select,
-#jobDetailsPopup .modal-content textarea,
-#groupedDetailsModal .modal-content input,
-#groupedDetailsModal .modal-content select,
-#groupedDetailsModal .modal-content textarea {
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
   width: 100%;
   padding: 0.6rem 0.8rem;
   margin-top: 0.25rem;
@@ -260,9 +249,7 @@ body {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-#jobModal .modal-content textarea,
-#jobDetailsPopup .modal-content textarea,
-#groupedDetailsModal .modal-content textarea {
+.modal-content textarea {
   resize: vertical;
 }
 

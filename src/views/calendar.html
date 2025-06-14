@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <!-- Top Header (Landing Style) -->
+  <!-- Top Header -->
   <header class="landing-header">
     <div class="logo-block">
       <h1>MooreWorks</h1>
@@ -25,60 +25,66 @@
     </nav>
   </header>
 
-  <!-- Calendar Content Container -->
+  <!-- Calendar Interface -->
   <div class="calendar-page-content">
-  <div class="calendar-header">
-  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-    <h2>🗓️ MooreWorks Job Calendar</h2>
-    <div class="calendar-controls">
-  <input type="text" id="jobSearchInput" placeholder="Search jobs by name or address..." />
-  <button id="addJobBtn" class="cta-button small">➕ Add Job</button>
-</div>
-  </div>
-  <ul id="searchResults"></ul>
-</div>
+    <div class="calendar-header">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <h2>🗓️ MooreWorks Job Calendar</h2>
+        <div class="calendar-controls">
+          <input type="text" id="jobSearchInput" placeholder="Search jobs by name or address..." />
+          <button id="addJobBtn" class="cta-button small">➕ Add Job</button>
+        </div>
+      </div>
+      <ul id="searchResults"></ul>
+    </div>
 
-<div class="main-content">
-  <div class="calendar-container">
-    <div id="calendar"></div>
+    <div class="main-content">
+      <div class="calendar-container">
+        <div id="calendar"></div>
+      </div>
+    </div>
   </div>
-</div>
 
   <!-- Job Modal -->
-<div id="jobModal" class="modal">
-  <div class="modal-content">
-    <h2 id="modalHeader">Add New Job</h2>
-    <form id="jobForm">
-      <label for="date">Date:</label>
-      <input type="date" id="date" name="date" required />
+  <div id="jobModal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalHeader">Add New Job</h2>
+      <form id="jobForm">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required />
 
-      <label for="jobType">Job Name:</label>
-      <input type="text" id="jobType" name="jobType" required />
+        <label for="jobType">Job Name:</label>
+        <input type="text" id="jobType" name="jobType" required />
 
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address" />
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" />
 
-      <label for="crew">Crew:</label>
-      <input type="text" id="crew" name="crew" />
+        <label for="crew">Crew:</label>
+        <input type="text" id="crew" name="crew" />
 
-      <label for="fieldHours">Field Hours:</label>
-      <input type="number" id="fieldHours" name="fieldHours" step="0.1" />
+        <label for="fieldHours">Field Hours:</label>
+        <input type="number" id="fieldHours" name="fieldHours" step="0.1" />
 
-      <label for="officeHours">Office Hours:</label>
-      <input type="number" id="officeHours" name="officeHours" step="0.1" />
+        <label for="officeHours">Office Hours:</label>
+        <input type="number" id="officeHours" name="officeHours" step="0.1" />
 
-      <label for="jobBrief">Job Brief:</label>
-      <textarea id="jobBrief" name="jobBrief" rows="3"></textarea>
+        <label for="jobBrief">Job Brief:</label>
+        <textarea id="jobBrief" name="jobBrief" rows="3"></textarea>
 
+        <label for="invoiceStatus">Invoice Status:</label>
+        <select id="invoiceStatus" name="invoiceStatus">
+          <option value="">Select...</option>
+          <option value="unpaid">Invoice Sent (Unpaid)</option>
+          <option value="paid">Invoice Sent (Paid)</option>
+        </select>
 
-      
-      <div class="modal-actions" style="text-align: right; margin-top: 1.5rem;">
-        <button type="submit" class="cta-button small">Save</button>
-        <button type="button" id="cancelBtn" class="cta-button small" style="background: gray;">Cancel</button>
-      </div>
-    </form>
+        <div class="modal-actions" style="text-align: right; margin-top: 1.5rem;">
+          <button type="submit" class="cta-button small">Save</button>
+          <button type="button" id="cancelBtn" class="cta-button small" style="background: gray;">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
   <!-- Job Details Modal -->
   <div id="jobDetailsPopup" class="modal">
@@ -120,18 +126,16 @@
         </tfoot>
       </table>
       <div class="form-group" style="margin-top: 1.5rem;">
-  <label for="groupedInvoiceStatus">Invoice Status</label>
-  <select id="groupedInvoiceStatus" class="invoice-dropdown">
-    <option value="unpaid">Invoice Sent (Unpaid)</option>
-    <option value="paid">Invoice Sent (Paid)</option>
-  </select>
-</div>
-      <div style="margin-top: 1rem; text-align: right;">
-        <button onclick="closeGroupedModal()">Close</button>
+        <label for="groupedInvoiceStatus">Invoice Status</label>
+        <select id="groupedInvoiceStatus" class="invoice-dropdown">
+          <option value="unpaid">Invoice Sent (Unpaid)</option>
+          <option value="paid">Invoice Sent (Paid)</option>
+        </select>
       </div>
       <div style="margin-top: 1rem; text-align: right;">
-  <button id="saveInvoiceStatusBtn" class="cta-button">Save Invoice Status</button>
-</div>
+        <button onclick="closeGroupedModal()">Close</button>
+        <button id="saveInvoiceStatusBtn" class="cta-button">Save Invoice Status</button>
+      </div>
     </div>
   </div>
 
