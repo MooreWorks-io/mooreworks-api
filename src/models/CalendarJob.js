@@ -8,6 +8,7 @@ const CalendarJobSchema = new mongoose.Schema({
   fieldHours: Number,
   officeHours: Number,
   jobBrief: String,
+  invoiceStatus: String,
   createdBy: {
   type: mongoose.Schema.Types.ObjectId,
   ref: 'User'
