@@ -71,12 +71,14 @@
         <label for="jobBrief">Job Brief:</label>
         <textarea id="jobBrief" name="jobBrief" rows="3"></textarea>
 
+        <div class="hidden-invoice-field" style="display: none;">
         <label for="invoiceStatus">Invoice Status:</label>
         <select id="invoiceStatus" name="invoiceStatus">
           <option value="">Select...</option>
           <option value="unpaid">Invoice Sent (Unpaid)</option>
           <option value="paid">Invoice Sent (Paid)</option>
         </select>
+        </div>
 
         <div class="modal-actions" style="text-align: right; margin-top: 1.5rem;">
           <button type="submit" class="cta-button small">Save</button>
