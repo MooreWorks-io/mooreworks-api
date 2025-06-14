@@ -140,7 +140,7 @@ body {
 }
 
 .fc-event {
-  background-color: var(--brand-purple) !important;
+  background-color: var(--brand-purple);
   border: none !important;
   border-radius: 6px !important;
   padding: 2px 6px;
