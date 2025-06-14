@@ -30,6 +30,7 @@
       </select>
 
       <form id="emailForm">
+        <label for="emailType">Choose Email Type:</label>
         <select id="emailType" required>
           <option value="">-- Choose an option --</option>
           <option value="estimate">Estimate Follow-Up</option>
@@ -40,7 +41,6 @@
           <option value="thankYou">Thank You / Closeout</option>
         </select>
 
-        <!-- Dynamic Form Groups Appear Here -->
         <div id="dynamicFields"></div>
 
         <button type="submit" class="generate-btn">Generate Email</button>
