@@ -242,7 +242,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         refreshCalendarEvents();
         calendar.render();
-        alert('Invoice status updated.');
         closeGroupedModal();
       } else {
         throw new Error(data.message || 'Update failed');
