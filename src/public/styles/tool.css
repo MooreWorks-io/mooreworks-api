@@ -7,7 +7,10 @@
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   border: 1px solid #e5e5ef;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* === Section Titles === */
@@ -37,7 +40,7 @@
   border-radius: 16px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   border: 1px solid #e0e0ec;
-  margin-top: 2rem;
+  margin-top: 3rem;
   text-align: center;
 }
 
@@ -82,9 +85,16 @@
 
 /* === Copy Button === */
 #copyBtn {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   background: var(--success-green);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  color: white;
+  padding: 0.65rem 1.25rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
 #copyBtn:hover {
@@ -211,10 +221,76 @@
 }
 
 .form-inner label {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: #333;
 }
 
 .form-inner select,
 .form-inner button {
   width: 100%;
+}
+
+/* === Dropdown Styling === */
+.form-inner select {
+  padding: 0.65rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+}
+
+.email-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.email-actions button {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+#emailBtn {
+  background-color: #4a90e2;
+}
+
+#emailBtn:hover {
+  background-color: #3477c9;
+}
+
+#gmailBtn {
+  background-color: #D93025;
+}
+
+#gmailBtn:hover {
+  background-color: #b62a1f;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #777;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.site-footer a {
+  color: var(--brand-purple);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
 }
