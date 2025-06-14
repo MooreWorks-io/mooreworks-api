@@ -240,3 +240,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 });
+
+function prefillJobForm(job) {
+  document.getElementById('modalHeader').textContent = 'Edit Job';
+  document.getElementById('jobType').value = job.jobType || '';
+  document.getElementById('date').value = job.date || '';
+  document.getElementById('crew').value = job.crew || '';
+  document.getElementById('address').value = job.address || '';
+  document.getElementById('fieldHours').value = job.fieldHours || 0;
+  document.getElementById('officeHours').value = job.officeHours || 0;
+  document.getElementById('jobBrief').value = job.jobBrief || '';
+  document.getElementById('invoiceStatus').value = job.invoiceStatus || '';
+}
