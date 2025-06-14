@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const res = await fetch('/api/calendar');
   jobs = await res.json();
-  refreshCalendarEvents();
+  
 
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
   calendar.render();
+  refreshCalendarEvents();
 
   // Search Logic
   const searchInput = document.getElementById('jobSearchInput');
