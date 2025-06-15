@@ -30,7 +30,6 @@ router.post('/', async (req, res) => {
   try {
     const newJob = new CalendarJob({
       ...req.body,
-       date: new Date(req.body.date),
       createdBy: req.session.userId
     });
 
@@ -118,15 +117,12 @@ router.get('/jobs', async (req, res) => {
   try {
     const jobs = await CalendarJob.find({
       createdBy: userId,
-      date: {
-        $gte: new Date(start),
-        $lte: new Date(end)
-      }
+      date: { $gte: start, $lte: end }  // match as string
     });
 
     const formatted = jobs.map(job => ({
       id: job._id,
-      date: job.date.toISOString().split('T')[0],
+      date: job.date,
       jobType: job.jobType,
       address: job.address,
       totalHours: job.fieldHours + job.officeHours
@@ -138,5 +134,3 @@ router.get('/jobs', async (req, res) => {
     res.status(500).json({ error: 'Failed to load jobs' });
   }
 });
-
-module.exports = router;
