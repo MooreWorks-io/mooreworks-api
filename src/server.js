@@ -79,6 +79,12 @@ app.get('/home', (req, res) => {
   if (!req.session.userId) return res.redirect('/');
   res.render('home', { userEmail: req.session.userEmail });
 });
+app.get('/forgot-password', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'forgot-password.html'));
+});
+app.get('/reset-password', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'reset-password.html'));
+});
 
 // Start Server
 const PORT = process.env.PORT || 5000;
