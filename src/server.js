@@ -66,6 +66,10 @@ app.get('/calendar', (req, res) => {
   if (!req.session.userId) return res.redirect('/');
   res.sendFile(path.join(__dirname, 'views', 'calendar.html'));
 });
+app.get('/invoice', (req, res) => {
+  if (!req.session.userId) return res.redirect('/');
+  res.sendFile(path.join(__dirname, 'views', 'invoice.html'));
+});
 app.get('/account', (req, res) => {
   if (!req.session.userId) return res.redirect('/');
   res.sendFile(path.join(__dirname, 'views', 'account.html'));

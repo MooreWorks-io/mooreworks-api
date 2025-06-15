@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invoice Tool | MooreWorks</title>
+  <link rel="stylesheet" href="/styles/account.css" />
+  <link rel="stylesheet" href="/styles/invoice.css" />
+</head>
+<body>
+  <header class="account-header">
+    <h1>Generate Invoice</h1>
+    <a href="/calendar" class="back-link">← Back to Calendar</a>
+  </header>
+
+  <main class="account-wrapper">
+    <!-- Invoice Header Info -->
+    <section>
+      <h2>Invoice Details</h2>
+      <label>Company Name</label>
+      <input type="text" id="companyName" value="Landmark Surveying LLC" />
+
+      <label>Client Name</label>
+      <input type="text" id="clientName" placeholder="John Doe" />
+
+      <label>Client Email</label>
+      <input type="email" id="clientEmail" placeholder="client@example.com" />
+
+      <label>Hourly Rate ($)</label>
+      <input type="number" id="hourlyRate" placeholder="e.g. 125" />
+
+      <label>Invoice Notes</label>
+      <textarea id="invoiceNotes" placeholder="Thank you for your business!"></textarea>
+    </section>
+
+    <!-- Job Filter & Selection -->
+    <section>
+      <h2>Select Jobs to Include</h2>
+      <label>Date Range</label>
+      <input type="date" id="startDate" />
+      <input type="date" id="endDate" />
+
+      <button id="loadJobsBtn" class="save-btn" style="margin-top: 1rem;">Load Jobs</button>
+      <div id="jobList" style="margin-top: 1rem;"></div>
+    </section>
+
+    <!-- Invoice Preview & Actions -->
+    <section style="margin-top: 2rem;">
+      <h2>Invoice Preview</h2>
+      <textarea id="invoicePreview" rows="10" readonly></textarea>
+
+      <div style="margin-top: 1rem;">
+        <button id="generateBtn" class="save-btn">Generate Invoice</button>
+        <button id="copyBtn" class="cta-button secondary">Copy Text</button>
+        <button id="downloadPdfBtn" class="cta-button secondary">Download PDF</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/invoice.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>

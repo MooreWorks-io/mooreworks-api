@@ -106,4 +106,36 @@ router.post('/update-invoice-status', async (req, res) => {
   }
 });
 
+// 🆕 GET: Filter jobs by date range for invoice tool
+router.get('/jobs', async (req, res) => {
+  const userId = req.session.userId;
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+  const { start, end } = req.query;
+  if (!start || !end) return res.status(400).json({ error: 'Missing date range' });
+
+  try {
+    const jobs = await CalendarJob.find({
+      createdBy: userId,
+      date: {
+        $gte: new Date(start),
+        $lte: new Date(end)
+      }
+    });
+
+    const formatted = jobs.map(job => ({
+      id: job._id,
+      date: job.date.toISOString().split('T')[0],
+      jobType: job.jobType,
+      address: job.address,
+      totalHours: job.fieldHours + job.officeHours
+    }));
+
+    res.json(formatted);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to load jobs' });
+  }
+});
+
 module.exports = router;
