@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Settings</title>
+  <link rel="stylesheet" href="/styles/account.css" />
+</head>
+<body>
+  <header class="account-header">
+    <h1>Account Settings</h1>
+    <a href="/" class="back-link">← Back to Home</a>
+  </header>
+
+  <main class="account-wrapper">
+    <form id="accountForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required disabled />
+
+      <label for="password">New Password</label>
+      <input type="password" id="password" name="password" placeholder="Leave blank to keep current password" />
+
+      <button type="submit" class="save-btn">Save Changes</button>
+    </form>
+
+    <hr />
+
+    <div class="danger-zone">
+      <h2>Danger Zone</h2>
+      <p>Delete your account permanently. This action cannot be undone.</p>
+      <button id="deleteAccountBtn" class="delete-btn">Delete Account</button>
+    </div>
+  </main>
+
+  <script src="/public/account.js"></script>
+</body>
+</html>

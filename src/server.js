@@ -40,10 +40,12 @@ app.use(session({
 const authRoutes = require('./routes/authRoutes');
 const emailRoutes = require('./routes/emailRoutes');
 const calendarRoutes = require('./routes/calendarRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api', emailRoutes);
 app.use('/api/calendar', calendarRoutes);
+app.use('/api', userRoutes);
 
 // Serve HTML Views
 
@@ -63,6 +65,10 @@ app.get('/tool', (req, res) => {
 app.get('/calendar', (req, res) => {
   if (!req.session.userId) return res.redirect('/');
   res.sendFile(path.join(__dirname, 'views', 'calendar.html'));
+});
+app.get('/account', (req, res) => {
+  if (!req.session.userId) return res.redirect('/');
+  res.sendFile(path.join(__dirname, 'views', 'account.html'));
 });
 app.get('/', (req, res) => {
   if (req.session.userId) return res.redirect('/home');
