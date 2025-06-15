@@ -134,3 +134,5 @@ router.get('/jobs', async (req, res) => {
     res.status(500).json({ error: 'Failed to load jobs' });
   }
 });
+
+module.exports = router; 
