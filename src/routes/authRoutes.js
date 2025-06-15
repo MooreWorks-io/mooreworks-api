@@ -86,7 +86,7 @@ router.post('/forgot-password', async (req, res) => {
       },
     });
 
-    const resetUrl = `http://localhost:5000/reset-password?token=${token}`;
+    const resetUrl = `https://mooreworks.io/reset-password?token=${token}`;
     await transporter.sendMail({
       to: user.email,
       from: process.env.EMAIL_USER,
