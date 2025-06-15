@@ -30,6 +30,7 @@ router.post('/', async (req, res) => {
   try {
     const newJob = new CalendarJob({
       ...req.body,
+       date: new Date(req.body.date),
       createdBy: req.session.userId
     });
 
