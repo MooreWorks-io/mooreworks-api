@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MooreWorks Dashboard</title>
+  <link rel="stylesheet" href="/styles/dashboard.css" />
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <aside class="sidebar">
+      <h2>MooreWorks</h2>
+      <nav>
+        <a href="/dashboard" class="active">📊 Dashboard</a>
+        <a href="/calendar">🗓️ Calendar</a>
+        <a href="/tool">✉️ Email Tool</a>
+        <a href="#">🧾 Invoices</a>
+        <a href="#">⏱️ Timesheets</a>
+        <a href="#">📁 Job Vault</a>
+        <a href="/account">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="dashboard-header">
+        <h1>Welcome back!</h1>
+        <p>Here’s what’s happening in your office today.</p>
+      </header>
+
+      <section class="card-grid">
+        <div class="card">
+          <h3>Today's Jobs</h3>
+          <p>3 scheduled jobs</p>
+          <a href="/calendar">View Calendar →</a>
+        </div>
+        <div class="card">
+          <h3>Email Follow-Ups</h3>
+          <p>2 pending estimates</p>
+          <a href="/tool">Open Email Tool →</a>
+        </div>
+        <div class="card placeholder">
+          <h3>Invoices</h3>
+          <p>Coming soon</p>
+        </div>
+        <div class="card placeholder">
+          <h3>Timesheets</h3>
+          <p>In Progress</p>
+        </div>
+        <div class="card placeholder">
+          <h3>Job Vault</h3>
+          <p>Digital report storage coming soon</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
