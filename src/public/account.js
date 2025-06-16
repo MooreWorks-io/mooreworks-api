@@ -18,12 +18,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const name = document.getElementById('name').value.trim();
     const password = document.getElementById('password').value;
+const quickbooksToggle = document.getElementById('quickbooksToggle').checked;
 
-    const res = await fetch('/api/user', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, password }),
-    });
+  const res = await fetch('/api/user', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      password,
+      quickbooksToggle: quickbooksToggle ? 'on' : ''
+    })
+  });
+    
 
     if (res.ok) {
       alert('Account updated successfully!');

@@ -30,6 +30,9 @@ router.put('/user', ensureAuth, async (req, res) => {
     if (name) updates.name = name;
     if (password) updates.password = await bcrypt.hash(password, 10);
 
+     updates.quickbooksConnected = quickbooksToggle === 'on';
+
+
     const updatedUser = await User.findByIdAndUpdate(req.session.userId, updates, { new: true });
 
     res.json({ message: 'User updated', user: { name: updatedUser.name } });
