@@ -15,14 +15,15 @@ function refreshCalendarEvents() {
       bgColor = '#27ae60'; // Green
     }
 
-    return {
-      title: job.jobType || job.address || 'Scheduled Job',
-      start: job.date,
-      backgroundColor: bgColor,
-      borderColor: bgColor,
-      textColor: '#fff',
-      extendedProps: { ...job }
-    };
+   return {
+  title: job.jobType || job.address || 'Scheduled Job',
+  start: job.date,
+  backgroundColor: bgColor,
+  borderColor: bgColor,
+  textColor: '#fff',
+  extendedProps: { ...job },
+  description: `${job.jobType} – ${job.address}`
+};
   });
 
   calendar.removeAllEvents();
@@ -47,6 +48,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     initialView: 'dayGridMonth',
     aspectRatio: 1.15,
     events: [],
+
+ eventDidMount: function(info) {
+    info.el.setAttribute('title', info.event.extendedProps.description);
+  },
 
     eventClick: function(info) {
       if (activeModal === 'grouped') return;

@@ -213,7 +213,8 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -225,7 +226,7 @@ body {
   background: white;
   padding: 2rem;
   border-radius: 12px;
-  max-width: 550px;
+  max-width: 500px;
   width: 95%;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   font-size: 1rem;
@@ -263,8 +264,40 @@ body {
   resize: vertical;
 }
 
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
 .modal-actions button {
-  margin-right: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.modal-actions .primary {
+  background-color: var(--brand-purple);
+  color: white;
+}
+
+.modal-actions .primary:hover {
+  background-color: var(--button-hover);
+}
+
+.modal-actions .danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-actions .danger:hover {
+  background-color: #d73833;
 }
 
 .cta-button.small {
