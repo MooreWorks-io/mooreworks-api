@@ -25,6 +25,14 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
+// Middleware to protect pages
+function ensureAuth(req, res, next) {
+  if (!req.session.userId) {
+    return res.redirect('/');
+  }
+  next();
+}
+
 // Middleware
 app.use(cors({ origin: '*', methods: ['POST'] }));
 app.use(express.json());
@@ -49,30 +57,30 @@ app.use('/api', userRoutes);
 
 // Serve HTML Views
 
-app.get('/', (req, res) => {
-  res.render('index', { loggedIn: !!req.session.userId });
-});
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'signup.html'));
 });
-app.get('/tool', (req, res) => { 
-  if (!req.session.userId) return res.redirect('/');
+app.get('/tool', ensureAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'tool.html'));
 });
-app.get('/calendar', (req, res) => {
-  if (!req.session.userId) return res.redirect('/');
+
+app.get('/calendar', ensureAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'calendar.html'));
 });
-app.get('/invoice', (req, res) => {
-  if (!req.session.userId) return res.redirect('/');
+
+app.get('/invoice', ensureAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'invoice.html'));
 });
-app.get('/account', (req, res) => {
-  if (!req.session.userId) return res.redirect('/');
+
+app.get('/account', ensureAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'account.html'));
+});
+
+app.get('/dashboard', ensureAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
 });
 app.get('/', (req, res) => {
   if (req.session.userId) return res.redirect('/home');
@@ -89,10 +97,7 @@ app.get('/forgot-password', (req, res) => {
 app.get('/reset-password', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'reset-password.html'));
 });
-app.get('/dashboard', (req, res) => {
-  if (!req.session.userId) return res.redirect('/');
-  res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
-});
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;
