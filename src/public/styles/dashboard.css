@@ -105,3 +105,26 @@ body {
   color: #777;
   text-align: center;
 }
+
+.logout-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #d73833;
+}
+
+.logout-btn.full {
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+}
