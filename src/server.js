@@ -84,11 +84,13 @@ app.get('/account', ensureAuth, (req, res) => {
 app.get('/dashboard', ensureAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
 });
+app.get('/timesheets', ensureAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'timesheets.html'));
+});
 app.get('/', (req, res) => {
   if (req.session.userId) return res.redirect('/home');
   res.render('index', { loggedIn: false });
 });
-
 app.get('/home', (req, res) => {
   if (!req.session.userId) return res.redirect('/');
   res.render('home', { userEmail: req.session.userEmail });
