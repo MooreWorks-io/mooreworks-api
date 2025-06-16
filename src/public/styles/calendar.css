@@ -358,9 +358,40 @@ body {
     width: 100%;
   }
 
-  .floating-add-btn {
-    margin-left: 0;
-  }
+ .floating-add-btn {
+  position: static;
+  margin: 1rem auto;
+  display: block;
+  width: 100%;
+  max-width: 240px;
+}
+
+  .calendar-container {
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.modal-content {
+  padding: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.modal-content h2,
+.modal-content h3 {
+  font-size: 1.3rem;
+}
+
+.fc .fc-toolbar {
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  text-align: center;
+}
+
+#jobSearchInput {
+  font-size: 0.95rem;
+  padding: 0.4rem 0.6rem;
+}
 }
 
 @keyframes fadeIn {
