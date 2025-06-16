@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timesheet Tracker</title>
+  <link rel="stylesheet" href="/styles/timesheets.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1>Timesheet Tracker</h1>
+    <a href="/dashboard" class="cta-button small">← Back to Dashboard</a>
+  </header>
+
+  <main class="timesheet-content">
+    <section class="timesheet-controls">
+      <label for="weekPicker">Select Week:</label>
+      <input type="week" id="weekPicker" />
+    </section>
+
+    <section class="timesheet-grid">
+      <!-- Example Entry -->
+      <div class="timesheet-entry">
+        <div><strong>Mon, June 10</strong></div>
+        <div>👤 Andrew Moore</div>
+        <div>📍 123 Main St (Boundary Survey)</div>
+        <div>⏱ 6h Field / 2h Office</div>
+        <div>📝 Tied flag line around back fence</div>
+        <div>Status: <span class="status unpaid">Unpaid</span></div>
+      </div>
+    </section>
+
+    <button class="add-entry-btn">➕ Add Entry</button>
+  </main>
+
+  <!-- ===== Add Entry Modal ===== -->
+<div id="timesheetModal" class="modal">
+  <div class="modal-content">
+    <h2 id="modalHeader">Add Time Entry</h2>
+    <form id="timesheetForm">
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="job">Job Description</label>
+      <input type="text" id="job" name="job" placeholder="e.g. 123 Main St – Boundary" required />
+
+      <label for="fieldHours">Field Hours</label>
+      <input type="number" id="fieldHours" name="fieldHours" min="0" step="0.1" value="0" required />
+
+      <label for="officeHours">Office Hours</label>
+      <input type="number" id="officeHours" name="officeHours" min="0" step="0.1" value="0" required />
+
+      <label for="notes">Notes</label>
+      <textarea id="notes" name="notes" rows="3" placeholder="Optional notes..."></textarea>
+
+      <div class="modal-actions">
+        <button type="submit" class="primary">Save Entry</button>
+        <button type="button" class="danger" id="cancelModalBtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script src="/timesheets.js"></script>
+</body>
+</html>
