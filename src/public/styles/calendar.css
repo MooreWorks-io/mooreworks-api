@@ -66,7 +66,7 @@ body {
 /* ========= Calendar Layout ========= */
 .calendar-page-content {
   max-width: 1200px;
-  margin: auto;
+  margin: 2rem auto;
 }
 
 .calendar-header {
@@ -127,6 +127,8 @@ body {
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  max-width: 1100px;
+  margin: auto;
 }
 
 #calendar {
@@ -143,14 +145,22 @@ body {
   background-color: var(--brand-purple);
   border: none !important;
   border-radius: 6px !important;
-  padding: 2px 6px;
+  padding: 4px 8px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.fc-event:hover {
+  background-color: var(--button-hover);
+  cursor: pointer;
 }
 
 .fc-daygrid-day:hover {
-  background-color: #f5f5fc;
+  background-color: #f0eefc;
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
 .fc .fc-button {
@@ -288,6 +298,12 @@ body {
     text-align: center;
     gap: 1rem;
   }
+
+.fc .fc-toolbar {
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
 
   .logo-block {
     text-align: center;
