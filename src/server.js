@@ -50,12 +50,14 @@ const emailRoutes = require('./routes/emailRoutes');
 const calendarRoutes = require('./routes/calendarRoutes');
 const userRoutes = require('./routes/userRoutes');
 const timesheetRoutes = require('./routes/timesheetRoutes');
+const mooreboardRoutes = require('./routes/mooreboardroutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api', emailRoutes);
 app.use('/api/calendar', calendarRoutes);
 app.use('/api', userRoutes);
 app.use('/api/timesheets', timesheetRoutes);
+app.use('/api/mooreboard', mooreboardRoutes);
 
 // Serve HTML Views
 
@@ -100,6 +102,9 @@ app.get('/forgot-password', (req, res) => {
 });
 app.get('/reset-password', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'reset-password.html'));
+});
+app.get('/mooreboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'mooreboard.html'));
 });
 
 
