@@ -50,7 +50,7 @@ const emailRoutes = require('./routes/emailRoutes');
 const calendarRoutes = require('./routes/calendarRoutes');
 const userRoutes = require('./routes/userRoutes');
 const timesheetRoutes = require('./routes/timesheetRoutes');
-const mooreboardRoutes = require('./routes/mooreboardroutes');
+const mooreboardRoutes = require('./routes/mooreboardRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api', emailRoutes);
