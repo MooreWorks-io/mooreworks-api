@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MooreBoard Jobs</title>
+  <link rel="stylesheet" href="/styles/mooreboard.css" />
+</head>
+<body>
+  <header class="mooreboard-header">
+    <h1>MooreBoard</h1>
+    <button class="add-job-btn">+ Add Job</button>
+    <a href="/" class="back-link">← Back to Home</a>
+  </header>
+
+  <main class="job-list-container">
+    <div id="jobList" class="job-list">
+      <!-- Jobs will be loaded here -->
+    </div>
+  </main>
+
+  <!-- Add Job Modal -->
+  <div id="addJobModal" class="modal">
+    <div class="modal-content">
+      <h2>Add New Job</h2>
+      <form id="addJobForm">
+        <label>Client Name</label>
+        <input type="text" name="clientName" required />
+
+        <label>Project Address</label>
+        <input type="text" name="address" required />
+
+        <label>Job Type</label>
+        <input type="text" name="jobType" required />
+
+        <label>Initial Status</label>
+        <select name="status" required>
+          <option value="Not Started">Not Started</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Field Complete">Field Complete</option>
+          <option value="Finalizing">Finalizing</option>
+          <option value="Ready to Invoice">Ready to Invoice</option>
+          <option value="Completed">Completed</option>
+        </select>
+
+        <div class="modal-actions">
+          <button type="submit" class="save-btn">Save Job</button>
+          <button type="button" id="cancelJobModalBtn" class="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/mooreboard.js"></script>
+</body>
+</html>
