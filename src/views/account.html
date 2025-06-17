@@ -14,32 +14,62 @@
 
   <main class="account-wrapper">
     <form id="accountForm">
+      <!-- User Info -->
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" required />
 
       <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required disabled />
+      <input type="email" id="email" name="email" disabled required />
 
       <label for="password">New Password</label>
-      <input type="password" id="password" name="password" placeholder="Leave blank to keep current password" />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Leave blank to keep current password"
+      />
 
-      <label>
-    <input type="checkbox" id="quickbooksToggle" />
-    Connect to QuickBooks for invoices and timesheets
-  </label>
+      <hr />
+
+      <!-- Hourly Rate Settings -->
+      <h3>Default Hourly Rates</h3>
+
+      <label for="fieldRate">Field Work Rate ($/hr)</label>
+      <input
+        type="number"
+        id="fieldRate"
+        name="fieldRate"
+        step="0.01"
+        min="0"
+      />
+
+      <label for="officeRate">Drafting / Office Rate ($/hr)</label>
+      <input
+        type="number"
+        id="officeRate"
+        name="officeRate"
+        step="0.01"
+        min="0"
+      />
+
+      <label for="courthouseRate">Courthouse Retrieval Rate ($/hr)</label>
+      <input
+        type="number"
+        id="courthouseRate"
+        name="courthouseRate"
+        step="0.01"
+        min="0"
+      />
 
       <button type="submit" class="save-btn">Save Changes</button>
     </form>
 
     <hr />
 
-    <div class="danger-zone">
-      <h2>Danger Zone</h2>
-      <p>Delete your account permanently. This action cannot be undone.</p>
-      <button id="deleteAccountBtn" class="delete-btn">Delete Account</button>
-    </div>
+    <!-- Danger Zone -->
+    <button id="deleteAccountBtn" class="delete-btn">Delete My Account</button>
   </main>
 
-  <script src="/account.js"></script>
+  <script src="/scripts/account.js"></script>
 </body>
 </html>

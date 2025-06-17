@@ -6,8 +6,10 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   resetToken: String,
   resetTokenExpiry: Date,
-   quickbooksConnected: { type: Boolean, default: false }
-}, { timestamps: true });
+  fieldRate: { type: Number, default: 0 },
+  officeRate: { type: Number, default: 0 },
+  courthouseRate: { type: Number, default: 0 },
+ });
 
 module.exports = mongoose.model('User', UserSchema);
 
